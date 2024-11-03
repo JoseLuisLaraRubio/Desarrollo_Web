@@ -24,7 +24,6 @@
 
   ```bash
   npm install -g @angular/cli
-  npm install -g @ionic/cli
   ```
 
 - An OCI compliant container runtime, such as:
