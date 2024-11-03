@@ -1,0 +1,43 @@
+{
+  "editor.rulers": [80, 120],
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": ["html-template.ng.control-flow.keyword"],
+        "settings": {
+          "foreground": "#cc00fa"
+        }
+      }
+    ]
+  },
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    ".vs/": true,
+    ".angular/": true,
+    ".nx/": true,
+    "node_modules/": true,
+    "www/": true,
+    ".scannerwork/": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "sonarlint.connectedMode.project": {
+    "connectionId": "http://localhost:9000",
+    "projectKey": "GymApp-WebApp"
+  },
+  "sonarlint.disableTelemetry": true
+}

@@ -1,0 +1,109 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{814BFC12-11AD-479F-B708-8E70293D8820}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.AppHost", "AppHost\GymApp.AppHost.csproj", "{21D40E8A-4CFF-4465-9187-0ED4FC6C0B95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.ServiceDefaults", "ServiceDefaults\GymApp.ServiceDefaults.csproj", "{CC39D945-BBF6-48EC-9CAC-9455E2F41485}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.ApiService", "ApiService\GymApp.ApiService.csproj", "{C6401D4E-0212-4420-A6F2-B124DF4DD6E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Tests", "Tests\GymApp.Tests.csproj", "{A7D56C5D-6005-4BD2-B453-246AABC6D095}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Database", "Database\GymApp.Database.csproj", "{9A0C4806-FA3D-4BD6-B4AE-131ED831EF6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Identity", "Identity\GymApp.Identity.csproj", "{8D9FE107-466D-457B-93AB-C9DB975021A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMigrationService.Server", "..\EFMigrationService\Server\EFMigrationService.Server.csproj", "{E7312210-7599-4B04-95DA-1CB927CDCB51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.Core", "..\RaptorUtils\Core\RaptorUtils.Core.csproj", "{CD36E33F-52B7-4523-9BD0-DCF3E38EDCD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.AspNet", "..\RaptorUtils\AspNet\RaptorUtils.AspNet.csproj", "{D61B44D3-9B73-4877-82E1-6D4691CFFB35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.Aspire.Hosting", "..\RaptorUtils\Aspire\Aspire.Hosting\RaptorUtils.Aspire.Hosting.csproj", "{CD72BC17-6FF2-4013-9612-6D131EDB88F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.Aspire.Hosting.NodeJs", "..\RaptorUtils\Aspire\Aspire.Hosting.NodeJs\RaptorUtils.Aspire.Hosting.NodeJs.csproj", "{26FB8908-C36D-42F8-802E-CAC7358C03B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.SerilogWebAppPlugin", "..\RaptorUtils\WebAppPlugins\SerilogWebAppPlugin\RaptorUtils.SerilogWebAppPlugin.csproj", "{8CEBC713-5DED-4483-A916-4E6B3C162AE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.SwaggerWebAppPlugin", "..\RaptorUtils\WebAppPlugins\SwaggerWebAppPlugin\RaptorUtils.SwaggerWebAppPlugin.csproj", "{625937E7-2A0E-42A6-8FEB-C3EE37578C03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMigrationService.Integration", "..\EFMigrationService\Integration\EFMigrationService.Integration.csproj", "{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21D40E8A-4CFF-4465-9187-0ED4FC6C0B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D40E8A-4CFF-4465-9187-0ED4FC6C0B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D40E8A-4CFF-4465-9187-0ED4FC6C0B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D40E8A-4CFF-4465-9187-0ED4FC6C0B95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC39D945-BBF6-48EC-9CAC-9455E2F41485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC39D945-BBF6-48EC-9CAC-9455E2F41485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC39D945-BBF6-48EC-9CAC-9455E2F41485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC39D945-BBF6-48EC-9CAC-9455E2F41485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6401D4E-0212-4420-A6F2-B124DF4DD6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6401D4E-0212-4420-A6F2-B124DF4DD6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6401D4E-0212-4420-A6F2-B124DF4DD6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6401D4E-0212-4420-A6F2-B124DF4DD6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D56C5D-6005-4BD2-B453-246AABC6D095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D56C5D-6005-4BD2-B453-246AABC6D095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D56C5D-6005-4BD2-B453-246AABC6D095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D56C5D-6005-4BD2-B453-246AABC6D095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A0C4806-FA3D-4BD6-B4AE-131ED831EF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A0C4806-FA3D-4BD6-B4AE-131ED831EF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A0C4806-FA3D-4BD6-B4AE-131ED831EF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A0C4806-FA3D-4BD6-B4AE-131ED831EF6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D9FE107-466D-457B-93AB-C9DB975021A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D9FE107-466D-457B-93AB-C9DB975021A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D9FE107-466D-457B-93AB-C9DB975021A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D9FE107-466D-457B-93AB-C9DB975021A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7312210-7599-4B04-95DA-1CB927CDCB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7312210-7599-4B04-95DA-1CB927CDCB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7312210-7599-4B04-95DA-1CB927CDCB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7312210-7599-4B04-95DA-1CB927CDCB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD36E33F-52B7-4523-9BD0-DCF3E38EDCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD36E33F-52B7-4523-9BD0-DCF3E38EDCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD36E33F-52B7-4523-9BD0-DCF3E38EDCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD36E33F-52B7-4523-9BD0-DCF3E38EDCD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61B44D3-9B73-4877-82E1-6D4691CFFB35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61B44D3-9B73-4877-82E1-6D4691CFFB35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61B44D3-9B73-4877-82E1-6D4691CFFB35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61B44D3-9B73-4877-82E1-6D4691CFFB35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD72BC17-6FF2-4013-9612-6D131EDB88F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD72BC17-6FF2-4013-9612-6D131EDB88F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD72BC17-6FF2-4013-9612-6D131EDB88F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD72BC17-6FF2-4013-9612-6D131EDB88F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26FB8908-C36D-42F8-802E-CAC7358C03B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26FB8908-C36D-42F8-802E-CAC7358C03B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26FB8908-C36D-42F8-802E-CAC7358C03B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FB8908-C36D-42F8-802E-CAC7358C03B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CEBC713-5DED-4483-A916-4E6B3C162AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CEBC713-5DED-4483-A916-4E6B3C162AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CEBC713-5DED-4483-A916-4E6B3C162AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CEBC713-5DED-4483-A916-4E6B3C162AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625937E7-2A0E-42A6-8FEB-C3EE37578C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625937E7-2A0E-42A6-8FEB-C3EE37578C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625937E7-2A0E-42A6-8FEB-C3EE37578C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625937E7-2A0E-42A6-8FEB-C3EE37578C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F42E60F-4E67-4910-A814-8CDD9D4DC619}
+	EndGlobalSection
+EndGlobal
