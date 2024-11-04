@@ -10,9 +10,9 @@ using RaptorUtils.Extensions.Configuration;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgres = builder.AddConfiguredPostgres(builder.Configuration);
+var mariaDB = builder.AddConfiguredMariaDB(builder.Configuration);
 
-var gymAppDb = postgres.AddDatabase("GymAppDb");
+var gymAppDb = mariaDB.AddDatabase("GymAppDb");
 
 if (!builder.Configuration.IsDatabaseMigrationMode())
 {

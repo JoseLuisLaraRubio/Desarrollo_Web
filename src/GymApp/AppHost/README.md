@@ -23,8 +23,7 @@ graph LR
     style MigrationClient fill:#de002d
     style WebApp fill:#de002d
     style db fill:#4e92e6
-    style pg1 fill:#4e92e6
-    style pg2 fill:#4e92e6
+    style db-admin fill:#4e92e6
 
     subgraph host-s[ ]
     AppHost
@@ -41,9 +40,8 @@ graph LR
     end
 
     subgraph Database
-    AppHost --> db[(PostgreSQL)]
-    AppHost --> pg1[[pgAdmin]]
-    AppHost --> pg2[[pgweb]]
+    AppHost --> db[(MariaDB)]
+    AppHost --> db-admin[[PhpMyAdmin]]
     end
 ```
 
@@ -51,7 +49,9 @@ graph LR
 
 **Default:** App.
 
-**Base services:** [PostgreSQL](https://www.postgresql.org/), [pgAdmin](https://www.pgadmin.org/) & [pgweb](https://sosedoff.github.io/pgweb/) containers.
+**Base services:**
+[MariaDB](https://mariadb.org/) &
+[PhpMyAdmin](https://www.phpmyadmin.net/) containers.
 
 ---
 
@@ -77,7 +77,7 @@ graph TD
     AppHost -.-> ApiService
     ApiService --> Database
     WebApp <-.->|http| ApiService
-    Database <-.->|EntityFramework| db[(PostgreSQL)]
+    Database <-.->|EntityFramework| db[(MariaDB)]
     ApiService --> Identity
     Database --> Identity
 ```
@@ -102,7 +102,7 @@ graph TD
     AppHost -.-> MigrationServer
     MigrationServer --> Database
     MigrationClient <-.->|SignalR| MigrationServer
-    Database <-.->|EntityFramework| db[(PostgreSQL)]
+    Database <-.->|EntityFramework| db[(MariaDB)]
     Database --> Identity
 ```
 

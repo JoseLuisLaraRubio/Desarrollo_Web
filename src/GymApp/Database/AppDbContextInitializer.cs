@@ -1,6 +1,6 @@
 ﻿namespace GymApp.Database;
 
-using Npgsql;
+using MySqlConnector;
 
 using Polly;
 using Polly.Retry;
@@ -16,7 +16,7 @@ public static class AppDbContextInitializer
             .Handle<ServiceUnavailableException>()
             .WaitAndRetryAsync(
                 retryCount: 5,
-                _ => TimeSpan.FromSeconds(5));
+                _ => TimeSpan.FromSeconds(10));
 
         PolicyResult<bool> result = await EnsureCreatedAsync(context, onException, retryPolicy);
 
@@ -39,7 +39,7 @@ public static class AppDbContextInitializer
             {
                 return await context.Database.EnsureCreatedAsync();
             }
-            catch (NpgsqlException exception) when (DatabaseNotReadyExceptionFilter(exception))
+            catch (InvalidOperationException exception) when (DatabaseNotReadyExceptionFilter(exception))
             {
                 var exceptionWrap = new ServiceUnavailableException("Database not ready.", exception);
                 onException.Invoke(exceptionWrap);
@@ -48,13 +48,10 @@ public static class AppDbContextInitializer
         });
     }
 
-    private static bool DatabaseNotReadyExceptionFilter(NpgsqlException exception)
+    private static bool DatabaseNotReadyExceptionFilter(InvalidOperationException exception)
     {
-        if (exception is PostgresException postgresException)
-        {
-            return postgresException.SqlState == "57P03";
-        }
-
-        return exception.InnerException is EndOfStreamException;
+        return exception.InnerException is MySqlException mySqlException
+            && mySqlException.ErrorCode == MySqlErrorCode.UnableToConnectToHost
+            && mySqlException.InnerException is MySqlEndOfStreamException;
     }
 }

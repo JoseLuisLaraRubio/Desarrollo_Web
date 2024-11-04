@@ -38,7 +38,7 @@ internal static class DatabaseInitializer
 
         // TODO: Replace with aspire 9 WaitFor
         // Wait to avoid a connection retry
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(12));
 
         bool dbCreated = await AppDbContextInitializer.EnsureCreatedAsync(
             context,
