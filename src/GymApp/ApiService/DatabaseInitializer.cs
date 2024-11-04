@@ -1,12 +1,9 @@
 ﻿namespace GymApp.ApiService;
 
 using GymApp.Database;
-using GymApp.Identity;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-using RaptorUtils.AspNet.Logging;
 using RaptorUtils.Extensions.Configuration;
 
 internal static class DatabaseInitializer
@@ -17,7 +14,6 @@ internal static class DatabaseInitializer
         IServiceProvider serviceProvider = serviceScope.ServiceProvider;
 
         await EnsureDbCreated(app, serviceProvider);
-        await EnsureRolesCreated(app.Logger, serviceProvider);
     }
 
     private static async Task EnsureDbCreated(WebApplication app, IServiceProvider serviceProvider)
@@ -51,21 +47,5 @@ internal static class DatabaseInitializer
 
         string dbName = context.Database.GetDbConnection().Database;
         app.Logger.LogInformation("Database '{DatabaseName}' created successfully", dbName);
-    }
-
-    private static async Task EnsureRolesCreated(ILogger logger, IServiceProvider serviceProvider)
-    {
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-        foreach (string roleName in Enum.GetNames<UserRole>())
-        {
-            if (!await roleManager.RoleExistsAsync(roleName))
-            {
-                var role = new IdentityRole(roleName);
-                await roleManager.CreateAsync(role);
-
-                logger.TryInformation()?.Log("Created role: {Role}", roleName);
-            }
-        }
     }
 }
