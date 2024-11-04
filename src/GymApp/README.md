@@ -72,5 +72,5 @@ graph TD
     ApiService --> Identity
     MigrationServer <-.->|EF tools| Database
     Database --> Identity
-    Database <-.->|EntityFramework| db[(PostgreSQL)]
+    Database <-.->|EntityFramework| db[(MariaDB)]
 ```

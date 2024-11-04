@@ -18,8 +18,11 @@ public static class AppDbContextConfiguration
     {
         ArgumentNullException.ThrowIfNull(connectionString);
 
-        options.UseNpgsql(
+        var serverVersion = ServerVersion.Parse("11.5.2-mariadb");
+
+        options.UseMySql(
             connectionString,
+            serverVersion,
             options => options.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null));
     }
 }

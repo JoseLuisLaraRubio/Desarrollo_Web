@@ -1,11 +1,10 @@
 ﻿﻿Utils
-﻿Npgsql
-﻿postgres
 ﻿dotnet
 ﻿csproj
 ﻿Auth
 ﻿Serilog
 ﻿microsoft
-﻿Postgre
 ﻿appsettings
 ﻿Otlp
+﻿mariadb
+﻿maria
