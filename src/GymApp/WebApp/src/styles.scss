@@ -3,10 +3,14 @@
 :root {
   --yellow: #e9da6b;
   --white: #FFFFFF;
+  --light-blue: #C5D3E8;
+  --dark-blue: #7AB2D3;
+  --black: #000000;
 }
 
 html {
   font-size: 62.5%; /* =10px */
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Establece el tamaño base en 10px lo que facilita la conversión */
