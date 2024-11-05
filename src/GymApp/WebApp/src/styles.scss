@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("./normalize.css");
+:root {
+  --yellow: #e9da6b;
+  --white: #FFFFFF;
+}
+
+html {
+  font-size: 62.5%; /* =10px */
+}
+
+/* Establece el tamaño base en 10px lo que facilita la conversión */
+
+body {
+  font-size: 1.6rem; /* =16px */
+}
+
+h1 {
+  font-size: 3.2rem; /* =32px */
+}
+
+h2 {
+  font-size: 2.4rem; /* =24px */
+}
+
+a {
+  text-decoration: none;
+}
+
