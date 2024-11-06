@@ -1,8 +1,55 @@
-.plansContainer{
+#plansContainer{
     display: flex;
     flex-direction: row;
+
+    flex-wrap: nowrap;
+
+    transition: margin-left 0.5s ease;
+
+    margin-left: -20px;
+}
+
+#buttonsContainer{
+    position: relative;
+}
+
+#leftBttn{
+    position: absolute;
+    top: 35%;
+    bottom: 35%;
+    z-index: 10;
+    
+    left: 2;
+    right: 98%;
+
+    background-color: #4495A2;
+    border-color: white;
+    border-radius: 4px;
+}
+#rightBttn{
+    position: absolute;
+    top: 35%;
+    bottom: 35%;
+    z-index: 10;
+    
+    right: 2;
+    left: 98%;
+        
+    background-color: #4495A2;
+    border-color: white;
+    border-radius: 4px;
+}
+
+#rightBttn:hover, #leftBttn:hover{
+    border-width: 3px;
 }
 
 h2{
-    margin-left: 5%;
+    padding: 5px;
+    width: 30%;
+    
+    color: white;
+    background-color: #A9D4DB;
+
+    text-align: center;
 }
