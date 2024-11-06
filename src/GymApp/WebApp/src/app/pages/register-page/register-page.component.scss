@@ -58,3 +58,19 @@ input[type="button"] {
   background-color: cadetblue;
   color: var(--white);
 }
+
+@media (max-width: 700px) {
+  .container-title {
+    h1 {
+      text-transform: uppercase;
+      font-size: 4rem;
+    }
+    p {
+      color: gray;
+      text-align: center;
+    }
+    progress {
+      width: 90%;
+    }
+  }
+}
