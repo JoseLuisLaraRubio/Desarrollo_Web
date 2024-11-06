@@ -1,0 +1,31 @@
+<app-home-nav-bar></app-home-nav-bar>
+<main>
+  <div class="container-title">
+    <h1>Bienvenido A Nombre</h1>
+    <p>
+      Este cuestionario nos ayudará a generar un plan de entrenamiento
+      personalizado para ti.
+    </p>
+    <progress max="100" [value]="progressValue"></progress>
+  </div>
+  <div class="container-questions">
+    <h2>Pregunta {{questionNumber}}</h2>
+
+    <div class="container-radio">
+      <input type="radio" id="question1" name="question"/>
+      <label for="question1">Respuesta 1</label>
+    </div>
+
+    <div class="container-radio">
+      <input type="radio" id="question2" name="question"/>
+      <label for="question2">Respuesta 2</label>
+    </div>
+
+    <div class="container-radio">
+      <input type="radio" id="question3" name="question"/>
+      <label for="question3">Respuesta 3</label>
+    </div>
+
+    <input type="button" value="CONTINUAR" (click)="changeProgressValue(); changeQuestionNumber()"/>
+  </div>
+</main>

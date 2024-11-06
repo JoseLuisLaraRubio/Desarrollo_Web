@@ -1,0 +1,23 @@
+nav {
+  background-color: var(--light-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    text-transform: uppercase;
+    color: var(--black);
+    font-size: 2.5rem;
+  }
+
+  .container-logo {
+    padding-left: 3rem;
+  }
+
+  .container-nav {
+    display: flex;
+    gap: 3rem;
+    justify-content: end;
+    padding: 2rem;
+  }
+}
