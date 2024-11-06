@@ -48,5 +48,9 @@ form {
     border: 0;
     background-color: cadetblue;
     color: var(--white);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
