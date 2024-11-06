@@ -1,2 +1,3 @@
 export * from "./exercise";
-export * from "./excercise-set";
+export * from "./exercise-set";
+export * from "./day-routine";
