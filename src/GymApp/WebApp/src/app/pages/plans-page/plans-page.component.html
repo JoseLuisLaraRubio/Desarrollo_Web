@@ -1,0 +1,8 @@
+
+<body>    
+    <h1>PLANES DE ENTRENAMIENTO</h1>
+    
+    @for (category of categories; track $index) {
+        <app-plans-list [listName]="category"/>
+    }
+</body>

@@ -3,6 +3,7 @@ import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { RegisterPageComponent } from "./pages/register-page/register-page.component";
 import { MainPageComponent } from "./pages/main-page/main-page.component";
+import { PlansPageComponent } from "./pages/plans-page/plans-page.component";
 import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
 
 export const routes: Routes = [
@@ -21,6 +22,10 @@ export const routes: Routes = [
   {
     path: "main-page",
     component: MainPageComponent,
+  },
+  {
+    path: "plans-page",
+    component: PlansPageComponent,
   },
   {
     path: "profile",
