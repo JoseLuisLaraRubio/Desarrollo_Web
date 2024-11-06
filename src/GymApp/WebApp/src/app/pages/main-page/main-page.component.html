@@ -1,0 +1,11 @@
+<app-nav-bar></app-nav-bar>
+
+<h1>Rutina</h1>
+<main>
+  @for (routine of routines; track routine.dayNumber) {
+    <app-day-routine
+      [dayNumber]="routine.dayNumber"
+      [sets]="routine.sets"
+    ></app-day-routine>
+  }
+</main>
