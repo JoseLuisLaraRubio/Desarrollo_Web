@@ -1,6 +1,6 @@
 import { Guid } from "./general";
 
-export interface Excercise {
+export interface Exercise {
   id: Guid;
   name: string;
   description: string;
