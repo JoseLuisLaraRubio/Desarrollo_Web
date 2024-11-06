@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { HomeNavBarComponent } from "../../components/home-nav-bar/home-nav-bar.component";
 
 @Component({
   selector: "app-login-page",
   standalone: true,
-  imports: [],
+  imports: [HomeNavBarComponent],
   templateUrl: "./login-page.component.html",
   styleUrl: "./login-page.component.scss",
 })
