@@ -1,6 +1,7 @@
-
+<app-nav-bar/>
 <body>    
     <h1>PLANES DE ENTRENAMIENTO</h1>
+    <input type="text" placeholder="Buscar Planes">
     
     @for (category of categories; track $index) {
         <app-plans-list [listName]="category"/>

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlansPageComponent } from './plans-page.component';
+import {  HomeNavBarComponent } from '../../components/home-nav-bar/home-nav-bar.component';
 
 describe('PlansPageComponent', () => {
   let component: PlansPageComponent;
