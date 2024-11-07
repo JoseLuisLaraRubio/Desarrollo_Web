@@ -1,12 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("./normalize.css");
 :root {
-  --yellow: #e9da6b;
-  --white: #FFFFFF;
-  --light-blue: #C5D3E8;
-  --dark-blue: #7AB2D3;
-  --bice-blue: #2072AF;
-  --black: #000000;
+  --red: #CA2529;
+  --dark-red: #592323;
+  --light-blue: #717DB9;
+  --dark-blue: #3C4575;
+  --green: #0CC385;
+  --light-gray: #ABABAB;
+  --gray: #333333;
+  --dark-gray: #212121;
+}
+
+*{
+  box-sizing: border-box;
 }
 
 html {
