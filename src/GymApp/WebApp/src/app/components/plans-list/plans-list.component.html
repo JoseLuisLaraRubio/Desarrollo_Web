@@ -1,6 +1,10 @@
 <h2>{{listName}}</h2>
-<div class="plansContainer">
-    @for (plan of plans; track $index) {
-        <app-plan-preview [planName]="plan"/>
-    }
+<div id="buttonsContainer">
+    <button id="leftBttn" (click)="scrollRight()"></button>
+    <div #plansContainer id="plansContainer">
+        @for (plan of plans; track $index) {
+            <app-plan-preview [planName]="plan"/>
+        }
+    </div>
+    <button id="rightBttn" (click)="scrollLeft()"></button>
 </div>
