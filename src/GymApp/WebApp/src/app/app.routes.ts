@@ -5,6 +5,7 @@ import { RegisterPageComponent } from "./pages/register-page/register-page.compo
 import { PlansPageComponent } from "./pages/plans-page/plans-page.component";
 import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
 import { RoutinePageComponent } from "./pages/routine-page/routine-page.component";
+import { DayRoutinePageComponent } from "./pages/day-routine-page/day-routine-page.component";
 
 export const routes: Routes = [
   {
@@ -20,16 +21,16 @@ export const routes: Routes = [
     component: RegisterPageComponent,
   },
   {
-    path: "plans-page",
-    component: PlansPageComponent,
-  },
-  {
     path: "profile",
     component: ProfilePageComponent,
   },
   {
     path: "routine",
     component: RoutinePageComponent,
+  },
+  {
+    path: "day-routine",
+    component: DayRoutinePageComponent,
   },
   {
     path: "**",

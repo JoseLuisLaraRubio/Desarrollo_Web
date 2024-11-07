@@ -15,6 +15,7 @@ import { DayRoutineComponent } from "../../components/day-routine/day-routine.co
 export class RoutinePageComponent implements OnInit{
   private readonly _routines : DayRoutine[];
   itemsWidth!: string;
+  editting = false;
 
   constructor(){
     this._routines = weeklyRoutine;
@@ -22,6 +23,18 @@ export class RoutinePageComponent implements OnInit{
 
   ngOnInit(): void {
     this.itemsWidth = (window.innerWidth / this._routines.length).toString() + 'px';
+  }
+
+  editRoutine(){
+    this.editting = true;
+  }
+  
+  saveChanges(){
+    this.editting = false;
+  }
+
+  cancel(){
+    this.editting = false;
   }
 
   public get routines() {
