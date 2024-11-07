@@ -18,4 +18,8 @@ export const weeklyRoutine: DayRoutine[] = [
     dayNumber: 4,
     sets: [exerciseSets[1], exerciseSets[2], exerciseSets[0]],
   },
+  {
+    dayNumber: 5,
+    sets: [exerciseSets[1], exerciseSets[2], exerciseSets[0]],
+  },
 ];
