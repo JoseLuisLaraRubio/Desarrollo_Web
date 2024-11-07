@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './nav-bar.component.scss'
 })
 export class NavBarComponent {
-  @Input() logo = false;
+  @Input() logo = true;
   @Input() profile = false;
   @Input() routine = false;
   @Input() login = false;

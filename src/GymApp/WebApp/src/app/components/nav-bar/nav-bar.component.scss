@@ -4,7 +4,6 @@ nav {
   
   gap: 3rem;
   padding: 2rem;
-  margin-bottom: 3rem;
 
   background-color: var(--gray);
 
@@ -30,6 +29,7 @@ nav {
   
   
   #logo{
+    margin-right: auto;
     font-weight: bolder;
     color: var(--red);
   }
