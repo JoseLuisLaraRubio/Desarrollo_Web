@@ -105,7 +105,10 @@
       "@angular-eslint/schematics"
     ],
 =======
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": "f3a4f3b5-c996-4b43-9961-87aaf250d82d",
 >>>>>>> 2b23c56ac7f063c17b4ab36fe744e0b8e7ad5253
     "analytics": false
   }
