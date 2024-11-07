@@ -1,62 +1,70 @@
 <body>
-    <app-nav-bar [logo]='true' [profile]='true' />
+  <app-nav-bar [profile]="true"/>
 
-    <div id="buttonsContainer">
-        <app-ng-button class="topButtons" value="EXPORTAR RUTINA" color=var(--red)></app-ng-button>
-        <app-ng-button class="topButtons" value="EDITAR RUTINA" color=var(--red) (click)="editRoutine()"></app-ng-button>
-    </div>
+  <div id="buttonsContainer">
+    <app-ng-button
+      class="topButtons"
+      value="EXPORTAR RUTINA"
+      color="var(--red)"
+    ></app-ng-button>
+    <app-ng-button
+      class="topButtons"
+      value="EDITAR RUTINA"
+      color="var(--red)"
+      (click)="editRoutine()"
+    ></app-ng-button>
+  </div>
 
-    <h1>Rutina</h1>
-    <main>
-        @for (routine of routines; track routine.dayNumber) {
-            <app-day-routine
-            [percentage]="70 / routines.length"
-            [dayNumber]="routine.dayNumber"
-            [sets]="routine.sets"
-            ></app-day-routine>
-        }
-    </main>
-
-    @if(editting){
-        <div class="pannel">
-            <div class="edit-day-card">
-                <h2>Editar Día</h2>
-              
-                <!-- Editable List -->
-                <div class="editable-list">
-                    <div class="list-item">
-                        <input type="text" class="input-box" placeholder="" />
-                        <button class="edit-button">
-                        ✏️
-                        </button>
-                    </div> 
-                    <div class="list-item">
-                        <input type="text" class="input-box" placeholder="" />
-                        <button class="edit-button">
-                        ✏️
-                        </button>
-                    </div> 
-                    <div class="list-item">
-                        <input type="text" class="input-box" placeholder="" />
-                        <button class="edit-button">
-                        ✏️
-                        </button>
-                    </div> 
-                    <div class="list-item">
-                        <input type="text" class="input-box" placeholder="" />
-                        <button class="edit-button">
-                        ✏️
-                        </button>
-                    </div> 
-                </div>
-              
-                <!-- Buttons -->
-                <div class="buttons">
-                  <app-ng-button color="var(--green)" value="GUARDAR CAMBIOS" (click)="saveChanges()"/>
-                  <app-ng-button  color="var(--red)" value="CANCELAR" (click)="cancel()"/>
-                </div>
-            </div>
-        </div>
+  <h1>Rutina</h1>
+  <main>
+    @for (routine of routines; track routine.dayNumber) {
+      <app-day-routine
+        [percentage]="70 / routines.length"
+        [dayNumber]="routine.dayNumber"
+        [sets]="routine.sets"
+      ></app-day-routine>
     }
+  </main>
 
+  @if (editting) {
+    <div class="pannel">
+      <div class="edit-day-card">
+        <h2>Editar Día</h2>
+
+        <!-- Editable List -->
+        <div class="editable-list">
+          <div class="list-item">
+            <input type="text" class="input-box" placeholder="" />
+            <button class="edit-button">✏️</button>
+          </div>
+          <div class="list-item">
+            <input type="text" class="input-box" placeholder="" />
+            <button class="edit-button">✏️</button>
+          </div>
+          <div class="list-item">
+            <input type="text" class="input-box" placeholder="" />
+            <button class="edit-button">✏️</button>
+          </div>
+          <div class="list-item">
+            <input type="text" class="input-box" placeholder="" />
+            <button class="edit-button">✏️</button>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+          <app-ng-button
+            color="var(--green)"
+            value="GUARDAR CAMBIOS"
+            (click)="saveChanges()"
+          />
+          <app-ng-button
+            color="var(--red)"
+            value="CANCELAR"
+            (click)="cancel()"
+          />
+        </div>
+      </div>
+    </div>
+  }
 </body>

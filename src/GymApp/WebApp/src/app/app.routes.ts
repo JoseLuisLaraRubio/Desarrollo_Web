@@ -21,6 +21,10 @@ export const routes: Routes = [
     component: RegisterPageComponent,
   },
   {
+    path: "explore",
+    component: PlansPageComponent,
+  },
+  {
     path: "profile",
     component: ProfilePageComponent,
   },
