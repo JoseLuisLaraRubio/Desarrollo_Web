@@ -5,6 +5,7 @@ import { RegisterPageComponent } from "./pages/register-page/register-page.compo
 import { MainPageComponent } from "./pages/main-page/main-page.component";
 import { PlansPageComponent } from "./pages/plans-page/plans-page.component";
 import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
+import { RoutinePageComponent } from "./pages/routine-page/routine-page.component";
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
   {
     path: "profile",
     component: ProfilePageComponent,
+  },
+  {
+    path: "routine",
+    component: RoutinePageComponent,
   },
   {
     path: "**",

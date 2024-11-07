@@ -1,0 +1,12 @@
+input{
+    border: 4px solid;
+    background-color: transparent;
+    border-radius: 1rem;
+    width: 100px;
+    height: 100px;
+}
+
+input:hover{
+    background-color: black;
+    transition-duration: .5s;
+}

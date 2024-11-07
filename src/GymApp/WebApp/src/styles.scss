@@ -9,6 +9,10 @@
   --black: #000000;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 html {
   font-size: 62.5%; /* =10px */
   font-family: 'Roboto', sans-serif;
