@@ -2,12 +2,12 @@
   <h2>DIA {{dayNumber}}</h2>
   <div class="container-sets">
     @for (set of sets; track $index) {
-      <div class="set">
+      <div class="set" (click)="action()">
         {{set.exercise.name}}
       </div>
     }
     <div class="startContainer">
-      <app-ng-button value="EMPEZAR" color="var(--red)"/>
+      <app-ng-button value="EMPEZAR" color="var(--red)" (click)="startRoutine()"/>
     </div>
   </div>
 

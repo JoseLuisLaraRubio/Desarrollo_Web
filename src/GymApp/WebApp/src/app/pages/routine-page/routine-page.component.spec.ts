@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoutinePageComponent } from './routine-page.component';
+import { NgButtonComponent } from '../../components/ng-button/ng-button.component';
 
 describe('RoutinePageComponent', () => {
   let component: RoutinePageComponent;
@@ -8,7 +9,7 @@ describe('RoutinePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RoutinePageComponent]
+      imports: [RoutinePageComponent, NgButtonComponent]
     })
     .compileComponents();
 
