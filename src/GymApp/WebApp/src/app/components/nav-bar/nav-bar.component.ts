@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,5 +9,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './nav-bar.component.scss'
 })
 export class NavBarComponent {
-  
+  @Input() logo = false;
+  @Input() profile = false;
+  @Input() routine = false;
+  @Input() login = false;
+  @Input() register = false;
 }

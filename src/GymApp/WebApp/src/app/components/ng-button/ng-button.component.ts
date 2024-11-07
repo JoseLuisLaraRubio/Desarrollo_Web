@@ -1,25 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
   selector: 'app-ng-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <input type="button" 
-    [value]="value" [ngStyle]="{'border-color': color}">
+    [value]="value"
+    [style.border-color]="color"
+    [style.background-color]="isHovered ? color : 'transparent'"
+    (mouseenter)="onHover(true)"
+    (mouseleave)="onHover(false)">
   `,
   styleUrl: './ng-button.component.scss'
 })
-export class NgButtonComponent implements OnInit{
+export class NgButtonComponent{
   @Input() value!: string;
-  @Input() color: string | undefined;
+  @Input() color!: string;
 
-  ngOnInit(): void {
-    if (!this.color) {
-      this.color = "#CA2529";
-    }
+  isHovered = false;
+
+  onHover(hovered: boolean) {
+    this.isHovered = hovered;
   }
-
 }

@@ -1,12 +1,14 @@
-<div class="container">
-  <h2>DIA {{dayNumber()}}</h2>
+<div class="container" [style.width]="percentage.toString() + 'vw'">
+  <h2>DIA {{dayNumber}}</h2>
   <div class="container-sets">
-    @for (set of sets(); track $index) {
+    @for (set of sets; track $index) {
       <div class="set">
-        <p>{{set.exercise.name}}</p>
+        {{set.exercise.name}}
       </div>
     }
-    <input type="button" value="EMPEZAR">
+    <div class="startContainer">
+      <app-ng-button value="EMPEZAR" color="var(--red)"/>
+    </div>
   </div>
 
 </div>
