@@ -1,5 +1,5 @@
 .background {
-  background-image: url("/backgrounds/home-page.svg");
+  background-image: url("/backgrounds/home-page2.svg");
   background-size: cover;
   width: 100%;
   height: 100vh;
@@ -7,8 +7,8 @@
 }
 
 h1 {
-  color: var(--white);
-  background-color: var(--light-blue);
+  color: #fff;
+  background-color: #333333;
   text-transform: uppercase;
   font-size: 8rem;
   width: max-content;
@@ -47,7 +47,7 @@ h1 {
 
 .text {
   width: 100%;
-  color: var(--dark-blue);
+  color: #fff;
   font-size: 2.5rem;
   margin-left: 1rem;
 }
@@ -57,6 +57,7 @@ h1 {
     background-size: contain;
     margin: 0;
   }
+
   .container {
     display: flex;
     flex-direction: column;
