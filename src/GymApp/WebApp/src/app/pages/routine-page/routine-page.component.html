@@ -1,2 +1,20 @@
-<p>routine-page works!</p>
-<app-ng-button value="HOLA"/>
+<body>
+    <app-nav-bar [logo]='true' [profile]='true' />
+
+    <div id="buttonsContainer">
+        <app-ng-button class="topButtons" value="EXPORTAR RUTINA" color=var(--red)></app-ng-button>
+        <app-ng-button class="topButtons" value="CARGAR RUTINA" color=var(--red)></app-ng-button>
+    </div>
+
+    <h1>Rutina</h1>
+    <main>
+        @for (routine of routines; track routine.dayNumber) {
+            <app-day-routine
+            [percentage]="70 / routines.length"
+            [dayNumber]="routine.dayNumber"
+            [sets]="routine.sets"
+            ></app-day-routine>
+        }
+    </main>
+
+</body>
