@@ -1,5 +1,5 @@
 nav {
-  background-color: var(--light-blue);
+  background-color: #333333;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,6 +12,22 @@ nav {
 
   .container-logo {
     padding-left: 3rem;
+  }
+
+  .container-logo a {
+    font-size: 3.2rem;
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .container-nav a {
+    color: var(--light-gray);
+    font-size: 2.5rem;
+  }
+
+  .container-nav a:hover {
+    color: #fff;
+    font-size: 2.5rem;
   }
 
   .container-nav {
