@@ -2,12 +2,16 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  background-color: var(--dark-gray);
+  color: var(--white);
+  min-height: 100vh;
 }
 
 h2 {
+  margin-top: 5rem;
   text-transform: uppercase;
-  font-size: 3rem;
+  font-size: 5rem;
   text-align: center;
 }
 
@@ -28,27 +32,29 @@ img {
 .container-inputs {
   display: flex;
   flex-direction: column;
+  min-width: 40rem;
 
   input[type="text"],
   input[type="password"] {
     padding: 2rem;
     border-radius: 1rem;
     border: 0;
-    background-color: var(--light-blue);
+    background-color:  #424242;
+    color: var(--white);
   }
 
   label {
-    font-weight: bold;
     font-size: 2rem;
+    margin-bottom: 1rem;
   }
 }
 
 input[type="button"] {
-  width: 100%;
+  color: var(--white);
+  width: 35%;
   padding: 1rem;
-  background-color: var(--yellow);
-  border: 0;
-  font-weight: bold;
+  background-color: #424242;
+  border: 2px solid var(--white);
   border-radius: 1rem;
   cursor: pointer;
   &:hover {
