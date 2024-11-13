@@ -15,19 +15,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.ServiceDefaults", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.ApiService", "ApiService\GymApp.ApiService.csproj", "{C6401D4E-0212-4420-A6F2-B124DF4DD6E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Tests", "Tests\GymApp.Tests.csproj", "{A7D56C5D-6005-4BD2-B453-246AABC6D095}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Database", "Database\GymApp.Database.csproj", "{9A0C4806-FA3D-4BD6-B4AE-131ED831EF6E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Identity", "Identity\GymApp.Identity.csproj", "{8D9FE107-466D-457B-93AB-C9DB975021A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMigrationService.Server", "..\EFMigrationService\Server\EFMigrationService.Server.csproj", "{E7312210-7599-4B04-95DA-1CB927CDCB51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymApp.Tests", "Tests\GymApp.Tests.csproj", "{A7D56C5D-6005-4BD2-B453-246AABC6D095}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.Core", "..\RaptorUtils\Core\RaptorUtils.Core.csproj", "{CD36E33F-52B7-4523-9BD0-DCF3E38EDCD7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.AspNet", "..\RaptorUtils\AspNet\RaptorUtils.AspNet.csproj", "{D61B44D3-9B73-4877-82E1-6D4691CFFB35}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.Aspire.Hosting", "..\RaptorUtils\Aspire\Aspire.Hosting\RaptorUtils.Aspire.Hosting.csproj", "{CD72BC17-6FF2-4013-9612-6D131EDB88F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaptorUtils.Aspire.Hosting.MySql", "..\RaptorUtils\Aspire\Aspire.Hosting.MySql\RaptorUtils.Aspire.Hosting.MySql.csproj", "{9F1E5665-F739-4E19-A829-98801DDCD5E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.Aspire.Hosting.NodeJs", "..\RaptorUtils\Aspire\Aspire.Hosting.NodeJs\RaptorUtils.Aspire.Hosting.NodeJs.csproj", "{26FB8908-C36D-42F8-802E-CAC7358C03B6}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaptorUtils.SwaggerWebAppPlugin", "..\RaptorUtils\WebAppPlugins\SwaggerWebAppPlugin\RaptorUtils.SwaggerWebAppPlugin.csproj", "{625937E7-2A0E-42A6-8FEB-C3EE37578C03}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMigrationService.Integration", "..\EFMigrationService\Integration\EFMigrationService.Integration.csproj", "{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMigrationService.Server", "..\EFMigrationService\Server\EFMigrationService.Server.csproj", "{E7312210-7599-4B04-95DA-1CB927CDCB51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07E1EB1D-FD2E-4EF1-9CF0-C16FFA3DA888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1E5665-F739-4E19-A829-98801DDCD5E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1E5665-F739-4E19-A829-98801DDCD5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1E5665-F739-4E19-A829-98801DDCD5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1E5665-F739-4E19-A829-98801DDCD5E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
