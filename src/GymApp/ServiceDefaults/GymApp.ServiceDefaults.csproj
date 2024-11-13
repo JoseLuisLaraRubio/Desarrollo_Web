@@ -28,7 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\RaptorUtils\Core\RaptorUtils.Core.csproj" />
     <ProjectReference Include="..\..\RaptorUtils\AspNet\RaptorUtils.AspNet.csproj" />
-    <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.NodeJs\RaptorUtils.Aspire.Hosting.NodeJs.csproj" />
     <ProjectReference Include="..\..\RaptorUtils\WebAppPlugins\SerilogWebAppPlugin\RaptorUtils.SerilogWebAppPlugin.csproj" />
     <ProjectReference Include="..\..\RaptorUtils\WebAppPlugins\SwaggerWebAppPlugin\RaptorUtils.SwaggerWebAppPlugin.csproj" />
   </ItemGroup>
