@@ -30,22 +30,16 @@ internal static class DatabaseInitializer
 
         app.Logger.LogWarning("Db persistence disabled! Data will not be saved.");
 
-        var context = serviceProvider.GetRequiredService<AppDbContext>();
+        var dbContext = serviceProvider.GetRequiredService<AppDbContext>();
 
-        // TODO: Replace with aspire 9 WaitFor
-        // Wait to avoid a connection retry
-        await Task.Delay(TimeSpan.FromSeconds(12));
-
-        bool dbCreated = await AppDbContextInitializer.EnsureCreatedAsync(
-            context,
-            exception => app.Logger.LogInformation(exception, "Waiting for database..."));
+        bool dbCreated = await dbContext.Database.EnsureCreatedAsync();
 
         if (!dbCreated)
         {
             throw new InvalidOperationException("Database already exists.");
         }
 
-        string dbName = context.Database.GetDbConnection().Database;
+        string dbName = dbContext.Database.GetDbConnection().Database;
         app.Logger.LogInformation("Database '{DatabaseName}' created successfully", dbName);
     }
 }

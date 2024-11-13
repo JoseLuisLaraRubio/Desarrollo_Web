@@ -17,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ServiceDefaults\GymApp.ServiceDefaults.csproj" IsAspireProjectResource="false" />
     <ProjectReference Include="..\..\EFMigrationService\Integration\EFMigrationService.Integration.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.NodeJs\RaptorUtils.Aspire.Hosting.NodeJs.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.MySql\RaptorUtils.Aspire.Hosting.MySql.csproj" IsAspireProjectResource="false" />
   </ItemGroup>
   
   <ItemGroup>

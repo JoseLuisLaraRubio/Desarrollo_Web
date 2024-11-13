@@ -17,7 +17,8 @@ var gymAppDb = mariaDB.AddDatabase("GymAppDb");
 if (!builder.Configuration.IsDatabaseMigrationMode())
 {
     var apiService = builder.AddProject<Projects.GymApp_ApiService>("ApiService")
-        .WithReference(gymAppDb);
+        .WithReference(gymAppDb)
+        .WaitFor(gymAppDb);
 
     builder.AddNpmApp("WebApp", "../WebApp")
         .WithEnvironment("SERVER_URL", apiService.GetEndpoint("http"))
