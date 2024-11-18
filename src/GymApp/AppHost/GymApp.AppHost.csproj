@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="Build-EFMigrationService-Server">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="Build-EFMigrationService;Configure-EFMigrationService-Integration">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
 
@@ -7,7 +7,7 @@
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>775f4f5a-d2ff-49ae-a660-4057296269b1</UserSecretsId>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.MySql" Version="9.0.0" />
@@ -16,9 +16,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceDefaults\GymApp.ServiceDefaults.csproj" IsAspireProjectResource="false" />
-    <ProjectReference Include="..\..\EFMigrationService\Integration\EFMigrationService.Integration.csproj" IsAspireProjectResource="false" />
     <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.NodeJs\RaptorUtils.Aspire.Hosting.NodeJs.csproj" IsAspireProjectResource="false" />
     <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.MySql\RaptorUtils.Aspire.Hosting.MySql.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\..\EFMigrationService\Integration\EFMigrationService.Integration.csproj" IsAspireProjectResource="false" />
   </ItemGroup>
   
   <ItemGroup>
@@ -26,11 +26,16 @@
     <ProjectReference Include="..\..\EFMigrationService\Server\EFMigrationService.Server.csproj" />
   </ItemGroup>
 
-  <Target Name="Build-EFMigrationService-Server">
+  <Target Name="Build-EFMigrationService">
+    <Exec WorkingDirectory="..\..\EFMigrationService\Integration\" Command="dotnet build EFMigrationService.Integration.sln -p:RaptorUtilsPathPrefix=.." />
     <Exec WorkingDirectory="..\..\EFMigrationService\Server\" Command="dotnet build EFMigrationService.Server.sln" />
   </Target>
 
-  <ItemGroup>
+  <Target Name="Configure-EFMigrationService-Integration">
+    <Copy SourceFiles="EFMigrationService.Integration-override.props" DestinationFolder="./../../EFMigrationService/Integration/" />
+  </Target>
+
+    <ItemGroup>
     <NpmPackageFile Include="..\WebApp\package.json" />
     <NpmPackageFile Include="..\..\EFMigrationService\Client\package.json" />
   </ItemGroup>
