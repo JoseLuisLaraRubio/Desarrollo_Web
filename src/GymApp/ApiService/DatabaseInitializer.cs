@@ -25,21 +25,23 @@ internal static class DatabaseInitializer
 
         if (app.Environment.IsProduction())
         {
-            throw new InvalidOperationException("DB_PERSISTENCE is required in production mode");
+            throw new InvalidOperationException("DB_PERSISTENCE is required in production mode.");
         }
 
-        app.Logger.LogWarning("Db persistence disabled! Data will not be saved.");
+        app.Logger.LogWarning("Database persistence disabled! Data will not be saved");
 
         var dbContext = serviceProvider.GetRequiredService<AppDbContext>();
 
         bool dbCreated = await dbContext.Database.EnsureCreatedAsync();
 
-        if (!dbCreated)
+        if (dbCreated)
         {
-            throw new InvalidOperationException("Database already exists.");
+            string dbName = dbContext.Database.GetDbConnection().Database;
+            app.Logger.LogInformation("Database '{DatabaseName}' created successfully", dbName);
         }
-
-        string dbName = dbContext.Database.GetDbConnection().Database;
-        app.Logger.LogInformation("Database '{DatabaseName}' created successfully", dbName);
+        else
+        {
+            app.Logger.LogWarning("Database already exists");
+        }
     }
 }
