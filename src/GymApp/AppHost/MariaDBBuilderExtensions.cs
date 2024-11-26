@@ -12,14 +12,16 @@ internal static class MariaDBBuilderExtensions
         this IDistributedApplicationBuilder builder,
         IConfiguration configuration)
     {
-        var mySql = builder.AddMariaDB("MariaDB")
-            .WithPhpMyAdmin();
+        return AddConfiguredMariaDB().WithLifetime(ContainerLifetime.Persistent);
 
-        if (configuration.IsDatabasePersistenceEnabled())
+        IResourceBuilder<MySqlServerResource> AddConfiguredMariaDB()
         {
-            return mySql.WithDataVolume();
-        }
+            var mySql = builder.AddMariaDB("MariaDB")
+                .WithPhpMyAdmin();
 
-        return mySql;
+            return configuration.IsDatabasePersistenceEnabled()
+                ? mySql.WithDataVolume()
+                : mySql;
+        }
     }
 }
