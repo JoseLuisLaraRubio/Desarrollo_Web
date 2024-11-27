@@ -32,16 +32,11 @@ internal static class DatabaseInitializer
 
         var dbContext = serviceProvider.GetRequiredService<AppDbContext>();
 
-        bool dbCreated = await dbContext.Database.EnsureCreatedAsync();
+        await dbContext.Database.EnsureDeletedAsync();
 
-        if (dbCreated)
-        {
-            string dbName = dbContext.Database.GetDbConnection().Database;
-            app.Logger.LogInformation("Database '{DatabaseName}' created successfully", dbName);
-        }
-        else
-        {
-            app.Logger.LogWarning("Database already exists");
-        }
+        await dbContext.Database.EnsureCreatedAsync();
+
+        string dbName = dbContext.Database.GetDbConnection().Database;
+        app.Logger.LogInformation("Database '{DatabaseName}' created successfully", dbName);
     }
 }
