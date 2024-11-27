@@ -13,6 +13,7 @@ var gymAppDb = mariaDB.AddDatabase("GymAppDb");
 if (!builder.Configuration.IsDatabaseMigrationMode())
 {
     var apiService = builder.AddProject<Projects.GymApp_ApiService>("ApiService")
+        .WithHttpHealthCheck("/health")
         .WithReference(gymAppDb)
         .WaitFor(gymAppDb);
 
