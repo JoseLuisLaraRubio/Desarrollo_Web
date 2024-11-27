@@ -18,10 +18,7 @@ public static class GymAppIdentityApiExtensions
 
         routeGroup.MapPost("/register-admin", RegisterAdminEndpoint.Handle<TUser>);
 
-        routeGroup.MapPost("/register", RegisterEndpoint.Handle<TUser>)
-            .RequireAuthorization(AppPolicy.AdminRole.Name);
-
-        routeGroup.MapGet("/admin-register-status", AdminRegisterStatusEndpoint.Handle<TUser>);
+        routeGroup.MapPost("/register", RegisterEndpoint.Handle<TUser>);
 
         routeGroup.MapPost("/login", LoginEndpoint.Handle<TUser>);
 
