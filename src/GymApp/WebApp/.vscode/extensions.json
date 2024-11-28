@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "ionic.ionic",
     "angular.ng-template",
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
@@ -7,3 +8,4 @@
     "sonarsource.sonarlint-vscode"
   ]
 }
+
