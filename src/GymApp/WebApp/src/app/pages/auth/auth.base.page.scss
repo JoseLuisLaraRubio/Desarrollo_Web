@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("/assets/backgrounds/login.svg");
+
+
+  &-auth {
+    width: 100%;
+    background-color: var(--light);
+    padding: 1rem 1.5rem;
+    min-width: 15rem;
+    max-width: 30rem;
+    border-radius: 0.3rem;
+    margin: 2rem 0;
+
+    -webkit-box-shadow: 4px 3px 102px -4px rgba(48, 131, 220, 1);
+    -moz-box-shadow: 4px 3px 102px -4px rgba(48, 131, 220, 1);
+    box-shadow: 4px 3px 102px -4px rgba(48, 131, 220, 1);
+  }
+}
+
+app-input-field{
+  --input-padding-bottom: 2rem;
+}
+
+.last-input {
+  --input-padding-bottom: .5rem;
+  }
+
+h1 {
+  color: var(--dark-blue);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+app-input-field {
+  --input-background: var(--light);
+  --input-text-color: var(--dark-gray);
+}
+
+ion-button {
+  --background: var(--dark-blue);
+  --color: var(--light);
+}
+
+.auth-error {
+  margin-top: 1rem;
+  padding: .5rem;
+  display: block;
+  background-color: var(--error);
+  color: var(--light);
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  white-space: pre-line;
+}
+
+.auth-error:empty {
+  display: none;
+}

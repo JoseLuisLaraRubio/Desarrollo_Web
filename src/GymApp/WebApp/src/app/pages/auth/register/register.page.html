@@ -1,0 +1,61 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+  <div class="container">
+    <div class="container-auth">
+      <h1>ADMIN REGISTER</h1>
+
+      @if (_authForm(); as authForm) {
+        <form
+          [formGroup]="authForm"
+          autocomplete="off"
+          novalidate
+          (ngSubmit)="onSubmit()"
+        >
+          <app-input-field
+            _name="userName"
+            _label="User Name"
+            _placeholder="..."
+            _icon="person-outline"
+            [_errorMessage]="getErrorMsg('userName')"
+          />
+
+          <app-input-field
+            _name="password"
+            _type="password"
+            _label="Password"
+            _placeholder="..."
+            _icon="lock-closed-outline"
+            [_errorMessage]="getErrorMsg('password')"
+            (_blur)="updateMismatchPasswordState(authForm)"
+          />
+
+          <app-input-field
+            _name="passwordConfirm"
+            _type="password"
+            _label="Password Confirmation"
+            _placeholder="..."
+            _icon="lock-closed-outline"
+            [_errorMessage]="getErrorMsg('passwordConfirm')"
+            (_blur)="updateMismatchPasswordState(authForm)"
+          />
+
+          <app-input-field
+            _name="adminCode"
+            _type="password"
+            _label="Admin Code"
+            _placeholder="..."
+            _icon="key-outline"
+            [_errorMessage]="getErrorMsg('adminCode')"
+            class="last-input"
+          />
+
+          <ion-button [disabled]="!authForm.valid" expand="block" type="submit">
+            Register
+          </ion-button>
+        </form>
+
+        <div class="auth-error">{{ _errorMessage() }}</div>
+      }
+    </div>
+  </div>
+</ion-content>
