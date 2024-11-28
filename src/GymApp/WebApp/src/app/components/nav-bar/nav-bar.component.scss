@@ -1,0 +1,33 @@
+nav {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--gray);
+
+  a {
+    text-transform: uppercase;
+    padding: 0;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: red;
+    }
+  }
+
+  .logo-div {
+    display: flex;
+    align-items: center;
+  }
+
+  .links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .logo-img {
+    max-width: 5rem;
+    filter: invert(100%);
+  }
+}
