@@ -11,11 +11,11 @@ import { Router, RouterLink } from "@angular/router";
 export class NavBarComponent {
   constructor(private readonly router: Router) {}
 
-  public a(): void {
+  public onClickToLogin(): void {
     this.router.navigate(["/auth/login"]);
   }
 
-  public b(): void {
+  public onClickToRegister(): void {
     this.router.navigate(["/auth/register"]);
   }
 }
