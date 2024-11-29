@@ -87,7 +87,7 @@ export class RegisterPage extends AuthBasePage<AdminRegistrationForm> {
 
     this._authService.registerUser(value).subscribe({
       next: () => {
-        this._router.navigate(["../login"]);
+        this._router.navigate(["/auth/login"]);
       },
       error: (response: HttpErrorResponse) => {
         const errorMessageValue =
