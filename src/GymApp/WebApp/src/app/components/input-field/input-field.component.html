@@ -1,0 +1,24 @@
+<div class="field">
+  <ion-input
+    [id]="_name()"
+    [formControlName]="_name()"
+    [type]="_type()"
+    [label]="_label()"
+    [placeholder]="_placeholder()"
+    [labelPlacement]="_label() ? 'stacked' : ''"
+    helperText=" "
+    clearOnEdit="false"
+    (ionBlur)="_blur.emit()"
+  >
+    @if (_icon()) {
+      <ion-icon [name]="_icon()" slot="start" aria-hidden="true" />
+    }
+
+    @if (_type() === "password") {
+      <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+    }
+  </ion-input>
+  <ion-note class="error">
+    {{ _errorMessage() }}
+  </ion-note>
+</div>
