@@ -3,51 +3,46 @@
   align-items: center;
   justify-content: center;
   background: url("/assets/backgrounds/login.svg");
-
+  height: 100%;
 
   &-auth {
     width: 100%;
-    background-color: var(--light);
     padding: 1rem 1.5rem;
     min-width: 15rem;
     max-width: 30rem;
     border-radius: 0.3rem;
     margin: 2rem 0;
+    background-color: rgb(75, 73, 73);
 
-    -webkit-box-shadow: 4px 3px 102px -4px rgba(48, 131, 220, 1);
-    -moz-box-shadow: 4px 3px 102px -4px rgba(48, 131, 220, 1);
-    box-shadow: 4px 3px 102px -4px rgba(48, 131, 220, 1);
+    -webkit-box-shadow: 4px 3px 102px -4px rgb(207, 210, 214);
+    -moz-box-shadow: 4px 3px 102px -4px rgba(207, 210, 214, 1);
+    box-shadow: 4px 3px 102px -4px rgba(207, 210, 214, 1);
   }
-}
-
-app-input-field{
-  --input-padding-bottom: 2rem;
 }
 
 .last-input {
-  --input-padding-bottom: .5rem;
-  }
+  --input-padding-bottom: 0.5rem;
+}
 
 h1 {
-  color: var(--dark-blue);
   font-weight: bold;
   text-align: center;
   margin-bottom: 2rem;
 }
 
 app-input-field {
-  --input-background: var(--light);
-  --input-text-color: var(--dark-gray);
+  --input-background: ;
+  --input-padding-bottom: 2rem;
 }
 
 ion-button {
-  --background: var(--dark-blue);
-  --color: var(--light);
+  --background: red;
+  color: white;
 }
 
 .auth-error {
   margin-top: 1rem;
-  padding: .5rem;
+  padding: 0.5rem;
   display: block;
   background-color: var(--error);
   color: var(--light);
