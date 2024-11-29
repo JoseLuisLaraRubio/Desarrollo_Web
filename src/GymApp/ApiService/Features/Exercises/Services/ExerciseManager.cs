@@ -1,7 +1,7 @@
 ﻿namespace GymApp.ApiService.Features.Exercises.Services;
 
 using GymApp.Database;
-using GymApp.Database.Entities.Routines;
+using GymApp.Database.Entities.Workouts;
 
 using Microsoft.EntityFrameworkCore;
 

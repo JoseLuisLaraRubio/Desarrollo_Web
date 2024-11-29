@@ -1,17 +1,17 @@
-﻿namespace GymApp.ApiService.Features.Routines.Endpoints;
+﻿namespace GymApp.ApiService.Features.Workouts.Endpoints;
 
 using GymApp.ApiService.Features.Routines.Services;
 using GymApp.Database.Entities;
-using GymApp.Database.Entities.Routines;
+using GymApp.Database.Entities.Workouts;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 using RaptorUtils.AspNet.Identity;
 
-public static class RoutineEndpoints
+public static class WorkoutEndpoints
 {
-    public static async Task<Results<Ok<IEnumerable<Routine>>, UnauthorizedHttpResult>> HandleGet(
+    public static async Task<Results<Ok<IEnumerable<WorkoutPlan>>, UnauthorizedHttpResult>> HandleGet(
         [FromServices] UserContext<AppUser> userContext,
         [FromServices] RoutineManager routineManager)
     {
@@ -20,8 +20,8 @@ public static class RoutineEndpoints
             return TypedResults.Unauthorized();
         }
 
-        IEnumerable<Routine> routines = await routineManager.GetUserRoutines(user);
+        IEnumerable<WorkoutPlan> Workouts = await routineManager.GetUserWorkouts(user);
 
-        return TypedResults.Ok(routines);
+        return TypedResults.Ok(Workouts);
     }
 }

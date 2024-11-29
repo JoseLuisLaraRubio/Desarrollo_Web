@@ -1,13 +1,11 @@
-﻿namespace GymApp.Database.Entities.Routines;
+﻿namespace GymApp.Database.Entities.Workouts;
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-public class ExerciseInRoutine
+public partial class RoutineBlock
 {
     public Guid Id { get; init; }
-
-    public Guid ExerciseId { get; init; }
 
     [JsonIgnore]
     public required Exercise Exercise { get; init; }

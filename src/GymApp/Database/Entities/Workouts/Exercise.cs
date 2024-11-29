@@ -1,4 +1,4 @@
-﻿namespace GymApp.Database.Entities.Routines;
+﻿namespace GymApp.Database.Entities.Workouts;
 
 using System.ComponentModel.DataAnnotations;
 

@@ -2,20 +2,20 @@
 
 using GymApp.ApiService.Features.Members.Services;
 using GymApp.Database.Entities;
-using GymApp.Database.Entities.Routines;
+using GymApp.Database.Entities.Workouts;
 
 using Microsoft.EntityFrameworkCore;
 
 public sealed class RoutineManager(
     MemberManager memberManager)
 {
-    public async Task<IReadOnlyCollection<Routine>> GetUserRoutines(AppUser user)
+    public async Task<IReadOnlyCollection<WorkoutPlan>> GetUserWorkouts(AppUser user)
     {
         ArgumentNullException.ThrowIfNull(user);
 
         Member member = await this.QueryMember(user).FirstAsync();
 
-        return [.. member.Routines];
+        return [.. member.Workouts];
     }
 
     private IQueryable<Member> QueryMember(AppUser user)
@@ -23,8 +23,8 @@ public sealed class RoutineManager(
         return memberManager.Query(user)
             .AsNoTracking()
             .Where(m => m.User == user)
-            .Include(m => m.Routines)
-            .ThenInclude(r => r.Days)
-            .ThenInclude(d => d.Exercises);
+            .Include(m => m.Workouts)
+            .ThenInclude(r => r.Routines)
+            .ThenInclude(d => d.Blocks);
     }
 }
