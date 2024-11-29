@@ -14,7 +14,7 @@ import { AuthBasePage } from "../auth.base.page";
 
 import { InputFieldComponent } from "@components/input-field";
 
-import { AdminRegisterRequest } from "@services/auth";
+import { RegisterRequest } from "@services/auth";
 
 import { FormObject, FormObjectGroup } from "@customTypes/.";
 
@@ -23,7 +23,7 @@ import { PasswordFieldMatcher } from "./password-field-matcher";
 import { environment } from "@environment";
 import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
 
-interface AdminRegistrationForm extends AdminRegisterRequest {
+interface AdminRegistrationForm extends RegisterRequest {
   passwordConfirm: string;
 }
 
@@ -64,7 +64,6 @@ export class RegisterPage extends AuthBasePage<AdminRegistrationForm> {
           Validators.minLength(environment.passwordMinLength),
         ]),
         passwordConfirm: builder.control("", [Validators.required]),
-        adminCode: builder.control("", [Validators.required]),
       },
       {
         validators: passwordFieldMatcher.matchValidator(),
@@ -86,7 +85,7 @@ export class RegisterPage extends AuthBasePage<AdminRegistrationForm> {
   protected override onSubmitValue(value: AdminRegistrationForm): void {
     this._errorMessage.set(null);
 
-    this._authService.registerAdmin(value).subscribe({
+    this._authService.registerUser(value).subscribe({
       next: () => {
         this._router.navigate(["../login"]);
       },
