@@ -8,11 +8,16 @@ nav {
 
   a {
     text-transform: uppercase;
-    padding: 0;
     color: white;
     text-decoration: none;
+  }
+
+  button {
+    padding: 1rem;
+    border-radius: 1rem;
     &:hover {
       color: red;
+      background-color: white;
     }
   }
 
@@ -29,5 +34,8 @@ nav {
   .logo-img {
     max-width: 5rem;
     filter: invert(100%);
+    &:hover {
+      filter: invert(0%)
+    }
   }
 }
