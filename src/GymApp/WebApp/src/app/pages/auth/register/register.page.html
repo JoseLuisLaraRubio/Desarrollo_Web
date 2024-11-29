@@ -39,7 +39,12 @@
             (_blur)="updateMismatchPasswordState(authForm)"
           />
 
-          <ion-button [disabled]="!authForm.valid" expand="block" type="submit">
+          <ion-button
+            [disabled]="!authForm.valid"
+            expand="block"
+            type="submit"
+            size="large"
+          >
             Register
           </ion-button>
         </form>
