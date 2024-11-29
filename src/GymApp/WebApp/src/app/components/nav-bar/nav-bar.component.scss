@@ -10,6 +10,17 @@ nav {
     text-transform: uppercase;
     color: white;
     text-decoration: none;
+    display: flex;
+    gap: 1rem;
+
+    &:hover {
+      h1 {
+        color: black;
+      }
+      .logo-img {
+        filter: invert(0%);
+      }
+    }
   }
 
   button {
@@ -34,8 +45,5 @@ nav {
   .logo-img {
     max-width: 5rem;
     filter: invert(100%);
-    &:hover {
-      filter: invert(0%)
-    }
   }
 }

@@ -2,7 +2,7 @@
 <ion-content>
   <div class="container">
     <div class="container-auth">
-      <h1>ADMIN REGISTER</h1>
+      <h1>REGISTER</h1>
 
       @if (_authForm(); as authForm) {
         <form
@@ -37,16 +37,6 @@
             _icon="lock-closed-outline"
             [_errorMessage]="getErrorMsg('passwordConfirm')"
             (_blur)="updateMismatchPasswordState(authForm)"
-          />
-
-          <app-input-field
-            _name="adminCode"
-            _type="password"
-            _label="Admin Code"
-            _placeholder="..."
-            _icon="key-outline"
-            [_errorMessage]="getErrorMsg('adminCode')"
-            class="last-input"
           />
 
           <ion-button [disabled]="!authForm.valid" expand="block" type="submit">
