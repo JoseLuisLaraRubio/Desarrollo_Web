@@ -1,7 +1,7 @@
 ﻿namespace GymApp.ApiService.Features.Exercises.Endpoints;
 
 using GymApp.ApiService.Features.Exercises.Services;
-using GymApp.Database.Entities.Routines;
+using GymApp.Database.Entities.Workouts;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

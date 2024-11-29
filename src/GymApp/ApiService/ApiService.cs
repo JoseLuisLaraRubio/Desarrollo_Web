@@ -5,8 +5,8 @@ using FluentValidation;
 using GymApp.ApiService.Features.Exercises.Endpoints;
 using GymApp.ApiService.Features.Exercises.Services;
 using GymApp.ApiService.Features.Members.Services;
-using GymApp.ApiService.Features.Routines.Endpoints;
 using GymApp.ApiService.Features.Routines.Services;
+using GymApp.ApiService.Features.Workouts.Endpoints;
 using GymApp.Database;
 using GymApp.Database.Entities;
 using GymApp.Identity.Extensions;
@@ -46,7 +46,7 @@ public class ApiService : GymAppWebAppDefinition
 
         apiGroup.MapExerciseApi();
 
-        apiGroup.MapRoutineApi();
+        apiGroup.MapWorkoutApi();
 
         await app.InitializeDb();
     }
