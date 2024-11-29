@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class AuthServiceCollectionExtensions
 {
-    public static void AddAppAuth(this IServiceCollection services)
+    public static IServiceCollection AddAppAuth(this IServiceCollection services)
     {
         services.AddAuthorization();
 
@@ -37,5 +37,7 @@ public static class AuthServiceCollectionExtensions
                 return Task.CompletedTask;
             }
         });
+
+        return services;
     }
 }
