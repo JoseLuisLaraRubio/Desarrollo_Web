@@ -31,4 +31,6 @@ public sealed class MemberManager(
         return dbContext.Members
             .Where(m => m.User.Id == user.Id);
     }
+
+    public Task SaveChanges() => dbContext.SaveChangesAsync();
 }

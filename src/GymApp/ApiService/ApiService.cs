@@ -5,8 +5,9 @@ using FluentValidation;
 using GymApp.ApiService.Features.Exercises.Endpoints;
 using GymApp.ApiService.Features.Exercises.Services;
 using GymApp.ApiService.Features.Members.Services;
-using GymApp.ApiService.Features.Routines.Services;
+using GymApp.ApiService.Features.Quizzes.Endpoints;
 using GymApp.ApiService.Features.Workouts.Endpoints;
+using GymApp.ApiService.Features.Workouts.Services;
 using GymApp.Database;
 using GymApp.Database.Entities;
 using GymApp.Identity.Extensions;
@@ -30,7 +31,7 @@ public class ApiService : GymAppWebAppDefinition
             .AddAppIdentity<AppDbContext, AppUser, MemberManager>(builder.Configuration)
             .AddAppAuth()
             .AddScoped<ExerciseManager>()
-            .AddScoped<RoutineManager>()
+            .AddScoped<WorkoutManager>()
             .AddValidatorsFromAssemblyContaining<ApiService>(ServiceLifetime.Singleton);
     }
 
@@ -47,6 +48,8 @@ public class ApiService : GymAppWebAppDefinition
         apiGroup.MapExerciseApi();
 
         apiGroup.MapWorkoutApi();
+
+        apiGroup.MapQuizApi();
 
         await app.InitializeDb();
     }
