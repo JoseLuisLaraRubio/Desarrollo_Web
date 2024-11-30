@@ -1,6 +1,6 @@
 ﻿namespace GymApp.Database.Entities.Workouts;
 
-public class RoutineBlockResult
+public partial class RoutineBlockResult
 {
     public Guid Id { get; init; }
 

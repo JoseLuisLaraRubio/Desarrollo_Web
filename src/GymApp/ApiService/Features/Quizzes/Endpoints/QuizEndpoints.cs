@@ -8,7 +8,6 @@ using GymApp.Database.Entities.Workouts;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using RaptorUtils.AspNet.Identity;
 
@@ -45,7 +44,7 @@ public static class QuizEndpoints
     // TODO: Move to service?
     private static async Task<WorkoutPlan> GenerateWorkout(ExerciseManager exerciseManager)
     {
-        IReadOnlyCollection<Exercise> exercises = await exerciseManager.GetExercises(QueryTrackingBehavior.NoTracking);
+        IReadOnlyCollection<Exercise> exercises = await exerciseManager.GetExercises();
         var exercise1 = exercises.ElementAt(0);
         var exercise2 = exercises.ElementAt(1);
 

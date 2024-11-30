@@ -23,7 +23,7 @@ public sealed class WorkoutManager(
     {
         ArgumentNullException.ThrowIfNull(user);
 
-        Member member = await memberManager.Query(user).FirstAsync();
+        Member member = memberManager.Attach(user);
         member.Workouts.Add(workout);
 
         await memberManager.SaveChanges();

@@ -1,6 +1,6 @@
 ﻿namespace GymApp.Database.Entities.Workouts;
 
-public class RoutineProgress
+public partial class RoutineProgress
 {
     public Guid Id { get; init; }
 
