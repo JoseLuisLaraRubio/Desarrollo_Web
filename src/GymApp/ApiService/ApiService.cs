@@ -5,6 +5,7 @@ using FluentValidation;
 using GymApp.ApiService.Features.Exercises.Endpoints;
 using GymApp.ApiService.Features.Exercises.Services;
 using GymApp.ApiService.Features.Members.Services;
+using GymApp.ApiService.Features.Progress.Services;
 using GymApp.ApiService.Features.Quizzes.Endpoints;
 using GymApp.ApiService.Features.Workouts.Endpoints;
 using GymApp.ApiService.Features.Workouts.Services;
@@ -32,6 +33,7 @@ public class ApiService : GymAppWebAppDefinition
             .AddAppAuth()
             .AddScoped<ExerciseManager>()
             .AddScoped<WorkoutManager>()
+            .AddScoped<ProgressManager>()
             .AddValidatorsFromAssemblyContaining<ApiService>(ServiceLifetime.Singleton);
     }
 

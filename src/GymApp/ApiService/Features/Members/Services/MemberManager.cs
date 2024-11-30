@@ -32,5 +32,18 @@ public sealed class MemberManager(
             .Where(m => m.User.Id == user.Id);
     }
 
+    public Member Attach(AppUser user)
+    {
+        ArgumentNullException.ThrowIfNull(user);
+
+        var member = new Member()
+        {
+            User = user,
+        };
+
+        dbContext.Attach(member);
+        return member;
+    }
+
     public Task SaveChanges() => dbContext.SaveChangesAsync();
 }

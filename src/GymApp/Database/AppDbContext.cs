@@ -19,7 +19,8 @@ public class AppDbContext(
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseValidationCheckConstraints()
+        optionsBuilder
+            .UseValidationCheckConstraints()
             .UseEnumCheckConstraints();
     }
 

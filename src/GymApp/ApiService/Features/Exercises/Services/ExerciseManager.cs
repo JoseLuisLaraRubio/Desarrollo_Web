@@ -8,10 +8,19 @@ using Microsoft.EntityFrameworkCore;
 public sealed class ExerciseManager(
     AppDbContext dbContext)
 {
-    public async Task<IReadOnlyCollection<Exercise>> GetExercises(QueryTrackingBehavior trackingBehavior)
+    public async Task<IReadOnlyCollection<Exercise>> GetExercises()
     {
-        return await dbContext.Set<Exercise>()
-            .AsTracking(trackingBehavior)
+        return await this.GetExerciseSet()
+            .AsNoTracking()
             .ToListAsync();
     }
+
+    public async Task<List<Guid>> GetInvalidExerciseIds(IEnumerable<Guid> ids)
+    {
+        List<Guid> allIds = await this.GetExerciseSet().Select(e => e.Id).ToListAsync();
+
+        return ids.Except(allIds).ToList();
+    }
+
+    private DbSet<Exercise> GetExerciseSet() => dbContext.Set<Exercise>();
 }
