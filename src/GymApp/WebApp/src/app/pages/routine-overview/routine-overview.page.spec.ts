@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { RoutineOverviewComponent } from './routine-overview.component';
+import { RoutineOverviewPage } from './routine-overview.page';
 
 describe('RoutineOverviewComponent', () => {
-  let component: RoutineOverviewComponent;
-  let fixture: ComponentFixture<RoutineOverviewComponent>;
+  let component: RoutineOverviewPage;
+  let fixture: ComponentFixture<RoutineOverviewPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoutineOverviewComponent ],
+      declarations: [ RoutineOverviewPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RoutineOverviewComponent);
+    fixture = TestBed.createComponent(RoutineOverviewPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
