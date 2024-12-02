@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'app-user-nav-bar',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.scss'
+  templateUrl: './user-nav-bar.component.html',
+  styleUrl: './user-nav-bar.component.scss'
 })
-export class NavBarComponent {
+export class UserNavBarComponent {
   @Input() logo = true;
   @Input() profile = false;
   @Input() routine = false;
