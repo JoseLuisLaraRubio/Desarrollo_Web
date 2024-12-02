@@ -1,28 +1,30 @@
 nav {
-  display: flex;
-  justify-content: end;
-  
-  gap: 3rem;
-  padding: 2rem;
+  display: flex;  
+
+  align-items: center;
 
   background-color: var(--gray);
 
   a{    
     text-transform: uppercase;
+    text-decoration: none;
   
     color: white;
     background-color: transparent;
     
-    padding: 1rem;
-    font-size: 2.5rem;
+    padding: 1vh;
+    font-size: 16pt;
   }
   
   a:not(#logo) {
+    margin-right: 1rem;
+    border-top: 0 var(--red) solid;
+    border-bottom: 1vh var(--red) solid;
     transition-duration: .2s;
-    border-bottom: 1rem var(--red) solid;
   }
   
   a:not(#logo):hover {
+    border-top: 1vh var(--red) solid;
     background-color: var(--red);
     transition-duration: .2s;
   } 
