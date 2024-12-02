@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-import { RoutineOverviewComponent } from "./pages/routine-overview/routine-overview.component";
 
 export const routes: Routes = [
   {
@@ -18,7 +17,8 @@ export const routes: Routes = [
   },
   {
     path: 'overview',
-    component: RoutineOverviewComponent
+    loadComponent: () => import('./pages/routine-overview/routine-overview.page').then( m => m.RoutineOverviewPage)
   },
+
 
 ];
