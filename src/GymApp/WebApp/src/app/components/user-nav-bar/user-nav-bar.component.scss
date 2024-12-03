@@ -24,6 +24,7 @@ nav {
     }
 
     &:hover {
+      cursor: pointer;
       h1 {
         transform: scale(1.1);
       }
