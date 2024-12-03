@@ -6,6 +6,7 @@ using GymApp.Database.Entities.Routines;
 
 public record RoutineView(
     Guid Id,
+    string Name,
     ICollection<WorkoutView> Workouts);
 
 public record WorkoutView(

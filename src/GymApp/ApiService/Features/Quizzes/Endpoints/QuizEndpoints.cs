@@ -50,6 +50,7 @@ public static class QuizEndpoints
 
         return new Routine()
         {
+            Name = "Default routine",
             Workouts =
             [
                 new()
