@@ -57,10 +57,7 @@ export class RoutineOverviewPage  implements OnInit {
 
   ngOnInit()
   {
-    // Send mock answers and ensure the GET request only proceeds after POST completes
-    this.http.post('/api/quiz', this.mockAns).pipe(
-      switchMap(() => this.http.get<Routine>('/api/routines/current'))
-    ).subscribe(
+    this.http.get<Routine>('/api/routines/current').subscribe(
       (response) => {
         this.routine = response;
       }

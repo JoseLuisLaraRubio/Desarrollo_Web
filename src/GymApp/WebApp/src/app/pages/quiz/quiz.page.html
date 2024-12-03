@@ -1,25 +1,21 @@
-<div class="container">
-  <h1 class="title">BIENVENIDO A NOMBRE</h1>
-  <p class="description">
-    Este cuestionario nos ayudará a generar un plan de entrenamiento personalizado para ti
-  </p>
-  <div class="progress-bar">
-    <div class="progress"></div>
+<body>
+  <div class="container">
+    <h1 class="title">BIENVENIDO A MY GYM APP</h1>
+    <p class="description">
+      Este cuestionario nos ayudará a generar un plan de entrenamiento personalizado para ti
+    </p>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="progressPercentage"></div>
+    </div>
+    <h2 class="question-title">{{currentQuestion?.question}}</h2>
+    <div class="answers">
+      @for (answer of currentQuestion?.options; track $index) {
+        <label class="answer">
+          <input type="radio" name="question" [value]="$index" [(ngModel)]="currentAnswerIndex"/>
+          <span>{{answer}}</span>
+        </label>
+      }
+    </div>
+    <button class="continue-button" (click)="continue()">CONTINUAR</button>
   </div>
-  <h2 class="question-title">PREGUNTA 3</h2>
-  <div class="answers">
-    <label class="answer">
-      <input type="radio" name="question" />
-      <span>RESPUESTA 1</span>
-    </label>
-    <label class="answer">
-      <input type="radio" name="question" checked />
-      <span>RESPUESTA 2</span>
-    </label>
-    <label class="answer">
-      <input type="radio" name="question" />
-      <span>RESPUESTA 3</span>
-    </label>
-  </div>
-  <button class="continue-button">CONTINUAR</button>
-</div>
+</body>
