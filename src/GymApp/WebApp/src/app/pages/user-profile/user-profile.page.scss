@@ -124,13 +124,12 @@
 
       .form-actions {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         gap: 1rem;
         margin-top: 1rem;
       }
 
-      .btn-cancelar,
-      .btn-save {
+      button {
         background-color: #ff0004;
         color: #fff;
         border: none;
@@ -150,6 +149,10 @@
 
         &:active {
           transform: translateY(0);
+        }
+
+        &.btn-print {
+          background-color: rgb(72, 72, 75);
         }
       }
 

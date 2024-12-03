@@ -21,6 +21,10 @@ export class UserProfilePage implements OnInit {
     this.getPersonalInfo();
   }
 
+  public onClickToPrint(): void {
+    window.print();
+  }
+
   public onSubmit(): void {
     if (this.isPersonalInfoValid()) {
       alert("Por favor, llena todos los campos antes de guardar.");
