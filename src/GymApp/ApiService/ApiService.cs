@@ -5,6 +5,7 @@ using FluentValidation;
 using GymApp.ApiService.Features.Exercises.Endpoints;
 using GymApp.ApiService.Features.Exercises.Services;
 using GymApp.ApiService.Features.Members.Services;
+using GymApp.ApiService.Features.PersonalInfo.Endpoints;
 using GymApp.ApiService.Features.Progress.Services;
 using GymApp.ApiService.Features.Quizzes.Endpoints;
 using GymApp.ApiService.Features.Routines.Endpoints;
@@ -48,6 +49,8 @@ public class ApiService : GymAppWebAppDefinition
         var apiGroup = app.MapGroup("/api").AddFluentValidationAutoValidation();
 
         apiGroup.MapGymAppIdentityApi<AppUser>();
+
+        apiGroup.MapPersonalInfoApi();
 
         apiGroup.MapExerciseApi();
 

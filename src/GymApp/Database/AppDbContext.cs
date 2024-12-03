@@ -46,8 +46,13 @@ public class AppDbContext(
     {
         base.ConfigureConventions(configurationBuilder);
 
-        configurationBuilder.Properties<Muscle>().HaveConversion<string>().HaveColumnType("VARCHAR(255)");
-        configurationBuilder.Properties<Equipment>().HaveConversion<string>().HaveColumnType("VARCHAR(255)");
+        ConfigurePropertiesAsString<Muscle>();
+        ConfigurePropertiesAsString<Equipment>();
+        ConfigurePropertiesAsString<Sex>();
+        ConfigurePropertiesAsString<BodyType>();
+
+        void ConfigurePropertiesAsString<T>()
+            => configurationBuilder.Properties<T>().HaveConversion<string>().HaveColumnType("VARCHAR(255)");
     }
 
     private static void SeedRoles(ModelBuilder builder)

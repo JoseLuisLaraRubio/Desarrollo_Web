@@ -7,6 +7,8 @@ public class Member
 {
     public required AppUser User { get; init; }
 
+    public PersonalInfo? Info { get; set; }
+
     public Routine? Routine { get; set; }
 
     public ICollection<WorkoutProgress> Progress { get; init; } = [];
