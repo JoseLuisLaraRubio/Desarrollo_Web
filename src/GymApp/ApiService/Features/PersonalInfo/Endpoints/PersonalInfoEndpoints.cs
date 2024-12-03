@@ -20,7 +20,10 @@ public static class PersonalInfoEndpoints
             return TypedResults.Unauthorized();
         }
 
-        PersonalInfo? info = (await memberManager.Query(user).FirstAsync()).Info;
+        PersonalInfo? info = await memberManager.Query(user)
+            .AsNoTracking()
+            .Select(m => m.Info)
+            .FirstAsync();
 
         return info is null
             ? TypedResults.NoContent()
