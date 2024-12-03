@@ -1,7 +1,7 @@
 ﻿namespace GymApp.Database;
 
 using GymApp.Database.Entities;
-using GymApp.Database.Entities.Workouts;
+using GymApp.Database.Entities.Routines;
 using GymApp.Identity;
 
 using Microsoft.AspNetCore.Identity;
