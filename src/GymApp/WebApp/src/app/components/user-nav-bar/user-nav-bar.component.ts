@@ -25,8 +25,17 @@ export class UserNavBarComponent {
   }
 
   public onClickToExit(): void {
-    this._authService.logout().subscribe();
-    this._router.navigate(["/auth/home"]);
+    this._authService.logout().subscribe({
+      next: () => {
+        console.log("Logout exitoso");
+        this._router.navigate(["/auth/home"]).then(() => {
+          window.location.reload();
+        });
+      },
+      error: (err) => {
+        console.error("Error durante el logout:", err);
+      },
+    });
   }
 
   public onClickToProfile(): void {
