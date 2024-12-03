@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
   templateUrl: "./menu.page.html",
   styleUrls: ["./menu.page.scss"],
   standalone: true,
-  imports: [NavBarComponent, CommonModule],
+  imports: [CommonModule, NavBarComponent],
 })
 export class MenuPage {
   private readonly _userInfo: Observable<Nullable<UserInfoResponse>>;
