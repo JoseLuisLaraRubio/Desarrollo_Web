@@ -12,8 +12,8 @@ using RaptorUtils.AspNet.Identity;
 public static class ProgressEndpoints
 {
     public static async Task<Results<Ok, ValidationProblem, UnauthorizedHttpResult>> HandlePost(
-        [FromRoute] Guid routineId,
-        [FromBody] RoutineProgressData routineProgressData,
+        [FromRoute] Guid workoutId,
+        [FromBody] WorkoutProgressData routineProgressData,
         [FromServices] UserContext<AppUser> userContext,
         [FromServices] ProgressManager progressManager)
     {
@@ -22,7 +22,7 @@ public static class ProgressEndpoints
             return TypedResults.Unauthorized();
         }
 
-        var result = await progressManager.AddRoutineProgress(user, routineProgressData.WithId(routineId));
+        var result = await progressManager.AddRoutineProgress(user, routineProgressData.WithId(workoutId));
         if (!result.IsValid)
         {
             return TypedResults.ValidationProblem(result.ToDictionary());

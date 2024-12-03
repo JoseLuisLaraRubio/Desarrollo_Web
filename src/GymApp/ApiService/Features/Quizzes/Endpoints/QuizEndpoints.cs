@@ -2,9 +2,9 @@
 
 using GymApp.ApiService.Features.Exercises.Services;
 using GymApp.ApiService.Features.Quizzes.Data;
-using GymApp.ApiService.Features.Workouts.Services;
+using GymApp.ApiService.Features.Routines.Services;
 using GymApp.Database.Entities;
-using GymApp.Database.Entities.Workouts;
+using GymApp.Database.Entities.Routines;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ public static class QuizEndpoints
     public static async Task<Results<Ok, BadRequest<string>, UnauthorizedHttpResult>> HandlePost(
         [FromBody] QuizResponse quizResponse,
         [FromServices] UserContext<AppUser> userContext,
-        [FromServices] WorkoutManager workoutManager,
+        [FromServices] RoutineManager routineManager,
         [FromServices] ExerciseManager exerciseManager)
     {
         if (await userContext.TryGetLoggedInUser() is not { } user)
@@ -35,22 +35,22 @@ public static class QuizEndpoints
         }
 
         // TODO
-        WorkoutPlan newWorkout = await GenerateWorkout(exerciseManager);
-        await workoutManager.AddWorkout(user, newWorkout);
+        Routine newRoutine = await GenerateRoutine(exerciseManager);
+        await routineManager.SetRoutine(user, newRoutine);
 
         return TypedResults.Ok();
     }
 
     // TODO: Move to service?
-    private static async Task<WorkoutPlan> GenerateWorkout(ExerciseManager exerciseManager)
+    private static async Task<Routine> GenerateRoutine(ExerciseManager exerciseManager)
     {
         IReadOnlyCollection<Exercise> exercises = await exerciseManager.GetExercises();
-        var exercise1 = exercises.ElementAt(0);
-        var exercise2 = exercises.ElementAt(1);
+        Exercise exercise1 = exercises.ElementAt(0);
+        Exercise exercise2 = exercises.ElementAt(1);
 
-        return new WorkoutPlan()
+        return new Routine()
         {
-            Routines =
+            Workouts =
             [
                 new()
                 {
