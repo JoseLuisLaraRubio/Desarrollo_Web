@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
 import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.component";
+import { PersonalInfoService } from "@services/personal-info/personal-info.service";
+import { PersonalInfo } from "@services/personal-info/data";
 
 @Component({
   selector: "app-user-profile",
@@ -12,68 +13,46 @@ import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.compo
   imports: [CommonModule, FormsModule, UserNavBarComponent],
 })
 export class UserProfilePage implements OnInit {
-  user = {
-    fullName: "",
-    sex: "",
-    dateOfBirth: "",
-    height: null,
-    weight: null,
-    bodyType: "",
-  };
+  personalInfo: PersonalInfo = {} as PersonalInfo;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly _personalInfoService: PersonalInfoService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getPersonalInfo();
   }
 
-  // Obtener la información personal del usuario
-  getPersonalInfo() {
-    const url = `api/personal-info`;
-    this.http.get<any>(url).subscribe(
-      (response) => {
-        this.user = { ...this.user, ...response };
-      },
-      (error) => {
-        console.error("Error al obtener la información personal:", error);
-      },
-    );
-  }
-
-  onSubmit() {
-    if (
-      !this.user.fullName ||
-      !this.user.height ||
-      !this.user.weight ||
-      !this.user.sex ||
-      !this.user.bodyType ||
-      !this.user.dateOfBirth
-    ) {
+  public onSubmit(): void {
+    if (this.isPersonalInfoValid()) {
       alert("Por favor, llena todos los campos antes de guardar.");
       return;
     }
 
-    const url = `api/personal-info`;
-    this.http.put(url, this.user).subscribe(
-      (response) => {
-        alert("¡Tu perfil ha sido actualizado!");
-        this.getPersonalInfo();
-      },
-      (error) => {
-        console.error("Error al actualizar la información:", error);
-        alert("Error al guardar los cambios.");
-      },
+    this.updatePersonalInfo(this.personalInfo);
+    console.log(this.personalInfo)
+    this.getPersonalInfo();
+    console.log(this.personalInfo)
+  }
+
+  private updatePersonalInfo(personalInfo: PersonalInfo): void {
+    this._personalInfoService.updatePersonalInfo(personalInfo);
+  }
+
+  private isPersonalInfoValid(): boolean {
+    return (
+      !this.personalInfo.fullName ||
+      !this.personalInfo.height ||
+      !this.personalInfo.weight ||
+      !this.personalInfo.sex ||
+      !this.personalInfo.bodyType ||
+      !this.personalInfo.dateOfBirth
     );
   }
 
-  onCancel() {
-    this.user = {
-      fullName: "",
-      sex: "",
-      dateOfBirth: "",
-      height: null,
-      weight: null,
-      bodyType: "",
-    };
+  private getPersonalInfo(): void {
+    const personalInfoObservable = this._personalInfoService.getPersonalInfo();
+
+    personalInfoObservable.subscribe((info) => {
+      this.personalInfo = { ...info };
+    });
   }
 }

@@ -11,7 +11,7 @@
       </div>
 
       <div class="user-info">
-        <h1>Hola, {{ user }}</h1>
+        <h1>Hola, {{ personalInfo.fullName }}</h1>
         <p>¡Mantén tu perfil actualizado para personalizar tu experiencia!</p>
       </div>
     </section>
@@ -25,7 +25,7 @@
             type="text"
             id="fullName"
             name="fullName"
-            [(ngModel)]="user.fullName"
+            [(ngModel)]="personalInfo.fullName"
             placeholder="Ingresa tu nombre completo"
             required
           />
@@ -37,7 +37,7 @@
             type="date"
             id="dateOfBirth"
             name="dateOfBirth"
-            [(ngModel)]="user.dateOfBirth"
+            [(ngModel)]="personalInfo.dateOfBirth"
             placeholder="Ingresa tu fecha de nacimiento"
             required
           />
@@ -45,7 +45,7 @@
 
         <div class="form-group">
           <label for="sex">Sexo</label>
-          <select id="sex" name="sex" [(ngModel)]="user.sex" required>
+          <select id="sex" name="sex" [(ngModel)]="personalInfo.sex" required>
             <option value="Hombre">Hombre</option>
             <option value="Mujer">Mujer</option>
           </select>
@@ -57,7 +57,7 @@
             type="number"
             id="height"
             name="height"
-            [(ngModel)]="user.height"
+            [(ngModel)]="personalInfo.height"
             placeholder="Ingresa tu estatura en cm"
             required
           />
@@ -69,7 +69,7 @@
             type="number"
             id="weight"
             name="weight"
-            [(ngModel)]="user.weight"
+            [(ngModel)]="personalInfo.weight"
             placeholder="Ingresa tu peso actual"
             required
           />
@@ -80,20 +80,16 @@
           <select
             id="bodyType"
             name="bodyType"
-            [(ngModel)]="user.bodyType"
+            [(ngModel)]="personalInfo.bodyType"
             required
           >
-            <option value="" disabled>Selecciona tu tipo de cuerpo</option>
-            <option value="ectomorph">Ectomorfo</option>
-            <option value="mesomorph">Mesomorfo</option>
-            <option value="endomorph">Endomorfo</option>
+            <option value="Ectomorph">Ectomorfo</option>
+            <option value="Mesomorph">Mesomorfo</option>
+            <option value="Endomorph">Endomorfo</option>
           </select>
         </div>
 
         <div class="form-actions">
-          <button type="button" class="btn-cancelar" (click)="onCancel()">
-            Cancelar
-          </button>
           <button type="submit" class="btn-save">Guardar Cambios</button>
         </div>
       </form>
