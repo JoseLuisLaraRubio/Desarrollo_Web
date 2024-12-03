@@ -1,24 +1,25 @@
 ﻿namespace GymApp.ApiService.Features.Progress.Data;
 
-using GymApp.Database.Entities.Workouts;
+using GymApp.Database.Entities.Routines;
+using GymApp.Database.Entities.Routines.Progress;
 
 using Riok.Mapperly.Abstractions;
 
 [Mapper]
 public static partial class RoutineProgressDataMapper
 {
-    [MapperIgnoreTarget(nameof(RoutineProgress.Id))]
-    [MapValue(nameof(RoutineProgress.Routine), Use = nameof(NullRoutine))]
-    public static partial RoutineProgress DataToEntity(RoutineProgressDataWithId data);
+    [MapperIgnoreTarget(nameof(WorkoutProgress.Id))]
+    [MapValue(nameof(WorkoutProgress.Workout), Use = nameof(NullWorkout))]
+    public static partial WorkoutProgress DataToEntity(WorkoutProgressDataWithId data);
 
-    [MapperIgnoreTarget(nameof(RoutineBlockResult.Id))]
-    [MapValue(nameof(RoutineBlockResult.Exercise), Use = nameof(NullExercise))]
-    private static partial RoutineBlockResult DataToEntity(RoutineBlockResultData data);
+    [MapperIgnoreTarget(nameof(ExerciseBlockResult.Id))]
+    [MapValue(nameof(ExerciseBlockResult.Exercise), Use = nameof(NullExercise))]
+    private static partial ExerciseBlockResult DataToEntity(ExerciseBlockResultData data);
 
     [MapperIgnoreTarget(nameof(SetResult.Id))]
     private static partial SetResult DataToEntity(SetResultData data);
 
-    private static Routine NullRoutine() => null!;
+    private static Workout NullWorkout() => null!;
 
     private static Exercise NullExercise() => null!;
 }

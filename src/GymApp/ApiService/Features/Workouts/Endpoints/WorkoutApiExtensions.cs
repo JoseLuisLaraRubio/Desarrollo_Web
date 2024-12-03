@@ -9,13 +9,12 @@ public static class WorkoutApiExtensions
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
-        var routeGroup = endpoints.MapGroup("/workouts")
-            .RequireAuthorization();
+        var routeGroup = endpoints.MapGroup("/workouts");
 
-        routeGroup.MapGet(string.Empty, WorkoutEndpoints.HandleGet);
+        routeGroup.MapGet("{workoutId}", WorkoutEndpoints.HandleGet);
 
         routeGroup.MapProgressApi();
 
-        return routeGroup.WithTags("Workout");
+        return routeGroup;
     }
 }
