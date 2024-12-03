@@ -1,0 +1,80 @@
+.container {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    background-color: #333;
+    height: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    width: 30%; /* Ajusta este porcentaje según el progreso */
+    height: 100%;
+    background-color: red;
+  }
+  
+  .question-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .answer {
+    display: flex;
+    align-items: center;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .answer input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  .answer input[type="radio"]:checked + span {
+    color: #00ff00; /* Color verde para la respuesta seleccionada */
+  }
+  
+  .continue-button {
+    background-color: transparent;
+    border: 2px solid red;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .continue-button:hover {
+    background-color: red;
+  }
+  

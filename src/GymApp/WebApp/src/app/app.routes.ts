@@ -18,7 +18,11 @@ export const routes: Routes = [
   {
     path: 'overview',
     loadComponent: () => import('./pages/routine-overview/routine-overview.page').then( m => m.RoutineOverviewPage)
+  },  {
+    path: 'quiz',
+    loadComponent: () => import('./quiz/quiz.page').then( m => m.QuizPage)
   },
+
 
 
 ];
