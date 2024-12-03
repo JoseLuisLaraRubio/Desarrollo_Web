@@ -1,11 +1,13 @@
 <app-nav-bar></app-nav-bar>
 
 <main class="background">
-
   <div class="textContainer">
     <h1>Gym App</h1>
     <p class="text">
-      <span>¡Bienvenido a Gym App! <br> Es un gusto tenerte de nuevo</span>
+      <span
+        >¡Bienvenido a Gym App! <br />
+        Es un gusto tenerte de nuevo {{ (userInfo | async)?.userName }}</span
+      >
     </p>
   </div>
 
@@ -28,5 +30,4 @@
       <img src="/assets/plans-page/GymStock.jpg" alt="Crear Rutina" />
     </div>
   </div>
-
 </main>
