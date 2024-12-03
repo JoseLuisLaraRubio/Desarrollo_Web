@@ -7,7 +7,7 @@ public static class ProgressApiExtensions
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
-        var routeGroup = endpoints.MapGroup("/workouts");
+        var routeGroup = endpoints.MapGroup(string.Empty);
 
         routeGroup.MapPost("{workoutId}/progress", ProgressEndpoints.HandlePost);
 

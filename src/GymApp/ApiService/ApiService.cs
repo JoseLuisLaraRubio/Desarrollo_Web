@@ -9,6 +9,7 @@ using GymApp.ApiService.Features.Progress.Services;
 using GymApp.ApiService.Features.Quizzes.Endpoints;
 using GymApp.ApiService.Features.Routines.Endpoints;
 using GymApp.ApiService.Features.Routines.Services;
+using GymApp.ApiService.Features.Workouts.Services;
 using GymApp.Database;
 using GymApp.Database.Entities;
 using GymApp.Identity.Extensions;
@@ -33,6 +34,7 @@ public class ApiService : GymAppWebAppDefinition
             .AddAppAuth()
             .AddScoped<ExerciseManager>()
             .AddScoped<RoutineManager>()
+            .AddScoped<WorkoutManager>()
             .AddScoped<ProgressManager>()
             .AddValidatorsFromAssemblyContaining<ApiService>(ServiceLifetime.Singleton);
     }
