@@ -22,6 +22,10 @@ export class UserNavBarComponent {
 
   public onClickToExit(): void {
     this._authService.logout();
-    this._router.navigate(["/auth/home"])
+    this._router.navigate(["/auth/home"]);
+  }
+
+  public onClickToProfile(): void {
+    this._router.navigate(["/user-profile"]);
   }
 }
