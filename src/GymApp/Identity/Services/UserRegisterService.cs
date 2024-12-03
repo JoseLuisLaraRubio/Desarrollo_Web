@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Identity;
 
 public class UserRegisterService<TUser>(
     UserManager<TUser> userManager,
-    AdminCodeValidator adminCodeValidator)
+    AdminCodeValidator adminCodeValidator,
+    IUserRegistrationHandler<TUser> userRegistrationHandler)
     where TUser : AppIdentityUser, new()
 {
     public Task<IdentityResult> RegisterUserAsync(RegisterRequest request)
     {
-        return this.RegisterAsync(request, UserRole.User);
+        return this.RegisterAsync(request, UserRole.Member);
     }
 
     public async Task<IdentityResult> RegisterAdminAsync(AdminRegisterRequest request)
@@ -42,6 +43,8 @@ public class UserRegisterService<TUser>(
         if (result.Succeeded)
         {
             await userManager.AddToRoleAsync(user, role.ToString());
+
+            await userRegistrationHandler.OnUserRegister(user, role);
         }
 
         return result;
