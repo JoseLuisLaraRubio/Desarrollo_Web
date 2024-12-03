@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
+import { Navbar2Component } from "@components/navbar2/navbar2.component";
 
 
 @Component({
@@ -7,7 +7,7 @@ import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
   standalone: true,
-  imports: [NavBarComponent],
+  imports: [Navbar2Component],
 })
 export class MenuPage {
 }
