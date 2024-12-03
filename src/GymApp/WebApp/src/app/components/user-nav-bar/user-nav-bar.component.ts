@@ -21,7 +21,7 @@ export class UserNavBarComponent {
   @Input() register = false;
 
   public onClickToExit(): void {
-    this._authService.logout();
+    this._authService.logout().subscribe();
     this._router.navigate(["/auth/home"]);
   }
 
