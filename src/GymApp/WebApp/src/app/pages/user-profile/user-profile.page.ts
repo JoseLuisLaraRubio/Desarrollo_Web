@@ -28,13 +28,11 @@ export class UserProfilePage implements OnInit {
     }
 
     this.updatePersonalInfo(this.personalInfo);
-    console.log(this.personalInfo)
     this.getPersonalInfo();
-    console.log(this.personalInfo)
   }
 
   private updatePersonalInfo(personalInfo: PersonalInfo): void {
-    this._personalInfoService.updatePersonalInfo(personalInfo);
+    this._personalInfoService.updatePersonalInfo(personalInfo).subscribe();
   }
 
   private isPersonalInfoValid(): boolean {
