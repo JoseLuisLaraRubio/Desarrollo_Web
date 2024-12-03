@@ -1,4 +1,4 @@
-﻿namespace GymApp.Database.Entities.Workouts;
+﻿namespace GymApp.Database.Entities.Routines.Progress;
 
 public class SetResult
 {
