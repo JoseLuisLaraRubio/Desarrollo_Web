@@ -1,0 +1,63 @@
+<app-nav-bar></app-nav-bar>
+
+<main class="profile-container">
+  <section class="profile-header">
+    <div class="profile-pic">
+      <img src="/assets/default-avatar.png" alt="User Profile Picture" />
+    </div>
+    <div class="user-info">
+      <h1>Hola, {{ user.username }}</h1>
+      <p>¡Mantén tu perfil actualizado para personalizar tu experiencia!</p>
+    </div>
+  </section>
+
+  <section class="profile-details">
+    <h2>Información Personal</h2>
+    <form (ngSubmit)="onSubmit()">
+      <!-- #profileForm="ngForm" -->
+      <div class="form-group">
+        <label for="fullName">Nombre Completo</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Ingresa tu nombre completo" />
+        <!-- [(ngModel)]="user.fullName" -->
+      </div>
+
+      <div class="form-group">
+        <label for="age">Edad</label>
+        <input type="number" id="age" name="age" placeholder="Ingresa tu edad" />
+        <!-- [(ngModel)]="user.age"  -->
+      </div>
+
+      <div class="form-group">
+        <label for="height">Estatura (cm)</label>
+        <input type="number" id="height" name="height" placeholder="Ingresa tu estatura en cm" />
+        <!-- [(ngModel)]="user.height" -->
+      </div>
+
+      <div class="form-group">
+        <label for="weight">Peso (kg)</label>
+        <input type="number" id="weight" name="weight" placeholder="Ingresa tu peso actual" />
+      </div>
+      <!--  [(ngModel)]="user.weight"-->
+      <div class="form-group">
+        <label for="bodyType">Tipo de Cuerpo</label>
+        <select id="bodyType" name="bodyType">
+          <!--  [(ngModel)]="user.bodyType"-->
+          <option value="" disabled selected>Selecciona tu tipo de cuerpo</option>
+          <option value="ectomorph">Ectomorfo</option>
+          <option value="mesomorph">Mesomorfo</option>
+          <option value="endomorph">Endomorfo</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sports">Actividades Deportivas Favoritas</label>
+        <input type="text" id="sports" name="sports" placeholder="Por ejemplo: Natación, Ciclismo, Yoga" />
+        <!-- [(ngModel)]="user.favoriteSports" -->
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-save">Guardar Cambios</button>
+      </div>
+    </form>
+  </section>
+</main>
