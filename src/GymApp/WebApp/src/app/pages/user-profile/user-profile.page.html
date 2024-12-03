@@ -6,66 +6,62 @@
       <div class="profile-pic">
         <img src="assets/plans-page/default-avatar.png.jpg" alt="User Profile Picture" />
       </div>
+
       <div class="user-info">
-        <h1>Hola, *usuario* </h1>
-        <!-- {{ user.username }} -->
+        <h1>Hola, {{ user.username }}</h1>
         <p>¡Mantén tu perfil actualizado para personalizar tu experiencia!</p>
       </div>
     </section>
 
     <section class="profile-details">
       <h2>Información Personal</h2>
-      <form>
-        <!-- (ngSubmit)="onSubmit()" #profileForm="ngForm" -->
+      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
         <div class="form-group">
           <label for="fullName">Nombre Completo</label>
-          <input type="text" id="fullName" name="fullName" placeholder="Ingresa tu nombre completo" />
-          <!-- [(ngModel)]="user.fullName" -->
+          <input type="text" id="fullName" name="fullName" [(ngModel)]="user.fullName"
+            placeholder="Ingresa tu nombre completo" required />
         </div>
 
         <div class="form-group">
-          <label for="age">Edad</label>
-          <input type="number" id="age" name="age" placeholder="Ingresa tu edad" />
-          <!-- [(ngModel)]="user.age" -->
+          <label for="dateOfBirth">Fecha de Nacimiento</label>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="user.dateOfBirth"
+            placeholder="Ingresa tu fecha de nacimiento" required />
         </div>
 
         <div class="form-group">
-          <label for="sports">Sexo</label>
-          <input type="text" id="sexo" name="sexo" placeholder="Hombre/Mujer" />
-          <!-- [(ngModel)]="user.favoriteSports" -->
+          <label for="sex">Sexo</label>
+          <select id="sex" name="sex" [(ngModel)]="user.sex" required>
+            <option value="Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+          </select>
         </div>
 
         <div class="form-group">
           <label for="height">Estatura (cm)</label>
-          <input type="number" id="height" name="height" placeholder="Ingresa tu estatura en cm" />
-          <!-- [(ngModel)]="user.height" -->
+          <input type="number" id="height" name="height" [(ngModel)]="user.height"
+            placeholder="Ingresa tu estatura en cm" required />
         </div>
 
         <div class="form-group">
           <label for="weight">Peso (kg)</label>
-          <input type="number" id="weight" name="weight" placeholder="Ingresa tu peso actual" />
-          <!-- [(ngModel)]="user.weight" -->
+          <input type="number" id="weight" name="weight" [(ngModel)]="user.weight" placeholder="Ingresa tu peso actual"
+            required />
         </div>
 
         <div class="form-group">
           <label for="bodyType">Tipo de Cuerpo</label>
-          <select id="bodyType" name="bodyType">
-            <!-- [(ngModel)]="user.bodyType" -->
-            <option value="" disabled selected>Selecciona tu tipo de cuerpo</option>
+          <select id="bodyType" name="bodyType" [(ngModel)]="user.bodyType" required>
+            <option value="" disabled>Selecciona tu tipo de cuerpo</option>
             <option value="ectomorph">Ectomorfo</option>
             <option value="mesomorph">Mesomorfo</option>
             <option value="endomorph">Endomorfo</option>
           </select>
         </div>
 
-
         <div class="form-actions">
-          <button type="button" class="btn-cancelar">Cancelar</button>
+          <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
           <button type="submit" class="btn-save">Guardar Cambios</button>
         </div>
-
-
-
       </form>
     </section>
   </main>
