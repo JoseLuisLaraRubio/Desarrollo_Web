@@ -4,16 +4,16 @@ using FluentValidation;
 
 #pragma warning disable SA1402
 
-public record RoutineProgressData(
+public record WorkoutProgressData(
     DateTimeOffset Date,
-    ICollection<RoutineBlockResultData> Results)
+    ICollection<ExerciseBlockResultData> Results)
 {
-    public RoutineProgressDataWithId WithId(Guid routineId)
+    public WorkoutProgressDataWithId WithId(Guid workoutId)
     {
-        return new RoutineProgressDataWithId(routineId, this.Date, this.Results);
+        return new WorkoutProgressDataWithId(workoutId, this.Date, this.Results);
     }
 
-    public class Validator : AbstractValidator<RoutineProgressData>
+    public class Validator : AbstractValidator<WorkoutProgressData>
     {
         public Validator()
         {
@@ -21,22 +21,22 @@ public record RoutineProgressData(
                 .WithMessage("The DateTimeOffset must be in UTC.");
 
             this.RuleFor(r => r.Results).NotNull()
-                .ForEach(r => r.SetValidator(RoutineBlockResultData.Validator.Instance));
+                .ForEach(r => r.SetValidator(ExerciseBlockResultData.Validator.Instance));
         }
     }
 }
 
-public record RoutineProgressDataWithId(
-    Guid RoutineId,
+public record WorkoutProgressDataWithId(
+    Guid WorkoutId,
     DateTimeOffset Date,
-    ICollection<RoutineBlockResultData> Results)
-    : RoutineProgressData(Date, Results);
+    ICollection<ExerciseBlockResultData> Results)
+    : WorkoutProgressData(Date, Results);
 
-public record RoutineBlockResultData(
+public record ExerciseBlockResultData(
     Guid ExerciseId,
     ICollection<SetResultData> Sets)
 {
-    public sealed class Validator : AbstractValidator<RoutineBlockResultData>
+    public sealed class Validator : AbstractValidator<ExerciseBlockResultData>
     {
         public Validator()
         {

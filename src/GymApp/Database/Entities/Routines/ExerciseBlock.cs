@@ -1,8 +1,8 @@
-﻿namespace GymApp.Database.Entities.Workouts;
+﻿namespace GymApp.Database.Entities.Routines;
 
 using System.ComponentModel.DataAnnotations;
 
-public partial class RoutineBlock
+public partial class ExerciseBlock
 {
     public Guid Id { get; init; }
 
