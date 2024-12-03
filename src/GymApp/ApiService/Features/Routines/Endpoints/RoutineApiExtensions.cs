@@ -1,6 +1,6 @@
 ﻿namespace GymApp.ApiService.Features.Routines.Endpoints;
 
-using GymApp.ApiService.Features.Progress.Endpoints;
+using GymApp.ApiService.Features.Workouts.Endpoints;
 
 public static class RoutineApiExtensions
 {
@@ -14,7 +14,7 @@ public static class RoutineApiExtensions
 
         routeGroup.MapGet("/current", WorkoutEndpoints.HandleGet);
 
-        routeGroup.MapProgressApi();
+        routeGroup.MapWorkoutApi();
 
         return routeGroup.WithTags("Routine");
     }
