@@ -1,0 +1,102 @@
+.profile-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1.5rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .user-info {
+            h1 {
+                font-size: 2rem;
+                color: #ff0004;
+                margin: 0;
+            }
+
+            p {
+                font-size: 1rem;
+                color: #666;
+            }
+        }
+    }
+
+    .profile-details {
+        h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            .form-group {
+                margin-bottom: 1rem;
+
+                label {
+                    font-size: 1rem;
+                    color: #333;
+                    display: block;
+                    margin-bottom: 0.5rem;
+                }
+
+                input,
+                select {
+                    width: 100%;
+                    padding: 0.5rem;
+                    font-size: 1rem;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                select {
+                    appearance: none;
+                }
+            }
+
+            .form-actions {
+                display: flex;
+                justify-content: flex-end;
+
+                .btn-save {
+                    background-color: #ff0004;
+                    color: #fff;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 0.8rem 2rem;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: transform 0.2s ease, background-color 0.2s ease;
+
+                    &:hover {
+                        background-color: #e00004;
+                        transform: translateY(-2px);
+                    }
+
+                    &:active {
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
+    }
+}
