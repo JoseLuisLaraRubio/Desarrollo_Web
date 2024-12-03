@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
+import { switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 interface Routine {
   id: string;
-  routines: Workout[];
+  workouts: Workout[];
 }
 
 interface Workout {
@@ -14,11 +16,11 @@ interface Workout {
 
 interface Block {
   id: string;
-  exerciseId: string;
+  exercise: Exercise;
   sets: number;
   repetitions: number;
-  excerciceName: string;
 }
+
 interface Exercise {
   id: string;
   name: string;
@@ -34,11 +36,18 @@ interface Exercise {
   standalone: true,
   templateUrl: './routine-overview.page.html',
   styleUrls: ['./routine-overview.page.scss'],
-  imports: [UserNavBarComponent],
+  imports: [UserNavBarComponent, FormsModule],
 })
 export class RoutineOverviewPage  implements OnInit {
 
+  searchInput: string = "";
+  searching: boolean = false;
+
   routine: Routine | undefined;
+  selectedWorkout: Workout | undefined;
+
+  exercises: Exercise[] = [];
+  matchingExercises: Exercise[] = [];
 
   constructor(private readonly http: HttpClient) {}
 
@@ -46,48 +55,86 @@ export class RoutineOverviewPage  implements OnInit {
     answersIndices: [0, 1]
   };
 
-  ngOnInit() 
+  ngOnInit()
   {
-    // Send mock answers to initialize the routine
-    this.http.post('/api/quiz', this.mockAns);
-
-    this.http.get<Routine[]>('/api/workouts').subscribe(
-    {
-      next: (response) => {
-        this.routine = response[0];
-
-        this.assignExcerciceNames();
-
-        console.log(this.routine)
-      },
-      error: (err) => {
-        console.error('Error fetching workouts:', err);
+    // Send mock answers and ensure the GET request only proceeds after POST completes
+    this.http.post('/api/quiz', this.mockAns).pipe(
+      switchMap(() => this.http.get<Routine>('/api/routines/current'))
+    ).subscribe(
+      (response) => {
+        this.routine = response;
       }
+    );
+
+    this.http.get<Exercise[]>('/api/exercises').subscribe(
+      (response) => {
+        this.exercises = response;
+      }
+    );
+  }
+
+  openEditForm(workout: Workout)
+  {
+    this.selectedWorkout = workout;
+  }
+  
+  closeModal(){
+    this.selectedWorkout = undefined;
+  }
+
+  findExcercices(){
+    if(this.exercises.length == 0 || this.searchInput == ""){
+      this.searching = false;
+      return;
+    }
+
+    this.searching = true;
+
+    this.matchingExercises = [];
+    this.exercises.forEach(exercise => {
+      if(exercise.name.toLowerCase().includes(this.searchInput.toLowerCase())){
+        this.matchingExercises.push(exercise);
+      }       
     });
   }
 
-  assignExcerciceNames()
-  {
-    var excercises : Exercise[]; 
-    this.http.get('api/exercises').subscribe(
-      {
-        next: (response) => {
-          excercises = response as Exercise[];
-          console.log(excercises);
+  addExerciseBlock(exercise:Exercise){
+    this.searching = false;
 
-          this.routine?.routines.forEach(workout => {
-            workout.blocks.forEach(block => {
-              console.log(block)
-              excercises.forEach(excercice => {
-                if(excercice.id === block.exerciseId){
-                  block.excerciceName = excercice.name;
-                }
-              })
-            });
-          });
-        }
+    var newBlock:Block = {
+      id: "",
+      exercise: exercise,
+      sets: 3,
+      repetitions: 10
+    };
+
+    this.selectedWorkout?.blocks.push(newBlock);
+
+    
+    console.log(exercise.name);
+  }
+
+  deleteExerciseBlock(block:Block){
+    var blockIndex = this.selectedWorkout?.blocks.findIndex(
+      (currBlock) => currBlock === block
+    ); 
+
+    if(blockIndex == undefined) return;
+    this.selectedWorkout?.blocks.splice(blockIndex, 1);
+  }
+
+  saveWorkoutChanges(){
+    //this.http.p
+    this.closeModal();
+  }
+
+  cancelWorkoutChanges(){
+    this.http.get<Routine>('/api/routines/current').subscribe(
+      (response) => {
+        this.routine = response;
       }
     );
+    this.closeModal();
   }
 
 }
