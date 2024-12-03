@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
+import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.component";
 import { Nullable } from "@customTypes/nullable";
 import { AuthService, UserInfoResponse } from "@services/auth";
 import { Observable } from "rxjs";
@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
   templateUrl: "./menu.page.html",
   styleUrls: ["./menu.page.scss"],
   standalone: true,
-  imports: [CommonModule, NavBarComponent],
+  imports: [CommonModule, UserNavBarComponent],
 })
 export class MenuPage {
   private readonly _userInfo: Observable<Nullable<UserInfoResponse>>;
