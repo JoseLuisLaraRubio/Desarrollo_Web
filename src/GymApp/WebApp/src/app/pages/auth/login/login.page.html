@@ -1,0 +1,48 @@
+<ion-content>
+  <app-nav-bar></app-nav-bar>
+
+  <div class="container">
+    <div class="container-auth">
+      <h1>LOGIN</h1>
+
+      @if (_authForm(); as authForm) {
+        <form
+          [formGroup]="authForm"
+          autocomplete="off"
+          novalidate
+          (ngSubmit)="onSubmit()"
+        >
+          <app-input-field
+            _name="userName"
+            _label="User Name"
+            _placeholder="..."
+            _icon="person-outline"
+            [_errorMessage]="getErrorMsg('userName')"
+          />
+
+          <app-input-field
+            _name="password"
+            _type="password"
+            _label="Password"
+            _placeholder="..."
+            _icon="lock-closed-outline"
+            [_errorMessage]="getErrorMsg('password')"
+            class="last-input"
+          />
+
+          <ion-button
+            class="auth-button"
+            expand="block"
+            [disabled]="!authForm.valid"
+            type="submit"
+            size="large"
+          >
+            Log In
+          </ion-button>
+        </form>
+
+        <div class="auth-error">{{ _errorMessage() }}</div>
+      }
+    </div>
+  </div>
+</ion-content>

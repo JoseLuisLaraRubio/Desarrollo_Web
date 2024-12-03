@@ -1,0 +1,235 @@
+.main-container {
+  background-color: #333333;
+  min-height: 100vh;
+}
+.workout-header {
+  background-color: #ff4444;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.workout-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.workout-block {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 10px 20px;
+  text-align: center;
+  width: 70%;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.workout-block:hover {
+  transform: scale(1.02);
+}
+
+.block-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #000;
+  gap: 15px;
+}
+
+.block-header h3 {
+  font-size: 22px;
+  color: #666666;
+}
+
+.block-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+  color: #333333;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #333333;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.register-button {
+  justify-self: center;
+  margin: 5px 0px;
+  background-color: #ff4444;
+  font-size: 16px;
+  border-radius: 10px;
+  width: 70%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register-button button{
+  background-color: transparent;
+  margin: 12px 20px;
+  width: 100%;
+}
+
+
+.register-button:hover {
+  background-color: #e63c3c;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 10px;
+  padding: 20px;
+  width: 42%;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.set-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.set-header {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.set-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.set-inputs label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.set-inputs input {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.set-inputs input:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button {
+  min-width: 13vh;
+  height: 4.5vh;
+  background-color: #ff4444;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: #e63c3c;
+}
+
+.close-button {
+  background-color: #00bbee;
+  height: 4.5vh;
+  color: white;
+  font-size: 14px;
+  width: 15vh;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.close-button:hover {
+  background-color: #0099cc;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+.no-data-message{
+  color: #d0d0d0;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}

@@ -1,0 +1,50 @@
+{
+    // https://code.visualstudio.com/docs/csharp/debugger-settings
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Development",
+            "launchSettingsProfile": "Development",
+            "launchSettingsFilePath": "${workspaceFolder}/AppHost/Properties/launchSettings.json",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/AppHost/bin/Debug/net8.0/GymApp.AppHost.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/AppHost",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Persistent-Development",
+            "launchSettingsProfile": "Persistent-Development",
+            "launchSettingsFilePath": "${workspaceFolder}/AppHost/Properties/launchSettings.json",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/AppHost/bin/Debug/net8.0/GymApp.AppHost.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/AppHost",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Migration",
+            "launchSettingsProfile": "Migration",
+            "launchSettingsFilePath": "${workspaceFolder}/AppHost/Properties/launchSettings.json",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/AppHost/bin/Debug/net8.0/GymApp.AppHost.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/AppHost",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}

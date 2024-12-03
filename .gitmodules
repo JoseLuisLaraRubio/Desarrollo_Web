@@ -1,0 +1,6 @@
+[submodule "src/RaptorUtils"]
+	path = src/RaptorUtils
+	url = https://github.com/RaptorRush135/RaptorUtils.git
+[submodule "src/EFMigrationService"]
+	path = src/EFMigrationService
+	url = https://github.com/RaptorRush135/EFMigrationService

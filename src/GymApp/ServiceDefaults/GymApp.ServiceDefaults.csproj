@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsAspireSharedProject>true</IsAspireSharedProject>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <PackageReference>
+      <PrivateAssets>compile</PrivateAssets>
+    </PackageReference>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.0.0" />
+
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.10.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.10.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
+
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RaptorUtils\Core\RaptorUtils.Core.csproj" />
+    <ProjectReference Include="..\..\RaptorUtils\AspNet\RaptorUtils.AspNet.csproj" />
+    <ProjectReference Include="..\..\RaptorUtils\WebAppPlugins\SerilogWebAppPlugin\RaptorUtils.SerilogWebAppPlugin.csproj" />
+    <ProjectReference Include="..\..\RaptorUtils\WebAppPlugins\SwaggerWebAppPlugin\RaptorUtils.SwaggerWebAppPlugin.csproj" />
+  </ItemGroup>
+
+</Project>

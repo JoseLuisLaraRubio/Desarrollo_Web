@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="Build-EFMigrationService;Configure-EFMigrationService-Integration">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>775f4f5a-d2ff-49ae-a660-4057296269b1</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.MySql" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceDefaults\GymApp.ServiceDefaults.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.NodeJs\RaptorUtils.Aspire.Hosting.NodeJs.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\..\RaptorUtils\Aspire\Aspire.Hosting.MySql\RaptorUtils.Aspire.Hosting.MySql.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\..\EFMigrationService\Integration\EFMigrationService.Integration.csproj" IsAspireProjectResource="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiService\GymApp.ApiService.csproj" />
+    <ProjectReference Include="..\..\EFMigrationService\Server\EFMigrationService.Server.csproj" />
+  </ItemGroup>
+
+  <Target Name="Build-EFMigrationService">
+    <Exec WorkingDirectory="..\..\EFMigrationService\Integration\" Command="dotnet build EFMigrationService.Integration.sln -p:RaptorUtilsPathPrefix=.." />
+    <Exec WorkingDirectory="..\..\EFMigrationService\Server\" Command="dotnet build EFMigrationService.Server.sln" />
+  </Target>
+
+  <Target Name="Configure-EFMigrationService-Integration">
+    <Copy SourceFiles="EFMigrationService.Integration-override.props" DestinationFolder="./../../EFMigrationService/Integration/" />
+  </Target>
+
+  <ItemGroup>
+    <NpmPackageFile Include="..\WebApp\package.json" />
+    <NpmPackageFile Include="..\..\EFMigrationService\Client\package.json" />
+  </ItemGroup>
+
+  <Target Name="ComputeNpmPackageMetadata">
+    <ItemGroup>
+      <NpmPackageFile>
+        <StampFile>$([System.IO.Path]::Combine(`%(RootDir)%(Directory)`, 'node_modules', '.install-stamp'))</StampFile>
+        <WorkingDirectory>%(RootDir)%(Directory)</WorkingDirectory>
+        <Command Condition="'$(RestorePackagesWithLockFile)' != 'true'">npm install</Command>
+        <Command Condition="'$(RestorePackagesWithLockFile)' == 'true'">npm ci</Command>
+      </NpmPackageFile>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="NpmInstall" DependsOnTargets="ComputeNpmPackageMetadata" Inputs="@(NpmPackageFile)" Outputs="%(NpmPackageFile.StampFile)" BeforeTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
+    <Message Importance="High" Text="Installing npm packages for %(NpmPackageFile.RelativeDir)" />
+    <Exec Command="@(NpmPackageFile->'%(Command)')" WorkingDirectory="%(WorkingDirectory)" />
+    <Touch Files="@(NpmPackageFile->'%(StampFile)')" AlwaysCreate="true" />
+  </Target>
+
+</Project>
