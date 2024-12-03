@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
 import { HttpClient } from "@angular/common/http";
+import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.component";
 
 @Component({
   selector: "app-user-profile",
   templateUrl: "./user-profile.page.html",
   styleUrls: ["./user-profile.page.scss"],
   standalone: true,
-  imports: [CommonModule, FormsModule, NavBarComponent],
+  imports: [CommonModule, FormsModule, UserNavBarComponent],
 })
 export class UserProfilePage implements OnInit {
   user = {
