@@ -40,7 +40,11 @@ public abstract class GymAppWebAppDefinition : PluginEnabledWebAppDefinition
         return new SwaggerWebAppPlugin(
             isEnabled: IsSwaggerEnabled,
             metadataAction: (builder) => builder.Services.AddEndpointsApiExplorer(),
-            setupActionProvider: (_) => (options) => options.SupportNonNullableReferenceTypes(),
+            setupActionProvider: (_) => (options) =>
+            {
+                options.SupportNonNullableReferenceTypes();
+                options.NonNullableReferenceTypesAsRequired();
+            },
             themeProvider: (_) => Theme.Vs2022);
     }
 
