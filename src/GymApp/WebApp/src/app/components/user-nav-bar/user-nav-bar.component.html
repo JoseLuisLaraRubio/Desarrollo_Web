@@ -1,22 +1,16 @@
 <nav>
-  @if(logo){
-    <a id="logo" routerLink="/"><img src="/assets/icon/Logo.svg" alt="LOGO"></a>
-  }
+  <div class="container">
+    <a class="logo-div" routerLink="/">
+      <img class="logo-img" src="/assets/icon/Logo.svg" alt="Logo" />
+      <h1>Gym App</h1>
+    </a>
 
-  @if(profile){
-  <a routerLink="/profile">Perfil</a>
-  }
+    <div class="links">
+      <button>Profile</button>
 
-  @if(routine){
-    <a routerLink="/routine">Rutina</a>
-  }
-  
-  @if(register){
-    <a routerLink="/auth/register">Registrarse</a>
-  }
-  
-  @if(login){
-    <a routerLink="/auth/login">Iniciar Sesión</a>
-  }
+      <button>Routine</button>
 
+      <button class="exit" (click)="onClickToExit()">Exit</button>
+    </div>
+  </div>
 </nav>
