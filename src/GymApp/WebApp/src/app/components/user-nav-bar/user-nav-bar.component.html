@@ -1,0 +1,22 @@
+<nav>
+  @if(logo){
+    <a id="logo" routerLink="/"><img src="/assets/icon/Logo.svg" alt="LOGO"></a>
+  }
+
+  @if(profile){
+  <a routerLink="/profile">Perfil</a>
+  }
+
+  @if(routine){
+    <a routerLink="/routine">Rutina</a>
+  }
+  
+  @if(register){
+    <a routerLink="/auth/register">Registrarse</a>
+  }
+  
+  @if(login){
+    <a routerLink="/auth/login">Iniciar Sesión</a>
+  }
+
+</nav>
