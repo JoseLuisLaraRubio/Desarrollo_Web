@@ -6,7 +6,7 @@ using GymApp.ApiService.Features.Exercises.Services;
 using GymApp.ApiService.Features.Members.Services;
 using GymApp.ApiService.Features.Progress.Data;
 using GymApp.Database.Entities;
-using GymApp.Database.Entities.Workouts;
+using GymApp.Database.Entities.Routines.Progress;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +16,11 @@ public sealed class ProgressManager(
 {
     public async Task<ValidationResult> AddRoutineProgress(
         AppUser user,
-        RoutineProgressDataWithId data)
+        WorkoutProgressDataWithId data)
     {
-        if (!await this.UserOwnsRoutine(user, data.RoutineId))
+        if (!await this.UserOwnsWorkout(user, data.WorkoutId))
         {
-            var error = new ValidationFailure("RoutineId", "Invalid routine id.");
+            var error = new ValidationFailure("WorkoutId", "Invalid workout id.");
             return new ValidationResult([error]);
         }
 
@@ -29,7 +29,7 @@ public sealed class ProgressManager(
             return result;
         }
 
-        RoutineProgress progress = RoutineProgressDataMapper.DataToEntity(data);
+        WorkoutProgress progress = RoutineProgressDataMapper.DataToEntity(data);
 
         Member member = memberManager.Attach(user);
         member.Progress.Add(progress);
@@ -39,18 +39,18 @@ public sealed class ProgressManager(
         return new ValidationResult();
     }
 
-    private Task<bool> UserOwnsRoutine(
+    private Task<bool> UserOwnsWorkout(
         AppUser user,
-        Guid routineId)
+        Guid workoutId)
     {
         return memberManager.Query(user)
-            .SelectMany(m => m.Workouts)
-            .SelectMany(w => w.Routines)
-            .AnyAsync(r => r.Id == routineId);
+            .Select(m => m.Routine!)
+            .SelectMany(w => w.Workouts)
+            .AnyAsync(r => r.Id == workoutId);
     }
 
     private async Task<ValidationResult> ValidateExerciseIds(
-        RoutineProgressDataWithId data)
+        WorkoutProgressDataWithId data)
     {
         IEnumerable<Guid> exerciseIds = data.Results.Select(r => r.ExerciseId);
         List<Guid> invalidExerciseIds = await exerciseManager.GetInvalidExerciseIds(exerciseIds);

@@ -1,6 +1,6 @@
-﻿namespace GymApp.Database.Entities.Workouts;
+﻿namespace GymApp.Database.Entities.Routines.Progress;
 
-public partial class RoutineBlockResult
+public partial class ExerciseBlockResult
 {
     public Guid Id { get; init; }
 
