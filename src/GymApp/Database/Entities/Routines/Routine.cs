@@ -6,6 +6,8 @@ public class Routine
 {
     public Guid Id { get; init; }
 
+    public required string Name { get; set; }
+
     [MaxLength(7)]
     public ICollection<Workout> Workouts { get; init; } = [];
 }
