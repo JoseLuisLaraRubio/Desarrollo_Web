@@ -15,6 +15,14 @@ nav {
     display: flex;
     gap: 1rem;
 
+    h1 {
+      transition: transform 0.2s ease;
+    }
+
+    .logo-img {
+      transition: transform 0.2s ease;
+    }
+
     &:hover {
       h1 {
         transform: scale(1.1);
@@ -28,9 +36,12 @@ nav {
   button {
     padding: 1rem;
     border-radius: 1rem;
+    transition: transform 0.2s ease;
+
     &:hover {
       color: red;
       background-color: white;
+      transform: translateY(-3px);
     }
 
     &.exit:hover {
