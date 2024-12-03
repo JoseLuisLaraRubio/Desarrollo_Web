@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
 import { Navbar2Component } from "@components/navbar2/navbar2.component";
 
 @Component({
