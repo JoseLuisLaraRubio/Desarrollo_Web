@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { PersonalInfo } from "./data";
+import { Nullable } from "@customTypes/nullable";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +10,7 @@ import { PersonalInfo } from "./data";
 export class PersonalInfoService {
   constructor(private readonly _httpClient: HttpClient) {}
 
-  public getPersonalInfo(): Observable<PersonalInfo> {
+  public getPersonalInfo(): Observable<Nullable<PersonalInfo>> {
     const apiPath = this.getApiPath();
 
     return this._httpClient.get<PersonalInfo>(apiPath);
