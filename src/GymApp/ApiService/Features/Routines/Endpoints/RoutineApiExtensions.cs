@@ -12,7 +12,9 @@ public static class RoutineApiExtensions
         var routeGroup = endpoints.MapGroup("/routines")
             .RequireAuthorization();
 
-        routeGroup.MapGet("/current", WorkoutEndpoints.HandleGet);
+        routeGroup.MapGet("/current", RoutineEndpoints.HandleGet);
+
+        routeGroup.MapPut("/current", RoutineEndpoints.HandlePut);
 
         routeGroup.MapWorkoutApi();
 

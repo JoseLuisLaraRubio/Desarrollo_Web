@@ -2,5 +2,5 @@
 
 public partial class ExerciseBlock
 {
-    public Guid ExerciseId { get; init; }
+    public Guid ExerciseId { get; set; }
 }
