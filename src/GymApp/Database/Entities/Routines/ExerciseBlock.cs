@@ -6,7 +6,7 @@ public partial class ExerciseBlock
 {
     public Guid Id { get; init; }
 
-    public required Exercise Exercise { get; init; }
+    public required Exercise Exercise { get; set; }
 
     [Range(1, int.MaxValue)]
     public required int Sets { get; set; }

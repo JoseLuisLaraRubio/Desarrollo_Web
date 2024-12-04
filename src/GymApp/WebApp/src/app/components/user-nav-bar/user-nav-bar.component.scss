@@ -1,0 +1,68 @@
+nav {
+  background-color: black;
+  .container {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  a {
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    gap: 1rem;
+
+    h1 {
+      transition: transform 0.2s ease;
+    }
+
+    .logo-img {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      cursor: pointer;
+      h1 {
+        transform: scale(1.1);
+      }
+      .logo-img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  button {
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      color: red;
+      background-color: white;
+      transform: translateY(-3px);
+    }
+
+    &.exit:hover {
+      color: white;
+      background-color: red;
+    }
+  }
+
+  .logo-div {
+    display: flex;
+    align-items: center;
+  }
+
+  .links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .logo-img {
+    max-width: 5rem;
+    filter: invert(100%);
+  }
+}
