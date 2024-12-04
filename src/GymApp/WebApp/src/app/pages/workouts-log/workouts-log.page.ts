@@ -5,13 +5,14 @@ import { WorkoutService } from '@services/workout';
 import { ActivatedRoute } from '@angular/router';
 import { SubmitProgressRequest } from '@services/workout';
 import { Workout } from '@services/workout';
+import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
 
 @Component({
   selector: 'app-workouts-log',
   templateUrl: './workouts-log.page.html',
   styleUrls: ['./workouts-log.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule ,UserNavBarComponent ]
 })
 export class WorkoutsLogPage implements OnInit {
   workout: Workout | undefined;
