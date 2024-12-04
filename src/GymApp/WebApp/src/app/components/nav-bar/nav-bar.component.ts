@@ -9,13 +9,13 @@ import { Router, RouterLink } from "@angular/router";
   styleUrl: "./nav-bar.component.scss",
 })
 export class NavBarComponent {
-  constructor(private readonly router: Router) {}
+  constructor(private readonly _router: Router) {}
 
   public onClickToLogin(): void {
-    this.router.navigate(["/auth/login"]);
+    this._router.navigate(["/auth/login"]);
   }
 
   public onClickToRegister(): void {
-    this.router.navigate(["/auth/register"]);
+    this._router.navigate(["/auth/register"]);
   }
 }
