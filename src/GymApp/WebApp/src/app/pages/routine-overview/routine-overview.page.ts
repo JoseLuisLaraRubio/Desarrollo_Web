@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
 import { switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { Guid } from '@customTypes/guid';
 
 interface Routine {
   id: string;
+  name: string;
   workouts: Workout[];
 }
 
@@ -31,6 +33,21 @@ interface Exercise {
   effectivenessLevel: number;
 }
 
+interface RoutineUpdate{
+  name: string,
+  workouts:
+  {
+    id: string,
+    blocks: 
+      {
+        id:string,
+        exerciseId:string,
+        sets: number,
+        repetitions: number
+      }[]
+  }[]
+}
+
 @Component({
   selector: 'app-routine-overview',
   standalone: true,
@@ -50,10 +67,6 @@ export class RoutineOverviewPage  implements OnInit {
   matchingExercises: Exercise[] = [];
 
   constructor(private readonly http: HttpClient) {}
-
-  mockAns = {
-    answersIndices: [0, 1]
-  };
 
   ngOnInit()
   {
@@ -91,7 +104,7 @@ export class RoutineOverviewPage  implements OnInit {
     this.exercises.forEach(exercise => {
       if(exercise.name.toLowerCase().includes(this.searchInput.toLowerCase())){
         this.matchingExercises.push(exercise);
-      }       
+      }
     });
   }
 
@@ -99,10 +112,10 @@ export class RoutineOverviewPage  implements OnInit {
     this.searching = false;
 
     var newBlock:Block = {
-      id: "",
+      id: this.generateGuid(),
       exercise: exercise,
       sets: 3,
-      repetitions: 10
+      repetitions: 10,
     };
 
     this.selectedWorkout?.blocks.push(newBlock);
@@ -121,7 +134,33 @@ export class RoutineOverviewPage  implements OnInit {
   }
 
   saveWorkoutChanges(){
-    //this.http.p
+    if (!this.routine || !this.selectedWorkout) {
+      console.error("Routine or selected workout is undefined.");
+      return;
+    }
+  
+    // Map the routine data into the RoutineUpdate format
+    const routineUpdate: RoutineUpdate = {
+      name: this.routine.name,
+      workouts: this.routine.workouts.map(workout => ({
+        id: workout.id,
+        blocks: workout.blocks.map(block => ({
+          id: block.id,
+          exerciseId: block.exercise.id,
+          sets: block.sets,
+          repetitions: block.repetitions,
+        }))
+      }))
+    };
+
+    console.log(routineUpdate)
+
+    this.http.put('/api/routines/current', routineUpdate).subscribe(
+      (response) => {
+        console.log(response)
+      }
+    )
+
     this.closeModal();
   }
 
@@ -132,6 +171,14 @@ export class RoutineOverviewPage  implements OnInit {
       }
     );
     this.closeModal();
+  }
+
+  generateGuid(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
+      const random = Math.random() * 16 | 0;
+      const value = char === 'x' ? random : (random & 0x3 | 0x8);
+      return value.toString(16);
+    });
   }
 
 }
