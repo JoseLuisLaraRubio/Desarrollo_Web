@@ -41,4 +41,8 @@ export class UserNavBarComponent {
   public onClickToProfile(): void {
     this._router.navigate(["/user-profile"]);
   }
+
+  public onClickToOverview(): void {
+    this._router.navigate(["/overview"]);
+  }
 }
