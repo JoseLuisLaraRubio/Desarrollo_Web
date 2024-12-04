@@ -12,12 +12,12 @@ interface Routine {
 }
 
 interface Workout {
-  id: string;
+  id: string|null;
   blocks: Block[];
 }
 
 interface Block {
-  id: string;
+  id: string | null;
   exercise: Exercise;
   sets: number;
   repetitions: number;
@@ -37,10 +37,10 @@ interface RoutineUpdate{
   name: string,
   workouts:
   {
-    id: string,
+    id: string|null,
     blocks: 
       {
-        id:string,
+        id:string|null,
         exerciseId:string,
         sets: number,
         repetitions: number
@@ -112,7 +112,7 @@ export class RoutineOverviewPage  implements OnInit {
     this.searching = false;
 
     var newBlock:Block = {
-      id: this.generateGuid(),
+      id: null,
       exercise: exercise,
       sets: 3,
       repetitions: 10,
@@ -133,19 +133,28 @@ export class RoutineOverviewPage  implements OnInit {
     this.selectedWorkout?.blocks.splice(blockIndex, 1);
   }
 
-  saveWorkoutChanges(){
-    if (!this.routine || !this.selectedWorkout) {
-      console.error("Routine or selected workout is undefined.");
+  saveRoutineChanges(){
+    if (!this.routine) {
+      console.log("Routine or is undefined.");
       return;
     }
   
+    if (this.selectedWorkout != undefined) {
+      for (const block of this.selectedWorkout.blocks) {
+        if (block.repetitions <= 0 || block.sets <= 0) {
+          alert("El número de sets y repeticiones no puede ser menor a 1");
+          return;
+        }
+      }
+    }
+
     // Map the routine data into the RoutineUpdate format
     const routineUpdate: RoutineUpdate = {
       name: this.routine.name,
       workouts: this.routine.workouts.map(workout => ({
         id: workout.id,
         blocks: workout.blocks.map(block => ({
-          id: block.id,
+          id: null,
           exerciseId: block.exercise.id,
           sets: block.sets,
           repetitions: block.repetitions,
@@ -153,11 +162,9 @@ export class RoutineOverviewPage  implements OnInit {
       }))
     };
 
-    console.log(routineUpdate)
-
     this.http.put('/api/routines/current', routineUpdate).subscribe(
       (response) => {
-        console.log(response)
+        this.getStoredRoutine();
       }
     )
 
@@ -165,20 +172,41 @@ export class RoutineOverviewPage  implements OnInit {
   }
 
   cancelWorkoutChanges(){
+    if(this.routine == undefined) return;
+
+    this.getStoredRoutine();
+    this.closeModal();
+  }
+
+  deleteWorkout(){
+    var workoutIndex = this.routine?.workouts.findIndex(
+      (workouts) => workouts === this.selectedWorkout
+    ); 
+
+    if(workoutIndex == undefined) return;
+    this.routine?.workouts.splice(workoutIndex, 1);
+    this.closeModal();
+    this.saveRoutineChanges();
+  }
+
+  addDay(){
+    if(this.routine == undefined || this.routine.workouts.length >= 7) return;
+
+    var emptyWorkout:Workout = {
+      id: null,
+      blocks: []
+    }
+
+    this.routine?.workouts.push(emptyWorkout);
+    this.saveRoutineChanges();
+  }
+
+  getStoredRoutine(){
     this.http.get<Routine>('/api/routines/current').subscribe(
       (response) => {
         this.routine = response;
       }
     );
-    this.closeModal();
-  }
-
-  generateGuid(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
-      const random = Math.random() * 16 | 0;
-      const value = char === 'x' ? random : (random & 0x3 | 0x8);
-      return value.toString(16);
-    });
   }
 
 }
