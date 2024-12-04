@@ -14,6 +14,8 @@ public static class QuizApiExtensions
 
         routeGroup.MapPost(string.Empty, QuizEndpoints.HandlePost);
 
+        routeGroup.MapGet("status", QuizEndpoints.HandleGetStatus);
+
         return routeGroup.WithTags("Quiz");
     }
 }
