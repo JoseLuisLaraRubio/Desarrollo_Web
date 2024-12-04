@@ -23,11 +23,9 @@ public static class ProgressEndpoints
         }
 
         var result = await progressManager.AddRoutineProgress(user, routineProgressData.WithId(workoutId));
-        if (!result.IsValid)
-        {
-            return TypedResults.ValidationProblem(result.ToDictionary());
-        }
 
-        return TypedResults.Ok();
+        return !result.IsValid
+            ? TypedResults.ValidationProblem(result.ToDictionary())
+            : TypedResults.Ok();
     }
 }

@@ -49,19 +49,11 @@ public sealed class ProgressManager(
             .AnyAsync(r => r.Id == workoutId);
     }
 
-    private async Task<ValidationResult> ValidateExerciseIds(
+    private Task<ValidationResult> ValidateExerciseIds(
         WorkoutProgressDataWithId data)
     {
         IEnumerable<Guid> exerciseIds = data.Results.Select(r => r.ExerciseId);
-        List<Guid> invalidExerciseIds = await exerciseManager.GetInvalidExerciseIds(exerciseIds);
-        if (invalidExerciseIds.Count > 0)
-        {
-            IEnumerable<ValidationFailure> errors = invalidExerciseIds.Select(
-                id => new ValidationFailure("ExerciseId", $"Invalid exercise id ({id})."));
 
-            return new ValidationResult(errors);
-        }
-
-        return new ValidationResult();
+        return exerciseManager.ValidateExerciseIds(exerciseIds);
     }
 }
