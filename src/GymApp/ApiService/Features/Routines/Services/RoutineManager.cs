@@ -31,6 +31,7 @@ public sealed class RoutineManager(
 
         Member member = memberManager.Attach(user);
         member.Routine = routine;
+        member.QuizStatus = true;
 
         await memberManager.SaveChanges();
     }

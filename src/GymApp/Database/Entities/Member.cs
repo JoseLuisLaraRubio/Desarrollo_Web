@@ -9,6 +9,8 @@ public class Member
 
     public PersonalInfo? Info { get; set; }
 
+    public bool QuizStatus { get; set; }
+
     public Routine? Routine { get; set; }
 
     public ICollection<WorkoutProgress> Progress { get; init; } = [];
