@@ -1,0 +1,94 @@
+<div class="container" *ngIf="!isPrinting">
+  <app-user-nav-bar></app-user-nav-bar>
+
+  <main class="profile-container">
+    <section class="profile-header">
+      <div class="profile-pic">
+        <img src="assets/plans-page/default-avatar.png.jpg" alt="User Profile" />
+      </div>
+
+      <div class="user-info">
+        <h1 *ngIf="personalInfo.fullName">Hola, {{ personalInfo.fullName }}</h1>
+        <h1 *ngIf="!personalInfo.fullName">Coloca tu nombre!</h1>
+        <p>¡Mantén tu perfil actualizado para personalizar tu experiencia!</p>
+      </div>
+    </section>
+
+    <section class="profile-details">
+      <h2>Información Personal</h2>
+      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+        <div class="form-group">
+          <label for="fullName">Nombre Completo</label>
+          <input type="text" id="fullName" name="fullName" [(ngModel)]="personalInfo.fullName"
+            placeholder="Ingresa tu nombre completo" required />
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfBirth">Fecha de Nacimiento</label>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="personalInfo.dateOfBirth"
+            placeholder="Ingresa tu fecha de nacimiento" required />
+        </div>
+
+        <div class="form-group">
+          <label for="sex">Sexo</label>
+          <select id="sex" name="sex" [(ngModel)]="personalInfo.sex" required>
+            <option value="Male">Hombre</option>
+            <option value="Female">Mujer</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="height">Estatura (cm)</label>
+          <input type="number" id="height" name="height" [(ngModel)]="personalInfo.height"
+            placeholder="Ingresa tu estatura en cm" required />
+        </div>
+
+        <div class="form-group">
+          <label for="weight">Peso (kg)</label>
+          <input type="number" id="weight" name="weight" [(ngModel)]="personalInfo.weight"
+            placeholder="Ingresa tu peso actual" required />
+        </div>
+
+        <div class="form-group">
+          <label for="bodyType">Tipo de Cuerpo</label>
+          <select id="bodyType" name="bodyType" [(ngModel)]="personalInfo.bodyType" required>
+            <option value="Ectomorph">Ectomorfo</option>
+            <option value="Mesomorph">Mesomorfo</option>
+            <option value="Endomorph">Endomorfo</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-save">Guardar Cambios</button>
+          <button type="button" class="btn-print" (click)="onClickToPrint()">
+            Imprimir
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>
+
+<div id="printSection" class="print-container" *ngIf="isPrinting">
+  <div class="credential-card">
+    <h2>Datos de Usuario</h2>
+    <div class="cred-item">
+      <strong>Nombre Completo:</strong> {{ personalInfo.fullName || 'N/A' }}
+    </div>
+    <div class="cred-item">
+      <strong>Fecha de Nacimiento:</strong> {{ personalInfo.dateOfBirth || 'N/A' }}
+    </div>
+    <div class="cred-item">
+      <strong>Sexo:</strong> {{ personalInfo.sex || 'N/A' }}
+    </div>
+    <div class="cred-item">
+      <strong>Estatura:</strong> {{ personalInfo.height || 'N/A' }} cm
+    </div>
+    <div class="cred-item">
+      <strong>Peso:</strong> {{ personalInfo.weight || 'N/A' }} kg
+    </div>
+    <div class="cred-item">
+      <strong>Tipo de Cuerpo:</strong> {{ personalInfo.bodyType || 'N/A' }}
+    </div>
+  </div>
+</div>

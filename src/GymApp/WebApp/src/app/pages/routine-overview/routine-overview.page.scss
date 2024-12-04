@@ -1,0 +1,231 @@
+body{
+    background-color: var(--dark-gray);
+}
+
+#title{
+    display: flex;
+
+    align-items: center;
+
+    h1{
+        margin-left: 50%;
+        transform: translateX(-50%);
+
+        color: white;
+        
+        font-size: 3.2rem;
+    }
+
+    h1 + .utilButtn{
+        margin-left: auto;
+    }
+}
+
+#routine{
+    display: flex;
+    justify-content: center;
+    
+    height: 70%;
+    width: auto;
+    
+    gap: 1%;
+}
+
+.workout{
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    gap: 1vh;
+    
+    overflow: auto;
+    scrollbar-width: none;
+    
+    background-color: var(--gray);
+    border-radius: 1vh;
+    
+    text-align: center;
+    
+    width: 100%;
+    max-width: 30vw;
+    
+    h2{
+        color: white;
+    }
+}
+
+.exercise{
+    border: 1px var(--red) solid;
+    background-color: var(--dark-red);
+
+    text-transform: uppercase;
+    
+    color: white;
+    
+    padding: 0 1vw;
+}
+
+button{
+    color: white;
+    background-color: transparent;
+    
+    border-width: .3vh;
+    border-radius: .5vh;
+    border-style: solid;
+    
+    font-size: large;
+    
+    padding: 1%;
+    transition-duration: .2s;
+}
+
+.utilButtn{ 
+    border-color: var(--red);
+    margin: 1vw;
+    height: 70%;
+
+    &:hover{
+        background-color: var(--red);
+        transition-duration: .2s;
+    }
+}
+.startBttn{
+    border-color: var(--red);
+    
+    &:hover{
+        background-color: var(--red);
+        transition-duration: .2s;
+    }
+}
+
+.editBttn{
+    border-color: var(--light-blue);
+    
+    &:hover{
+        background-color: var(--light-blue);
+        transition-duration: .2s;
+    }
+}
+
+#editModal{
+    z-index: 100;
+    position: fixed;
+    
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba($color: black, $alpha: .6);
+
+    display: flex;
+    align-items: center;
+}
+
+#modalPannel{
+    margin-left: 20%;
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    gap: 1vw;
+    
+    overflow: auto;
+    scrollbar-width: none;
+    
+    background-color: var(--gray);
+    border-radius: 1vh;
+        
+    width: 60vw;
+    height: 70vh;
+    
+    
+    h2{
+        color: white;
+    }    
+}
+
+#endButtns{
+    display: flex;
+    gap: 1vw;
+
+    margin: 0;
+    padding: 0;
+
+    #cancelBttn{
+        margin: 0;
+        border-color: var(--red);
+
+        &:hover{
+            background-color: var(--red);
+        }
+    }
+    #saveBttn{
+        margin: 0;
+        border-color: var(--light-blue);
+        
+        &:hover{
+            background-color: var(--light-blue);
+        }
+    }
+}
+
+.editExercise{
+    display: flex;
+    gap: 1vw;
+    
+    p{
+        width: 100%;
+        color: white;
+        font-size: large;
+        background-color: var(--dark-gray);
+        padding: 1vw;
+        margin: 0;
+    }
+    
+    button{
+        margin: 0;
+        
+        border-color: var(--red);
+        
+        &:hover{
+            background-color: var(--red);
+        }
+    }
+    
+}
+
+#searchBar{
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    
+    button{
+        margin-top: 0;
+        border-color: var(--green);
+        
+        &:hover{
+            background-color: var(--green);
+        }
+    }
+    
+    input{
+        background-color: var(--light-gray);
+        border: none;
+        height: 25pt;
+        padding: 1vh;
+    }
+    
+    p{
+        margin: 0;
+        color: white;
+        font-style: italic;
+    }
+}
+
+.matchsContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-gray);
+
+    gap: .5vh;
+
+    padding:.5vw;
+}

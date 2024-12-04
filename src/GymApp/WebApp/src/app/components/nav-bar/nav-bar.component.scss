@@ -1,10 +1,13 @@
 nav {
-  width: 95%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--gray);
+  .container {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  background-color: black;
 
   a {
     text-transform: uppercase;
@@ -15,10 +18,10 @@ nav {
 
     &:hover {
       h1 {
-        color: black;
+        transform: scale(1.1);
       }
       .logo-img {
-        filter: invert(0%);
+        transform: scale(1.1);
       }
     }
   }

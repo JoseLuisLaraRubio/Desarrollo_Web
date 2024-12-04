@@ -1,104 +1,302 @@
-.background {
-  background-image: url("/assets/backgrounds/home-page2.svg");
+.container {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+  font-family: "Roboto", sans-serif;
+  /* Fuente moderna */
+  scroll-behavior: smooth;
+  /* Desplazamiento suave */
+}
+
+// Página de inicio
+.backgroundContainer {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/assets/backgrounds/gym2.svg");
   background-size: cover;
+  background-position: center;
   width: 100%;
   height: 100vh;
-  overflow-x: hidden;
-}
-
-h1 {
-  color: #fff;
-  background-color: #333333;
-  text-transform: uppercase;
-  font-size: 8rem;
-  width: max-content;
-  padding-left: 5rem;
-  padding-right: 10rem;
-  height: 100%;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  place-items: center;
-  align-items: start;
-  justify-items: center;
-  padding: 3rem;
-}
-
-.container img {
-  max-width: 100%;
-  object-fit: cover;
-  height: auto;
-  margin-top: 0;
-  align-self: center;
-}
-
-.img-container {
-  margin-top: 10rem;
-  grid-row: span 2;
-  position: relative;
   display: flex;
   justify-content: center;
-  justify-self: center;
-  width: 100%;
-  height: auto;
+  align-items: center;
+  text-align: center;
+  animation: fadeInBackground 2s ease-in-out;
 }
 
-.text {
-  width: 100%;
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  max-width: 60%;
+  min-height: 100vh;
   color: #fff;
-  font-size: 2.5rem;
-  margin-left: 1rem;
+
+  h1 {
+    font-family: "Impact", sans-serif;
+    font-size: 5rem;
+    color: #ff0004;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  p {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out;
+  }
 
   span {
     font-weight: bold;
+    font-size: 2rem;
+    color: #ff0004;
     display: block;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    animation: fadeInUp 1.5s ease-in-out;
   }
 }
 
-@media (max-width: 1100px) {
-  .background {
-    background-size: contain;
-    margin: 0;
+.button {
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff0004;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e00004;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
   }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Animaciones en la sección de información
+.infoApp {
+  background-color: #f9f9f9;
+  padding: 3rem 2rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideIn 1.5s ease-in-out;
+
+  .info {
+    background: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
     width: 100%;
-    padding: 1rem;
-    text-align: center;
+    text-align: left;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      color: #ff0004;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border-left: 5px solid #ff0004;
+      padding-left: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #555;
+    }
+  }
+}
+
+// Animaciones en las estadísticas
+.impactStats {
+  background-color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    color: #ff0004;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeInDown 1.5s ease-in-out;
   }
 
-  .container img {
-    width: 80%;
-    max-width: 100%;
-    object-fit: cover;
-    height: auto;
-    margin: 0 auto;
-  }
-
-  .img-container {
-    margin-top: 0;
-    width: 100%;
+  .stats {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 2rem;
+
+    .stat {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      width: 200px;
+      text-align: center;
+      animation: scaleUp 1.5s ease-in-out;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px) scale(1.1);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      h3 {
+        font-size: 3rem;
+        color: #ff0004;
+        margin: 0;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #333;
+        margin: 0;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+// Animaciones en retos semanales
+.weeklyChallenges {
+  background-color: #f9f9f9;
+  padding: 3rem 2rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    color: #ff0004;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeInDown 1.5s ease-in-out;
   }
 
-  h1 {
-    font-size: 6rem;
-    padding: 1rem;
-    text-align: center;
-    width: 100%;
-    margin: 0;
+  .challenges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+
+    .challenge {
+      background-color: #fff;
+      border-left: 5px solid #ff0004;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      max-width: 300px;
+      text-align: left;
+      animation: scaleUp 1.5s ease-in-out;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: #555;
+      }
+    }
+  }
+}
+
+// Animaciones (keyframes)
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
 
-  .text {
-    font-size: 1.5rem;
-    width: 100%;
-    text-align: center;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInBackground {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

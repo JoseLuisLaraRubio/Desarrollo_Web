@@ -1,0 +1,55 @@
+<body>
+  <app-user-nav-bar [profile]="true"></app-user-nav-bar>
+  
+  <div id="title">
+    <h1>RUTINA</h1>
+    <button class="utilButtn">EXPORTAR</button>
+    <button class="utilButtn">CARGAR</button>
+  </div>
+
+  <div id="routine">
+    @for (workout of routine?.workouts; track workout.id) {
+      <div class="workout">
+        <h2>DIA {{ $index + 1 }}</h2>
+        @for (block of workout.blocks; track block.id) {
+          <div class="exercise">
+            <p>{{ block.exercise.name }}</p>
+          </div>
+        }
+        <button class="startBttn">EMPEZAR</button>
+        <button class="editBttn" (click)="openEditForm(workout)">EDITAR</button>
+      </div>
+    }
+  </div>
+</body>
+
+@if(selectedWorkout != undefined){
+  <div id="editModal">
+    <div id="modalPannel">
+      <h2>MENÚ DE EDICIÓN</h2>
+      <div id="searchBar">
+        <p>Buscar Ejercicio</p>
+        <input type="text" [(ngModel)]="searchInput" (keyup)="findExcercices()" (click)="findExcercices()">
+        @if(searching){
+          <div class="matchsContainer">
+            @for(exercise of matchingExercises; track exercise.name){
+              <button (click)="addExerciseBlock(exercise)">{{exercise.name}}</button>
+            }
+          </div>
+        }
+
+      </div>
+
+      @for (block of selectedWorkout.blocks; track block.id) {
+        <div class="editExercise">
+          <p>{{ block.exercise.name }}</p>
+          <button (click)="deleteExerciseBlock(block)">ELIMINAR</button>
+        </div>
+      }
+      <div id="endButtns">
+        <button id="saveBttn" (click)="saveWorkoutChanges()">GUARDAR</button>
+        <button id="cancelBttn" (click)="cancelWorkoutChanges()">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+}
