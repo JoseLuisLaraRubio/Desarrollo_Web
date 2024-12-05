@@ -21,7 +21,7 @@ export class UserProfilePage implements OnInit {
 
   isPrinting: boolean = false;
 
-  constructor(private readonly _personalInfoService: PersonalInfoService) {}
+  constructor(private readonly personalInfoService: PersonalInfoService) {}
 
   public ngOnInit(): void {
     this.personalInfoService.getPersonalInfo().subscribe((info) => {
@@ -31,6 +31,7 @@ export class UserProfilePage implements OnInit {
 
   public onClickToPrint(): void {
     this.isPrinting = true;
+
     // Llama a la función de impresión del navegador
     setTimeout(() => {
       window.print();
@@ -38,41 +39,25 @@ export class UserProfilePage implements OnInit {
     }, 100); // Da tiempo a Angular para aplicar cambios en el DOM
   }
 
-  public onSubmit(): void {
-    if (
-      !this.isPersonalInfoValid() &&
-      this.isHeightValid() &&
-      this.isWeightValid()
-    ) {
-      this.updatePersonalInfo(this.personalInfo);
-      this.getPersonalInfo();
+  public onSubmit(personalInfo: PersonalInfo): void {
+    if (!this.isPersonalInfoValid(personalInfo)) {
+      alert("Por favor, llena todos los campos antes de guardar.");
       return;
     }
-    alert("Por favor, llena todos los campos correctamente antes de guardar.");
+
+    this.personalInfoService.updatePersonalInfo(personalInfo).subscribe();
   }
 
   private isPersonalInfoValid(personalInfo: PersonalInfo): boolean {
     return (
-      !personalInfo.fullName ||
-      !personalInfo.height ||
-      !personalInfo.weight ||
-      !personalInfo.sex ||
-      !personalInfo.bodyType ||
-      !personalInfo.dateOfBirth
+      !!personalInfo.fullName &&
+      !!personalInfo.height &&
+      !!personalInfo.weight &&
+      !!personalInfo.sex &&
+      !!personalInfo.bodyType &&
+      !!personalInfo.dateOfBirth &&
+      personalInfo.height > 0 &&
+      personalInfo.weight > 0
     );
-  }
-
-  private isHeightValid(): boolean {
-    return this.personalInfo.height > 0;
-  }
-
-  private isWeightValid(): boolean {
-    return this.personalInfo.weight > 0;
-  }
-
-  private getPersonalInfo(): void {
-    this._personalInfoService.getPersonalInfo().subscribe((info) => {
-      this.personalInfo = { ...info };
-    });
   }
 }
