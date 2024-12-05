@@ -1,42 +1,48 @@
-<app-user-nav-bar></app-user-nav-bar>
-<div class="routine-container">
-  <div *ngIf="routine">
-    <h1>{{ routine.name }} Progreso</h1>
+<body>
+  <app-user-nav-bar></app-user-nav-bar>
+  <div class="routine-container">
+    <div *ngIf="routineTrackingData.length > 0">
+      <h1>Progreso de Rutina</h1>
 
-    <h3 id="reps-label">Repeticiones por Ejercicios</h3>
-    <div class="dark">
-    <ngx-charts-bar-vertical
-      [view]="view"
-      [scheme]="colorSchemeReps"
-      [results]="repetitionsData"
-      [xAxis]="true"
-      [yAxis]="true"
-      [legend]="true"
-      [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
-      xAxisLabel="Ejercico"
-      yAxisLabel="Repeticiones"
-      [animations]="true">
-    </ngx-charts-bar-vertical>
+      <h3 id="reps-label">Máximas Repeticiones por Ejercicios</h3>
+      <div class="dark">
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="colorSchemeReps"
+          [results]="repetitionsData"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="Ejercicio"
+          yAxisLabel="Repeticiones"
+          [animations]="true"
+          [barPadding]="barChartOptions.barPadding"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+
+      <h3 id="weight-label">Máximo Peso por Ejercicios</h3>
+      <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorSchemeWeight"
+        [results]="weightData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Ejercicio"
+        yAxisLabel="Peso (kg)"
+        [animations]="true"
+        [barPadding]="barChartOptions.barPadding"
+      >
+      </ngx-charts-bar-vertical>
     </div>
 
-    <h3 id="weight-label">Peso por ejercicios</h3>
-    <ngx-charts-bar-vertical
-      [view]="view"
-      [scheme]="colorSchemeWeight"
-      [results]="weightData"
-      [xAxis]="true"
-      [yAxis]="true"
-      [legend]="true"
-      [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
-      xAxisLabel="Ejercicios"
-      yAxisLabel="Peso (kg)"
-      [animations]="true">
-    </ngx-charts-bar-vertical>
+    <div *ngIf="routineTrackingData.length === 0">
+      <p>No se encontraron datos de la rutina.</p>
+    </div>
   </div>
-
-  <div *ngIf="!routine">
-    <p>No routine data found.</p>
-  </div>
-</div>
+</body>
