@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { catchError, Observable, of } from "rxjs";
+import { catchError, Observable, of, tap } from "rxjs";
 
 import {
   LoginRequest,
@@ -40,16 +40,28 @@ export class AuthService {
   public login(request: LoginRequest): Observable<void> {
     const apiPath: string = this.getApiPath("login");
 
-    return this._httpClient.post<void>(apiPath, request);
+    return this._httpClient.post<void>(apiPath, request).pipe(
+      tap(() => {
+        localStorage.setItem("isLogged", "true");
+      }),
+    );
   }
 
   public logout(): Observable<void> {
     const apiPath: string = this.getApiPath("logout");
 
-    return this._httpClient.post<void>(apiPath, {});
+    return this._httpClient.post<void>(apiPath, {}).pipe(
+      tap(() => {
+        localStorage.setItem("isLogged", "false");
+      }),
+    );
   }
 
   public getUserInfo(): Observable<Nullable<UserInfoResponse>> {
+    if (localStorage.getItem("isLogged") === "false") {
+      return of(null);
+    }
+
     const apiPath: string = this.getApiPath("manage/info");
 
     const userInfo = this._httpClient.get<UserInfoResponse>(apiPath).pipe(

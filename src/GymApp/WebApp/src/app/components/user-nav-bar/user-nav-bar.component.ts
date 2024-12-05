@@ -20,6 +20,12 @@ export class UserNavBarComponent {
   @Input() login = false;
   @Input() register = false;
 
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
   public onClickToMenu(): void {
     this._router.navigate(["/menu"]);
   }

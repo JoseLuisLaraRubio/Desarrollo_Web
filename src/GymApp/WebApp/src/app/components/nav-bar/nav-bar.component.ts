@@ -11,6 +11,12 @@ import { Router, RouterLink } from "@angular/router";
 export class NavBarComponent {
   constructor(private readonly _router: Router) {}
 
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
   public onClickToLogin(): void {
     this._router.navigate(["/auth/login"]);
   }
