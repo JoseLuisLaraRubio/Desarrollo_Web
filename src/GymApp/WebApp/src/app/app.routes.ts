@@ -42,4 +42,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import("./pages/quiz/quiz.page").then((m) => m.QuizPage),
   },
+  {
+    path: 'routine-tracking',
+    loadComponent: () => import('./pages/routine-tracking/routine-tracking.page').then( m => m.RoutineTrackingPage)
+  },
 ];
