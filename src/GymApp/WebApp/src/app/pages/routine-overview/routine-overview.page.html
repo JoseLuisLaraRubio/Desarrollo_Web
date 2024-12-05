@@ -3,8 +3,7 @@
   
   <div id="upperButtns">
     <button class="utilButtn" (click)="addDay()">AÑADIR DÍA</button>
-    <button class="utilButtn">EXPORTAR</button>
-    <button class="utilButtn">CARGAR</button>
+    <button class="utilButtn" (click)="seeProgress()">VER PROGRESO</button>
   </div>
 
   <div id="routine">
@@ -16,7 +15,7 @@
             <p>{{ block.exercise.name }}</p>
           </div>
         }
-        <button class="startBttn">EMPEZAR</button>
+        <button class="startBttn" (click)="startRoutine(workout)">EMPEZAR</button>
         <button class="editBttn" (click)="openEditForm(workout)">EDITAR</button>
       </div>
     }
