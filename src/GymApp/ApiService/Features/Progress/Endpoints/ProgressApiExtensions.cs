@@ -9,6 +9,8 @@ public static class ProgressApiExtensions
 
         var routeGroup = endpoints.MapGroup(string.Empty);
 
+        routeGroup.MapGet("{workoutId}/progress", ProgressEndpoints.HandleGet);
+
         routeGroup.MapPost("{workoutId}/progress", ProgressEndpoints.HandlePost);
 
         return routeGroup;
