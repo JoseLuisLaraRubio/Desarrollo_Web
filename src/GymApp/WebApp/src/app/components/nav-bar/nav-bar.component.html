@@ -5,9 +5,10 @@
       <h1>Gym App</h1>
     </a>
 
-    <div class="links">
-      <button (click)="onClickToRegister()">Registrarse</button>
+    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
 
+    <div class="links" [class.active]="menuOpen">
+      <button (click)="onClickToRegister()">Registrarse</button>
       <button (click)="onClickToLogin()">Iniciar Sesión</button>
     </div>
   </div>
