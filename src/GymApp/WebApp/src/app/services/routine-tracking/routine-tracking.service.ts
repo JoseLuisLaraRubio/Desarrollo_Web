@@ -10,7 +10,7 @@ export class RoutineTrackingService {
   constructor(private readonly _httpClient: HttpClient) {}
 
   public getRoutineTracking(workoutsId: number): Observable<RoutineTracking[]> {
-    const apiPath: string = this.getApiPath(`/api/routines/workouts/${workoutsId}/progress`);
+    const apiPath: string = this.getApiPath(`/routines/workouts/${workoutsId}/progress`);
     return this._httpClient.get<RoutineTracking[]>(apiPath).pipe(
       catchError((error) => {
         console.error('Error fetching routines:', error);
