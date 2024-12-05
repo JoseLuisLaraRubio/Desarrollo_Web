@@ -1,5 +1,8 @@
 ﻿namespace GymApp.ApiService;
 
+using FluentStorage;
+using FluentStorage.Blobs;
+
 using FluentValidation;
 
 using GymApp.ApiService.Features.Exercises.Endpoints;
@@ -28,11 +31,15 @@ public class ApiService : GymAppWebAppDefinition
 
         ValidatorOptions.Global.LanguageManager.Enabled = false;
 
+        string storagePath = Path.Join(AppContext.BaseDirectory, "uploads");
+        IBlobStorage storage = StorageFactory.Blobs.DirectoryFiles(storagePath);
+
         builder.Services
             .AddProblemDetails()
             .AddAppDbContext(builder.Configuration)
             .AddAppIdentity<AppDbContext, AppUser, MemberManager>(builder.Configuration)
             .AddAppAuth()
+            .AddSingleton(storage)
             .AddScoped<ExerciseManager>()
             .AddScoped<RoutineManager>()
             .AddScoped<WorkoutManager>()
