@@ -9,7 +9,7 @@ import { RoutineTracking } from '.';
 export class RoutineTrackingService {
   constructor(private readonly _httpClient: HttpClient) {}
 
-  public getRoutineTracking(workoutsId: number): Observable<RoutineTracking[]> {
+  public getRoutineTracking(workoutsId: string): Observable<RoutineTracking[]> {
     const apiPath: string = this.getApiPath(`/routines/workouts/${workoutsId}/progress`);
     return this._httpClient.get<RoutineTracking[]>(apiPath).pipe(
       catchError((error) => {
