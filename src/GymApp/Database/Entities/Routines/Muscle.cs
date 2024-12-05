@@ -2,15 +2,18 @@
 
 using System.Text.Json.Serialization;
 
-// TODO: Set values
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Muscle
 {
+    MidBack,
+    Lats,
     Chest,
-    Back,
-    Legs,
-    Arms,
+    Quads,
+    Glutes,
+    Hamstrings,
+    Calves,
+    Biceps,
+    Triceps,
     Shoulders,
     Abs,
-    Glutes,
 }
