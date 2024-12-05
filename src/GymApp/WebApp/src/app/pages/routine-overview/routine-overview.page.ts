@@ -4,6 +4,7 @@ import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.compo
 import { switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Guid } from '@customTypes/guid';
+import { Router, RouterLink } from '@angular/router';
 
 interface Routine {
   id: string;
@@ -66,7 +67,7 @@ export class RoutineOverviewPage  implements OnInit {
   exercises: Exercise[] = [];
   matchingExercises: Exercise[] = [];
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private readonly _router: Router) {}
 
   ngOnInit()
   {
@@ -207,6 +208,11 @@ export class RoutineOverviewPage  implements OnInit {
         this.routine = response;
       }
     );
+  }
+
+  startRoutine(workout:Workout){
+    if (workout == null) return;
+    this._router.navigate(['/workouts-log',{  workoutId: workout.id}]);
   }
 
 }
