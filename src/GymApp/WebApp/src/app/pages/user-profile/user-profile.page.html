@@ -5,11 +5,7 @@
     <main class="profile-container">
       <section class="profile-header">
         <div class="profile-pic">
-          <img
-            id="profile-pic"
-            [src]="preview"
-            alt="User Profile"
-          />
+          <img id="profile-pic" [src]="preview" alt="User Profile" />
         </div>
 
         <div class="user-info">
@@ -18,8 +14,7 @@
           </h1>
           <h1 *ngIf="!personalInfo.fullName">Coloca tu nombre!</h1>
           <p>¡Mantén tu perfil actualizado para personalizar tu experiencia!</p>
-          <!-- <app-upload-user-picture></app-upload-user-picture> -->
-          <input (change)="captureFile($event)" type="file" >
+          <input (change)="captureFile($event)" type="file" />
         </div>
       </section>
 
@@ -99,7 +94,6 @@
           </div>
 
           <div class="form-actions">
-            
             <button type="submit" class="btn-save">Guardar Cambios</button>
             <button type="button" class="btn-print" (click)="onClickToPrint()">
               Imprimir
