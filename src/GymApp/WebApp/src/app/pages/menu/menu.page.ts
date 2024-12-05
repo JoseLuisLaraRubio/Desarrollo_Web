@@ -1,9 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.component";
-import { Nullable } from "@customTypes/nullable";
-import { AuthService, UserInfoResponse } from "@services/auth";
-import { Observable } from "rxjs";
 
 @Component({
   selector: "app-menu",
@@ -13,13 +11,13 @@ import { Observable } from "rxjs";
   imports: [CommonModule, UserNavBarComponent],
 })
 export class MenuPage {
-  private readonly _userInfo: Observable<Nullable<UserInfoResponse>>;
+  constructor(private readonly router: Router) {}
 
-  constructor(private readonly _authService: AuthService) {
-    this._userInfo = _authService.getUserInfo();
+  public onClickToProfile(): void {
+    this.router.navigate(["/user-profile"]);
   }
 
-  public get userInfo() {
-    return this._userInfo;
+  public onClickToRoutine(): void {
+    this.router.navigate(["/overview"]);
   }
 }

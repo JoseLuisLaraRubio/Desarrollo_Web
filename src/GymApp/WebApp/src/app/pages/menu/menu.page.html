@@ -19,24 +19,15 @@
     <section class="features-section">
       <h2>¿Qué deseas hacer hoy?</h2>
       <div class="cajas-container">
-        <div class="feature-card crearRutina">
-          <img src="/assets/plans-page/GymStock.jpg" alt="Crear Rutina" />
-          <p>Crear Rutina</p>
-        </div>
-        <div class="feature-card consultar">
+        <button class="feature-card consultar" (click)="onClickToRoutine()">
           <img src="/assets/plans-page/GymStock.jpg" alt="Consultar Rutinas" />
-          <p>Consultar tus rutinas</p>
-        </div>
-        <div class="feature-card progreso">
-          <img src="/assets/plans-page/GymStock.jpg" alt="Consultar Progreso" />
-          <p>Consultar tu progreso</p>
-        </div>
-        <div class="feature-card logProgreso">
+          <p>Consultar tu rutina</p>
+        </button>
+        <button class="feature-card logProgreso" (click)="onClickToProfile()">
           <img src="/assets/plans-page/GymStock.jpg" alt="Loggear Progreso" />
-          <p>Loggear progreso actual</p>
-        </div>
+          <p>Modifica tu perfil</p>
+        </button>
       </div>
     </section>
   </main>
-
 </div>
