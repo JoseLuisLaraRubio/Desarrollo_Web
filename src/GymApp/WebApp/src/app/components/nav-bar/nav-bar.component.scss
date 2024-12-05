@@ -44,6 +44,20 @@ a {
   display: flex;
   gap: 15px;
   z-index: 1000;
+
+  button {
+    background-color: gray;
+    border-radius: 0.5rem;
+    transition: transform 0.2 ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.exit {
+      background-color: red;
+    }
+  }
 }
 
 button {
