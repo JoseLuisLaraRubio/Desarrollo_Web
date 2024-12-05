@@ -14,6 +14,11 @@ public static class PersonalInfoApiExtensions
 
         routeGroup.MapPut(string.Empty, PersonalInfoEndpoints.HandlePut);
 
+        routeGroup.MapGet("/picture", PersonalInfoEndpoints.HandlePictureGet);
+
+        routeGroup.MapPut("/picture", PersonalInfoEndpoints.HandlePicturePut)
+            .DisableAntiforgery();
+
         return routeGroup.WithTags("Personal info");
     }
 }
