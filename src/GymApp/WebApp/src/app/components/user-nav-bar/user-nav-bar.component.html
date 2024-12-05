@@ -5,7 +5,9 @@
       <h1>Gym App</h1>
     </a>
 
-    <div class="links">
+    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+
+    <div class="links" [class.active]="menuOpen">
       <button (click)="onClickToProfile()">Profile</button>
 
       <button (click)="onClickToOverview()">Overview</button>
