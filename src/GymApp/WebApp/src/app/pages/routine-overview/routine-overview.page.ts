@@ -214,10 +214,11 @@ export class RoutineOverviewPage  implements OnInit {
     if (workout == null) return;
     this._router.navigate(['/workouts-log',{  workoutId: workout.id}]);
   }
-  
+
   seeProgress(){
     if (this.routine == null) return;
-    this._router.navigate(['/routine-tracking',{  workoutsId: this.routine.id}]);
+    const workoutIds = this.routine?.workouts.map(workout => workout.id).join(',');
+    this._router.navigate(['/routine-tracking',{  workoutsId: workoutIds}]);
   }
 
 }

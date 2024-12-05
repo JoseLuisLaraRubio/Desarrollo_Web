@@ -6,6 +6,7 @@ import { NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { Color } from '@swimlane/ngx-charts';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
 import { ActivatedRoute } from '@angular/router'; // Para obtener parámetros de la URL
+import { forkJoin } from 'rxjs'; // Para hacer llamadas paralelas
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -55,22 +56,20 @@ export class RoutineTrackingPage implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const workoutsId = params.get('workoutsId');
       if (workoutsId) {
-        const id = +workoutsId;
-        if (!isNaN(id)) {
-          this.fetchRoutineData(id);
-        } else {
-          console.error('Invalid workoutsId:', workoutsId);
-        }
+        const workoutIds = workoutsId.split(',');
+        this.fetchRoutineData(workoutIds);
       } else {
         console.error('workoutsId not found in URL parameters');
       }
     });
   }
 
-  fetchRoutineData(workoutsId: number) {
-    this.routineService.getRoutineTracking(workoutsId).subscribe(
-      (data) => {
-        this.routineTrackingData = data;
+  fetchRoutineData(workoutIds: string[]) {
+    const observables = workoutIds.map(id => this.routineService.getRoutineTracking(+id));
+
+    forkJoin(observables).subscribe(
+      (responses: RoutineTracking[][]) => {
+        this.routineTrackingData = ([] as RoutineTracking[]).concat(...responses);
         this.processChartData();
       },
       (error) => {
