@@ -17,6 +17,7 @@ import { AuthBasePage } from "../auth.base.page";
 
 import { FormObjectGroup } from "@customTypes/.";
 import { NavBarComponent } from "@components/nav-bar/nav-bar.component";
+import { switchMap } from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -46,16 +47,19 @@ export class LoginPage extends AuthBasePage<LoginRequest> {
   protected override onSubmitValue(value: LoginRequest): void {
     this._errorMessage.set(null);
 
-    this._authService.login(value).subscribe({
-      next: () => {
-        this._router.navigateByUrl("menu");
-      },
-      error: (response: HttpErrorResponse) => {
-        const errorMessageValue =
-          this._errorMessageProvider.formatErrorResponse(response);
-
-        this._errorMessage.set(errorMessageValue);
-      },
-    });
+    this._authService
+      .login(value)
+      .pipe(switchMap(() => this._quizService.getQuizStatus()))
+      .subscribe({
+        next: (quizStatus: boolean) => {
+          const targetRoute = quizStatus ? "menu" : "quiz";
+          this._router.navigateByUrl(targetRoute);
+        },
+        error: (response: HttpErrorResponse) => {
+          const errorMessage =
+            this._errorMessageProvider.formatErrorResponse(response);
+          this._errorMessage.set(errorMessage);
+        },
+      });
   }
 }
