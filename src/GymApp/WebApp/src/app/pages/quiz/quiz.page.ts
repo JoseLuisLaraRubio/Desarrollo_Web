@@ -1,21 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-
-interface Quiz {
-  questions: Question[];
-}
-
-interface Question {
-  question: string;
-  options: string[];
-}
-
-interface Answers {
-  answersIndices: number[];
-}
+import { QuizService } from "@services/quiz/quiz.service";
+import { Answers, Question, Quiz } from "@services/quiz/data";
 
 @Component({
   selector: "app-quiz",
@@ -27,7 +15,7 @@ interface Answers {
 export class QuizPage implements OnInit {
   constructor(
     private readonly router: Router,
-    private readonly http: HttpClient,
+    private readonly quizService: QuizService,
   ) {}
 
   quiz: Quiz | undefined;
@@ -40,7 +28,7 @@ export class QuizPage implements OnInit {
   currentAnswerIndex: number = 0;
 
   ngOnInit() {
-    this.http.get<Quiz>("/api/quiz").subscribe((response) => {
+    this.quizService.getQuiz().subscribe((response) => {
       this.quiz = response;
       this.currentQuestion = this.quiz.questions[0];
       this.currentQuestionIndex = 0;
@@ -59,8 +47,9 @@ export class QuizPage implements OnInit {
     } else if (this.currentQuestionIndex == this.quiz.questions.length - 1) {
       this.answers?.answersIndices.push(this.currentAnswerIndex);
       console.log(this.answers);
-      this.http
-        .post("/api/quiz", this.answers)
+
+      this.quizService
+        .postAnswers(this.answers)
         .subscribe((response) => this.router.navigate(["/overview"]));
     }
   }
