@@ -1,7 +1,7 @@
 <body>
   <app-user-nav-bar></app-user-nav-bar>
   <div class="routine-container">
-    <div *ngIf="routineTrackingData.length > 0">
+    <div *ngIf="repetitionsData.length > 0 || weightData.length > 0">
       <h1>Progreso de Rutina</h1>
 
       <h3 id="reps-label">Máximas Repeticiones por Ejercicios</h3>
@@ -19,6 +19,7 @@
           yAxisLabel="Repeticiones"
           [animations]="true"
           [barPadding]="barChartOptions.barPadding"
+          [roundDomains]="true"
         >
         </ngx-charts-bar-vertical>
       </div>
@@ -41,8 +42,8 @@
       </ngx-charts-bar-vertical>
     </div>
 
-    <div *ngIf="routineTrackingData.length === 0">
-      <p>No se encontraron datos de la rutina.</p>
+    <div *ngIf="repetitionsData.length === 0 && weightData.length === 0">
+      <p>No se encontraron datos de repeticiones ni de peso.</p>
     </div>
   </div>
 </body>

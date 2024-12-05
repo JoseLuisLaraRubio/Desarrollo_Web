@@ -1,7 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RoutineTracking, RoutineTrackingService } from '@services/routine-tracking';
+import {
+  Result,
+  RoutineTracking,
+  RoutineTrackingService,
+} from '@services/routine-tracking';
 import { NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { Color } from '@swimlane/ngx-charts';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
@@ -27,7 +31,7 @@ export class RoutineTrackingPage implements OnInit {
 
   constructor(
     private routineService: RoutineTrackingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   colorSchemeReps: Color = {
@@ -41,7 +45,15 @@ export class RoutineTrackingPage implements OnInit {
     name: 'custom-blue',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#CCE5FF', '#99CCFF', '#66B2FF', '#3399FF', '#007FFF', '#0059B2', '#003D80'],
+    domain: [
+      '#CCE5FF',
+      '#99CCFF',
+      '#66B2FF',
+      '#3399FF',
+      '#007FFF',
+      '#0059B2',
+      '#003D80',
+    ],
   };
 
   ngOnInit() {
@@ -52,9 +64,14 @@ export class RoutineTrackingPage implements OnInit {
   getparamWorkId() {
     this.route.paramMap.subscribe((params) => {
       const workoutsId = params.get('workoutsId');
+      console.log('workoutsId:', workoutsId);
       if (workoutsId) {
-        const workoutIds = workoutsId.split(',');
-        this.fetchRoutineData(workoutIds);
+        const workoutIdsArray = workoutsId.split(',');
+        if (workoutIdsArray.length > 0) {
+          this.fetchRoutineData(workoutIdsArray);
+        } else {
+          console.error('No se recibieron IDs válidos en la URL');
+        }
       } else {
         console.error('workoutsId not found in URL parameters');
       }
@@ -62,67 +79,76 @@ export class RoutineTrackingPage implements OnInit {
   }
 
   fetchRoutineData(workoutIds: string[]) {
-    this.routineTrackingData = [];
+    const allResults: Result[] = [];
+
     workoutIds.forEach((id, index) => {
-      this.routineService.getRoutineTracking(+id).subscribe(
+      this.routineService.getRoutineTracking(id).subscribe(
         (response: RoutineTracking[]) => {
-          this.routineTrackingData = this.routineTrackingData.concat(response);
+          response.forEach((routine) => {
+            allResults.push(...routine.results);
+          });
+
           if (index === workoutIds.length - 1) {
-            this.processChartData();
+            console.log('Todos los resultados recibidos:', allResults);
+            this.processChartData(allResults);
           }
         },
         (error) => {
           console.error('Error fetching routine data:', error);
-        }
+        },
       );
     });
   }
 
-  processChartData() {
+  processChartData(allResults: Result[]) {
     this.repetitionsData = [];
     this.weightData = [];
 
-    // Procesar los datos de cada rutina
-    this.routineTrackingData.forEach((routine) => {
-      routine.results.forEach((result) => {
-        let maxRepetitions = 0;
-        let maxWeight = 0;
-        let maxRepetitionsSetIndex = -1;
-        let maxWeightSetIndex = -1;
+    allResults.forEach((result) => {
+      let maxRepetitions = 0;
+      let maxWeight = 0;
+      let maxRepetitionsSetIndex = -1;
+      let maxWeightSetIndex = -1;
 
-        result.sets.forEach((set, index) => {
-          if (set.repetitions > maxRepetitions) {
-            maxRepetitions = set.repetitions;
-            maxRepetitionsSetIndex = index;
-          }
-
-          if (set.weight > maxWeight) {
-            maxWeight = set.weight;
-            maxWeightSetIndex = index;
-          }
-        });
-
-        const uniqueExerciseName = `${result.exercise.name}-Set`;
-
-        if (maxRepetitionsSetIndex !== -1) {
-          this.repetitionsData.push({
-            name: uniqueExerciseName,
-            value: maxRepetitions,
-            series: `Set ${maxRepetitionsSetIndex + 1}`,
-            date: routine.date,
-          });
+      result.sets.forEach((set, index) => {
+        if (set.repetitions > maxRepetitions) {
+          maxRepetitions = set.repetitions;
+          maxRepetitionsSetIndex = index;
         }
 
-        if (maxWeightSetIndex !== -1) {
-          this.weightData.push({
-            name: uniqueExerciseName,
-            value: maxWeight,
-            series: `Set ${maxWeightSetIndex + 1}`,
-            date: routine.date,
-          });
+        if (set.weight > maxWeight) {
+          maxWeight = set.weight;
+          maxWeightSetIndex = index;
         }
       });
+
+      const uniqueExerciseName = `${result.exercise.name}-Set`;
+
+      if (maxRepetitionsSetIndex !== -1) {
+        this.repetitionsData.push({
+          name: uniqueExerciseName,
+          value: maxRepetitions,
+          series: `Set ${maxRepetitionsSetIndex + 1}`,
+          date: this.generateRandomDate(),
+        });
+      }
+
+      if (maxWeightSetIndex !== -1) {
+        console.log('Agregando peso:', {
+          name: uniqueExerciseName,
+          value: maxWeight,
+          series: `Set ${maxWeightSetIndex + 1}`,
+        });
+        this.weightData.push({
+          name: uniqueExerciseName,
+          value: maxWeight,
+          series: `Set ${maxWeightSetIndex + 1}`,
+        });
+      }
     });
+
+    console.log('Datos de repeticiones:', this.repetitionsData);
+    console.log('Datos de peso:', this.weightData);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -134,5 +160,16 @@ export class RoutineTrackingPage implements OnInit {
     const width = window.innerWidth;
     const height = window.innerHeight;
     this.view = [width * 0.7, height * 0.5];
+  }
+
+  generateRandomDate(): string {
+    const start = new Date();
+    const end = new Date(start.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+    const randomTimestamp =
+      start.getTime() - Math.random() * (start.getTime() - end.getTime());
+    const randomDate = new Date(randomTimestamp);
+
+    return randomDate.toISOString().split('T')[0];
   }
 }
