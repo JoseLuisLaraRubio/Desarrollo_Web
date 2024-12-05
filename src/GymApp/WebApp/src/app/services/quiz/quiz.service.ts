@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Answers, Quiz } from "./data";
 
 @Injectable({
@@ -19,6 +19,15 @@ export class QuizService {
     const apiPath = this.getApiPath();
 
     return this.httpClient.post<void>(apiPath, answers);
+  }
+
+  public getQuizStatus(): Observable<boolean> {
+    if (localStorage.getItem("quizStatus") === "true") {
+      return of(true);
+    }
+    const apiPath = this.getApiPath("status");
+
+    return this.httpClient.get<boolean>(apiPath);
   }
 
   private getApiPath(path: string = ""): string {

@@ -13,6 +13,7 @@ import { AuthService } from "@services/auth";
 import { ErrorMessageProviderService } from "@services/error-message-provider";
 
 import { Nullable, FormObjectGroup } from "@customTypes/.";
+import { QuizService } from "@services/quiz/quiz.service";
 
 @Directive()
 export abstract class AuthBasePage<TValue> implements OnInit {
@@ -25,6 +26,7 @@ export abstract class AuthBasePage<TValue> implements OnInit {
     protected readonly _router: Router,
     protected readonly _authService: AuthService,
     protected readonly _errorMessageProvider: ErrorMessageProviderService,
+    protected readonly _quizService: QuizService,
   ) {
     addIcons({ personOutline, lockClosedOutline, keyOutline });
   }

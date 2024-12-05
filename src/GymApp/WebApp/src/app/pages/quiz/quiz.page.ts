@@ -48,9 +48,10 @@ export class QuizPage implements OnInit {
       this.answers?.answersIndices.push(this.currentAnswerIndex);
       console.log(this.answers);
 
-      this.quizService
-        .postAnswers(this.answers)
-        .subscribe((response) => this.router.navigate(["/overview"]));
+      this.quizService.postAnswers(this.answers).subscribe(() => {
+        localStorage.setItem("quizStatus", "true");
+        this.router.navigate(["/overview"]);
+      });
     }
   }
 }
