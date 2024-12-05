@@ -14,6 +14,22 @@ public sealed class ProgressManager(
     MemberManager memberManager,
     ExerciseManager exerciseManager)
 {
+    public async Task<IEnumerable<WorkoutProgressView>?> GetRoutineProgress(AppUser user, Guid workoutId)
+    {
+        ArgumentNullException.ThrowIfNull(user);
+
+        if (!await this.UserOwnsWorkout(user, workoutId))
+        {
+            return null;
+        }
+
+        var progress = await this.QueryProgress(user, workoutId).ToListAsync();
+
+        return progress == null
+            ? null
+            : RoutineProgressViewMapper.EntityToView(progress);
+    }
+
     public async Task<ValidationResult> AddRoutineProgress(
         AppUser user,
         WorkoutProgressDataWithId data)
@@ -37,6 +53,18 @@ public sealed class ProgressManager(
         await memberManager.SaveChanges();
 
         return new ValidationResult();
+    }
+
+    private IQueryable<WorkoutProgress> QueryProgress(AppUser user, Guid workoutId)
+    {
+        return memberManager.Query(user)
+            .AsNoTracking()
+            .SelectMany(m => m.Progress)
+            .Where(p => p.Workout.Id == workoutId)
+            .Include(p => p.Results)
+            .ThenInclude(r => r.Exercise)
+            .Include(p => p.Results)
+            .ThenInclude(r => r.Sets);
     }
 
     private Task<bool> UserOwnsWorkout(
