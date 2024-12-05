@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Equipment
 {
-    None,
-    Dumbbells,
-    Gym,
+    None = 1,
+    Dumbbells = 2,
+    Gym = 3,
 }
