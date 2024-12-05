@@ -1,13 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-
-import { BehaviorSubject, ReplaySubject, switchMap, tap } from "rxjs";
-
+import { ReplaySubject } from "rxjs";
 import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.component";
 import { PersonalInfoService } from "@services/personal-info/personal-info.service";
 import { PersonalInfo } from "@services/personal-info/data";
-import { Nullable } from "@customTypes/nullable";
 
 @Component({
   selector: "app-user-profile",
@@ -32,11 +29,10 @@ export class UserProfilePage implements OnInit {
   public onClickToPrint(): void {
     this.isPrinting = true;
 
-    // Llama a la función de impresión del navegador
     setTimeout(() => {
       window.print();
       this.isPrinting = false;
-    }, 100); // Da tiempo a Angular para aplicar cambios en el DOM
+    }, 100);
   }
 
   public onSubmit(personalInfo: PersonalInfo): void {
