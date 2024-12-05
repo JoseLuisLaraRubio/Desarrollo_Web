@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
-import { Routine } from '.';
+import { RoutineTracking } from '.';
 
 @Injectable({
   providedIn: 'root',
@@ -9,12 +9,12 @@ import { Routine } from '.';
 export class RoutineTrackingService {
   constructor(private readonly _httpClient: HttpClient) {}
 
-  public getCurrentRoutine(): Observable<Routine> {
-    const apiPath: string = this.getApiPath('/api/routines/current');
-    return this._httpClient.get<Routine>(apiPath).pipe(
+  public getRoutineTracking(workoutsId: number): Observable<RoutineTracking[]> {
+    const apiPath: string = this.getApiPath(`/api/routines/workouts/${workoutsId}/progress`);
+    return this._httpClient.get<RoutineTracking[]>(apiPath).pipe(
       catchError((error) => {
-        console.error('Error fetching routine:', error);
-        return of({ id: '', name: '', workouts: [] });
+        console.error('Error fetching routines:', error);
+        return of([]);
       })
     );
   }
