@@ -5,10 +5,7 @@ import { RoutineTracking, RoutineTrackingService } from '@services/routine-track
 import { NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { Color } from '@swimlane/ngx-charts';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
-import { ActivatedRoute } from '@angular/router'; // Para obtener parámetros de la URL
-import { forkJoin } from 'rxjs'; // Para hacer llamadas paralelas
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-routine-tracking',
@@ -65,24 +62,27 @@ export class RoutineTrackingPage implements OnInit {
   }
 
   fetchRoutineData(workoutIds: string[]) {
-    const observables = workoutIds.map(id => this.routineService.getRoutineTracking(+id));
-
-    forkJoin(observables).subscribe(
-      (responses: RoutineTracking[][]) => {
-        this.routineTrackingData = ([] as RoutineTracking[]).concat(...responses);
-        this.processChartData();
-      },
-      (error) => {
-        console.error('Error fetching routine data:', error);
-        this.routineTrackingData = [];
-      }
-    );
+    this.routineTrackingData = [];
+    workoutIds.forEach((id, index) => {
+      this.routineService.getRoutineTracking(+id).subscribe(
+        (response: RoutineTracking[]) => {
+          this.routineTrackingData = this.routineTrackingData.concat(response);
+          if (index === workoutIds.length - 1) {
+            this.processChartData();
+          }
+        },
+        (error) => {
+          console.error('Error fetching routine data:', error);
+        }
+      );
+    });
   }
 
   processChartData() {
     this.repetitionsData = [];
     this.weightData = [];
 
+    // Procesar los datos de cada rutina
     this.routineTrackingData.forEach((routine) => {
       routine.results.forEach((result) => {
         let maxRepetitions = 0;
