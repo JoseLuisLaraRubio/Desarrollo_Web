@@ -1,25 +1,36 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routine, RoutineTrackingService } from '@services/routine-tracking';
+import { RoutineTracking, RoutineTrackingService } from '@services/routine-tracking';
 import { NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { Color } from '@swimlane/ngx-charts';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
+import { ActivatedRoute } from '@angular/router'; // Para obtener parámetros de la URL
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-routine-tracking',
   templateUrl: './routine-tracking.page.html',
   styleUrls: ['./routine-tracking.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, NgxChartsModule , UserNavBarComponent],
+  imports: [CommonModule, FormsModule, NgxChartsModule, UserNavBarComponent],
 })
 export class RoutineTrackingPage implements OnInit {
-  routine: Routine | undefined;
+  routineTrackingData: RoutineTracking[] = [];
   repetitionsData: any[] = [];
   weightData: any[] = [];
   view: [number, number] = [0, 0];
 
-  constructor(private routineService: RoutineTrackingService) {}
+  barChartOptions = {
+    barWidth: 20,
+    barPadding: 20,
+  };
+
+  constructor(
+    private routineService: RoutineTrackingService,
+    private route: ActivatedRoute
+  ) {}
 
   colorSchemeReps: Color = {
     name: 'custom-red',
@@ -36,293 +47,82 @@ export class RoutineTrackingPage implements OnInit {
   };
 
   ngOnInit() {
-    this.fetchRoutineDataJson();
+    this.getparamWorkId();
     this.updateChartSize();
   }
 
-  fetchRoutineDataJson() {
-    this.routine = {
-      id: '1',
-      name: 'Weekly Routine',
-      workouts: [
-        {
-          id: 'w1',
-          blocks: [
-            {
-              id: 'b1',
-              exercise: {
-                id: 'e1',
-                name: 'Push Up',
-                primaryMuscle: 'Chest',
-                secondaryMuscles: ['Shoulders'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 15,
-            },
-            {
-              id: 'b2',
-              exercise: {
-                id: 'e2',
-                name: 'Pull Up',
-                primaryMuscle: 'Back',
-                secondaryMuscles: ['Biceps'],
-                equipmentRequirement: 'Bar',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 4,
-              repetitions: 10,
-            },
-          ],
-        },
-        {
-          id: 'w2',
-          blocks: [
-            {
-              id: 'b3',
-              exercise: {
-                id: 'e3',
-                name: 'Squat',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Core'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-            {
-              id: 'b4',
-              exercise: {
-                id: 'e4',
-                name: 'Lunge',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Glutes'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-          ],
-        },
-        {
-          id: 'w1',
-          blocks: [
-            {
-              id: 'b1',
-              exercise: {
-                id: 'e1',
-                name: 'Push Up',
-                primaryMuscle: 'Chest',
-                secondaryMuscles: ['Shoulders'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 15,
-            },
-            {
-              id: 'b2',
-              exercise: {
-                id: 'e2',
-                name: 'Pull Up',
-                primaryMuscle: 'Back',
-                secondaryMuscles: ['Biceps'],
-                equipmentRequirement: 'Bar',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 4,
-              repetitions: 10,
-            },
-          ],
-        },
-        {
-          id: 'w2',
-          blocks: [
-            {
-              id: 'b3',
-              exercise: {
-                id: 'e3',
-                name: 'Squat',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Core'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-            {
-              id: 'b4',
-              exercise: {
-                id: 'e4',
-                name: 'Lunge',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Glutes'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-          ],
-        },
-        {
-          id: 'w1',
-          blocks: [
-            {
-              id: 'b1',
-              exercise: {
-                id: 'e1',
-                name: 'Push Up',
-                primaryMuscle: 'Chest',
-                secondaryMuscles: ['Shoulders'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 15,
-            },
-            {
-              id: 'b2',
-              exercise: {
-                id: 'e2',
-                name: 'Pull Up',
-                primaryMuscle: 'Back',
-                secondaryMuscles: ['Biceps'],
-                equipmentRequirement: 'Bar',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 4,
-              repetitions: 10,
-            },
-          ],
-        },
-        {
-          id: 'w2',
-          blocks: [
-            {
-              id: 'b3',
-              exercise: {
-                id: 'e3',
-                name: 'Squat',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Core'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-            {
-              id: 'b4',
-              exercise: {
-                id: 'e4',
-                name: 'Lunge',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Glutes'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-          ],
-        },
-        {
-          id: 'w1',
-          blocks: [
-            {
-              id: 'b1',
-              exercise: {
-                id: 'e1',
-                name: 'Push Up',
-                primaryMuscle: 'Chest',
-                secondaryMuscles: ['Shoulders'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 15,
-            },
-            {
-              id: 'b2',
-              exercise: {
-                id: 'e2',
-                name: 'Pull Up',
-                primaryMuscle: 'Back',
-                secondaryMuscles: ['Biceps'],
-                equipmentRequirement: 'Bar',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 4,
-              repetitions: 10,
-            },
-          ],
-        },
-        {
-          id: 'w2',
-          blocks: [
-            {
-              id: 'b3',
-              exercise: {
-                id: 'e3',
-                name: 'Squat',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Core'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 3,
-                effectivenessLevel: 5,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-            {
-              id: 'b4',
-              exercise: {
-                id: 'e4',
-                name: 'Lunge',
-                primaryMuscle: 'Legs',
-                secondaryMuscles: ['Glutes'],
-                equipmentRequirement: 'None',
-                difficultyLevel: 2,
-                effectivenessLevel: 4,
-              },
-              sets: 3,
-              repetitions: 12,
-            },
-          ],
-        },
-      ],
-    };
-    this.generateChartData();
+  getparamWorkId() {
+    this.route.paramMap.subscribe((params) => {
+      const workoutsId = params.get('workoutsId');
+      if (workoutsId) {
+        const id = +workoutsId;
+        if (!isNaN(id)) {
+          this.fetchRoutineData(id);
+        } else {
+          console.error('Invalid workoutsId:', workoutsId);
+        }
+      } else {
+        console.error('workoutsId not found in URL parameters');
+      }
+    });
   }
 
-  fetchRoutineData() {
-    this.routineService.getCurrentRoutine().subscribe({
-      next: (data) => {
-        this.routine = data;
-        this.generateChartData();
+  fetchRoutineData(workoutsId: number) {
+    this.routineService.getRoutineTracking(workoutsId).subscribe(
+      (data) => {
+        this.routineTrackingData = data;
+        this.processChartData();
       },
-      error: (err) => {
-        console.error('Error fetching routine:', err);
-      },
+      (error) => {
+        console.error('Error fetching routine data:', error);
+        this.routineTrackingData = [];
+      }
+    );
+  }
+
+  processChartData() {
+    this.repetitionsData = [];
+    this.weightData = [];
+
+    this.routineTrackingData.forEach((routine) => {
+      routine.results.forEach((result) => {
+        let maxRepetitions = 0;
+        let maxWeight = 0;
+        let maxRepetitionsSetIndex = -1;
+        let maxWeightSetIndex = -1;
+
+        result.sets.forEach((set, index) => {
+          if (set.repetitions > maxRepetitions) {
+            maxRepetitions = set.repetitions;
+            maxRepetitionsSetIndex = index;
+          }
+
+          if (set.weight > maxWeight) {
+            maxWeight = set.weight;
+            maxWeightSetIndex = index;
+          }
+        });
+
+        const uniqueExerciseName = `${result.exercise.name}-Set`;
+
+        if (maxRepetitionsSetIndex !== -1) {
+          this.repetitionsData.push({
+            name: uniqueExerciseName,
+            value: maxRepetitions,
+            series: `Set ${maxRepetitionsSetIndex + 1}`,
+            date: routine.date,
+          });
+        }
+
+        if (maxWeightSetIndex !== -1) {
+          this.weightData.push({
+            name: uniqueExerciseName,
+            value: maxWeight,
+            series: `Set ${maxWeightSetIndex + 1}`,
+            date: routine.date,
+          });
+        }
+      });
     });
   }
 
@@ -332,37 +132,8 @@ export class RoutineTrackingPage implements OnInit {
   }
 
   updateChartSize() {
-    const width = window.innerWidth * 0.9;
-    const height = window.innerHeight * 0.65;
-    this.view = [width, height];
-  }
-
-  generateChartData() {
-    if (this.routine?.workouts) {
-      const repetitions: any[] = [];
-      const weight: any[] = [];
-
-      this.routine.workouts.forEach((workout, workoutIndex) => {
-        workout.blocks.forEach((block, blockIndex) => {
-          const uniqueName = `${block.exercise.name} (W${workoutIndex + 1}B${blockIndex + 1})`;
-
-          repetitions.push({
-            name: uniqueName,
-            value: block.repetitions,
-          });
-
-          weight.push({
-            name: uniqueName,
-            value: Math.floor(Math.random() * 50) + 10,
-          });
-        });
-      });
-
-      console.log('Repetitions Data:', repetitions);
-      console.log('Weight Data:', weight);
-
-      this.repetitionsData = repetitions;
-      this.weightData = weight;
-    }
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    this.view = [width * 0.7, height * 0.5];
   }
 }

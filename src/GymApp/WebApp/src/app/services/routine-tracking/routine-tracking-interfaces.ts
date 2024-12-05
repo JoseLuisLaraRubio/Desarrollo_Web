@@ -1,27 +1,19 @@
-export interface Routine {
+export interface RoutineTracking {
+  date: string;
+  results: Result[];
+}
+
+export interface Result {
+  exercise: ExerciseRoutine;
+  sets: Set[];
+}
+
+export interface ExerciseRoutine {
   id: string;
   name: string;
-  workouts: Workout[];
 }
 
-export interface Workout {
-  id: string;
-  blocks: Block[];
-}
-
-export interface Block {
-  id: string;
-  exercise: Exercise;
-  sets: number;
+export interface Set {
+  weight: number;
   repetitions: number;
-}
-
-export interface Exercise {
-  id: string;
-  name: string;
-  primaryMuscle: string;
-  secondaryMuscles: string[];
-  equipmentRequirement: string;
-  difficultyLevel: number;
-  effectivenessLevel: number;
 }

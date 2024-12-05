@@ -27,42 +27,7 @@ export class WorkoutsLogPage implements OnInit {
   constructor(private workoutService: WorkoutService ,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //datos simulados
-    this.workout = {
-      id: 'workout1',
-      blocks: [
-        {
-          id: 'block1',
-          exercise: {
-            id: 'exercise1',
-            name: 'Push Up',
-            primaryMuscle: 'Chest',
-            secondaryMuscles: ['Triceps', 'Shoulders'],
-            equipmentRequirement: 'None',
-            difficultyLevel: 2,
-            effectivenessLevel: 4
-          },
-          sets: 3,
-          repetitions: 15,
-        },
-        {
-          id: 'block2',
-          exercise: {
-            id: 'exercise2',
-            name: 'Squat',
-            primaryMuscle: 'Legs',
-            secondaryMuscles: ['Glutes', 'Core'],
-            equipmentRequirement: 'None',
-            difficultyLevel: 3,
-            effectivenessLevel: 5
-          },
-          sets: 3,
-          repetitions: 12
-        }
-      ]
-    };
-
-    this.workoutId = this.route.snapshot.paramMap.get('id');
+    this.workoutId = this.route.snapshot.paramMap.get('workoutId');
 
     if (this.workoutId) {
       this.getDataWorkout();
