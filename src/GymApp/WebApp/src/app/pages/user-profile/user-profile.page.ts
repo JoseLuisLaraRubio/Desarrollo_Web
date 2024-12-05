@@ -2,12 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
-import { BehaviorSubject, ReplaySubject, switchMap, tap } from "rxjs";
+import { catchError, map, of, ReplaySubject } from "rxjs";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 
 import { UserNavBarComponent } from "@components/user-nav-bar/user-nav-bar.component";
 import { PersonalInfoService } from "@services/personal-info/personal-info.service";
 import { PersonalInfo } from "@services/personal-info/data";
-import { Nullable } from "@customTypes/nullable";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-user-profile",
@@ -18,28 +19,51 @@ import { Nullable } from "@customTypes/nullable";
 })
 export class UserProfilePage implements OnInit {
   personalInfo$ = new ReplaySubject<PersonalInfo>();
-
   isPrinting: boolean = false;
+  public preview: SafeUrl | null = this.sanitizer.bypassSecurityTrustUrl(
+    "assets/plans-page/default-avatar.png.jpg",
+  );
+  public files: File[] = []; // Declare the files array to store the uploaded files
 
-  constructor(private readonly personalInfoService: PersonalInfoService) {}
+  constructor(
+    private readonly personalInfoService: PersonalInfoService,
+    private readonly sanitizer: DomSanitizer,
+    private readonly httpClient: HttpClient,
+  ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.personalInfoService.getPersonalInfo().subscribe((info) => {
       this.personalInfo$.next(info ?? ({} as PersonalInfo));
+
+      this.httpClient
+        .get("http://localhost:53722/api/personal-info/picture", {
+          responseType: "blob",
+        })
+        .pipe(
+          map((imageBlob: Blob) => {
+            const imageUrl = URL.createObjectURL(imageBlob);
+            this.preview = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+          }),
+          catchError((error) => {
+            console.error("Error al cargar la imagen: ", error);
+            return of(null);
+          }),
+        )
+        .subscribe();
     });
   }
 
-  public onClickToPrint(): void {
+  onClickToPrint(): void {
     this.isPrinting = true;
 
-    // Llama a la función de impresión del navegador
     setTimeout(() => {
       window.print();
       this.isPrinting = false;
-    }, 100); // Da tiempo a Angular para aplicar cambios en el DOM
+    }, 100);
   }
 
-  public onSubmit(personalInfo: PersonalInfo): void {
+  onSubmit(personalInfo: PersonalInfo): void {
+    this.updateProfileImage();
     if (!this.isPersonalInfoValid(personalInfo)) {
       alert("Por favor, llena todos los campos antes de guardar.");
       return;
@@ -59,5 +83,52 @@ export class UserProfilePage implements OnInit {
       personalInfo.height > 0 &&
       personalInfo.weight > 0
     );
+  }
+
+  captureFile(event: any): void {
+    const captureFile = event.target.files[0];
+    if (captureFile) {
+      this.files.push(captureFile);
+      this.extraerBase64(captureFile).then((imagen: any) => {
+        this.preview = imagen.base;
+      });
+    }
+  }
+
+  extraerBase64 = async ($event: any) =>
+    new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+        reader.readAsDataURL($event);
+        reader.onload = () => {
+          resolve({
+            base: image,
+          });
+        };
+        reader.onerror = (error) => {
+          resolve({
+            base: null,
+          });
+        };
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+  updateProfileImage(): void {
+    const pictureFile = new FormData();
+    if (this.files.length > 0) {
+      pictureFile.append("pictureFile", this.files[0]);
+    } else {
+      console.error("No valid file to upload");
+    }
+
+    this.httpClient
+      .put("api/personal-info/picture", pictureFile)
+      .subscribe((res: any) => {
+        console.log("Respuesta del servidor: ", res);
+      });
   }
 }
