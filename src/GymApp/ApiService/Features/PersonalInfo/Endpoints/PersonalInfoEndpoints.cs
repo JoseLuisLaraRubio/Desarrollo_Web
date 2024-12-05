@@ -1,5 +1,7 @@
 ﻿namespace GymApp.ApiService.Features.PersonalInfo.Endpoints;
 
+using FluentStorage.Blobs;
+
 using GymApp.ApiService.Features.Members.Services;
 using GymApp.Database.Entities;
 
@@ -44,6 +46,43 @@ public static class PersonalInfoEndpoints
         member.Info = personalInfo;
 
         await memberManager.SaveChanges();
+
+        return TypedResults.Ok();
+    }
+
+    public static async Task<Results<FileStreamHttpResult, NoContent, UnauthorizedHttpResult>> HandlePictureGet(
+        [FromServices] UserContext<AppUser> userContext,
+        [FromServices] IBlobStorage storage)
+    {
+        if (await userContext.TryGetLoggedInUser() is not { } user)
+        {
+            return TypedResults.Unauthorized();
+        }
+
+        Stream? stream = await storage.OpenReadAsync(user.Id);
+
+        return stream is null
+            ? TypedResults.NoContent()
+            : TypedResults.File(stream, "image");
+    }
+
+    public static async Task<Results<Ok, BadRequest<string>, UnauthorizedHttpResult>> HandlePicturePut(
+        IFormFile pictureFile,
+        [FromServices] UserContext<AppUser> userContext,
+        [FromServices] IBlobStorage storage)
+    {
+        if (await userContext.TryGetLoggedInUser() is not { } user)
+        {
+            return TypedResults.Unauthorized();
+        }
+
+        if (pictureFile.Length <= 0 || !pictureFile.ContentType.Contains("image"))
+        {
+            return TypedResults.BadRequest("Expected a image.");
+        }
+
+        await using Stream fileStream = pictureFile.OpenReadStream();
+        await storage.WriteAsync(user.Id, fileStream);
 
         return TypedResults.Ok();
     }

@@ -1,0 +1,77 @@
+.routine-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+#weight-label{
+  color: #21bcef;
+}
+#reps-label{
+  color: #ef2121;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+ngx-charts-bar-vertical {
+  margin: 20px 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+::ng-deep .ngx-charts text {
+  fill: #ffffff;
+}
+
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .routine-container {
+    color: black; 
+    padding: 0;
+    min-height: auto;
+  }
+
+  h1, h2, h3 {
+    color: black;
+    margin: 0 0 10px 0;
+    align-items: center;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  ::ng-deep .ngx-charts text {
+    fill: black;
+    font-size: 10px;
+  }
+}

@@ -1,28 +1,25 @@
 <div class="main-container">
-  <div class="workout-header">
-    <h1>Workouts Log</h1>
-  </div>
-
+  <app-user-nav-bar></app-user-nav-bar>
   <div class="workout-content">
     <div *ngIf="!workout || workout.blocks.length === 0" class="no-data-message">
-      <p>No workout data found.</p>
+      <p>No se encontraron datos de entrenamiento.</p>
     </div>
-
+    <h1>Registro de Entrenamiento</h1>
     <div *ngFor="let block of workout?.blocks; let i = index" class="workout-block">
       <div class="block-header">
-        <h2>Bloque{{ i + 1 }}</h2>
+        <h2>Bloque {{ i + 1 }}</h2>
         <h3>{{ block.exercise.name }}</h3>
       </div>
       <div class="block-info">
-        <p><strong>Sets:</strong> {{ block.sets }}</p>
-        <p><strong>Repetitions:</strong> {{ block.repetitions }}</p>
-        <p><strong>Equipment:</strong> {{ block.exercise.equipmentRequirement }}</p>
-        <p><strong>Difficulty Level:</strong> {{ block.exercise.difficultyLevel }}</p>
-        <p><strong>Effectiveness Level:</strong> {{ block.exercise.effectivenessLevel }}</p>
+        <p><strong>Series:</strong> {{ block.sets }}</p>
+        <p><strong>Repeticiones:</strong> {{ block.repetitions }}</p>
+        <p><strong>Equipo:</strong> {{ block.exercise.equipmentRequirement }}</p>
+        <p><strong>Nivel de Dificultad:</strong> {{ block.exercise.difficultyLevel }}</p>
+        <p><strong>Nivel de Efectividad:</strong> {{ block.exercise.effectivenessLevel }}</p>
       </div>
 
       <div class="register-button">
-        <button (click)="openProgressModal(block)">Register Progress</button>
+        <button (click)="openProgressModal(block)">Registrar Progreso</button>
       </div>
     </div>
   </div>
@@ -31,22 +28,22 @@
   <div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <h2>Register Progress</h2>
+        <h2>Registrar Progreso</h2>
       </div>
 
       <div class="modal-body">
         <div class="form-group">
-          <label for="weight">Weight</label>
+          <label for="weight">Peso</label>
           <input id="weight" type="number" [(ngModel)]="progressData.weight" />
         </div>
 
         <div class="form-group">
-          <label for="repetitions">Repetitions</label>
+          <label for="repetitions">Repeticiones</label>
           <input id="repetitions" type="number" [(ngModel)]="progressData.repetitions" />
         </div>
 
-        <button class="submit-button" (click)="submitProgress()">Submit Progress</button>
-        <button class="close-button" (click)="closeModal()">Close</button>
+        <button class="submit-button" (click)="submitProgress()">Enviar Progreso</button>
+        <button class="close-button" (click)="closeModal()">Cerrar</button>
       </div>
     </div>
   </div>
