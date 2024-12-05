@@ -3,19 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { UserNavBarComponent } from '@components/user-nav-bar/user-nav-bar.component';
 import { switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { Guid } from '@customTypes/guid';
 
 interface Routine {
   id: string;
+  name: string;
   workouts: Workout[];
 }
 
 interface Workout {
-  id: string;
+  id: string|null;
   blocks: Block[];
 }
 
 interface Block {
-  id: string;
+  id: string | null;
   exercise: Exercise;
   sets: number;
   repetitions: number;
@@ -29,6 +31,21 @@ interface Exercise {
   equipmentRequirement: string;
   difficultyLevel: number;
   effectivenessLevel: number;
+}
+
+interface RoutineUpdate{
+  name: string,
+  workouts:
+  {
+    id: string|null,
+    blocks: 
+      {
+        id:string|null,
+        exerciseId:string,
+        sets: number,
+        repetitions: number
+      }[]
+  }[]
 }
 
 @Component({
@@ -50,10 +67,6 @@ export class RoutineOverviewPage  implements OnInit {
   matchingExercises: Exercise[] = [];
 
   constructor(private readonly http: HttpClient) {}
-
-  mockAns = {
-    answersIndices: [0, 1]
-  };
 
   ngOnInit()
   {
@@ -91,7 +104,7 @@ export class RoutineOverviewPage  implements OnInit {
     this.exercises.forEach(exercise => {
       if(exercise.name.toLowerCase().includes(this.searchInput.toLowerCase())){
         this.matchingExercises.push(exercise);
-      }       
+      }
     });
   }
 
@@ -99,10 +112,10 @@ export class RoutineOverviewPage  implements OnInit {
     this.searching = false;
 
     var newBlock:Block = {
-      id: "",
+      id: null,
       exercise: exercise,
       sets: 3,
-      repetitions: 10
+      repetitions: 10,
     };
 
     this.selectedWorkout?.blocks.push(newBlock);
@@ -120,18 +133,80 @@ export class RoutineOverviewPage  implements OnInit {
     this.selectedWorkout?.blocks.splice(blockIndex, 1);
   }
 
-  saveWorkoutChanges(){
-    //this.http.p
+  saveRoutineChanges(){
+    if (!this.routine) {
+      console.log("Routine or is undefined.");
+      return;
+    }
+  
+    if (this.selectedWorkout != undefined) {
+      for (const block of this.selectedWorkout.blocks) {
+        if (block.repetitions <= 0 || block.sets <= 0) {
+          alert("El número de sets y repeticiones no puede ser menor a 1");
+          return;
+        }
+      }
+    }
+
+    // Map the routine data into the RoutineUpdate format
+    const routineUpdate: RoutineUpdate = {
+      name: this.routine.name,
+      workouts: this.routine.workouts.map(workout => ({
+        id: workout.id,
+        blocks: workout.blocks.map(block => ({
+          id: null,
+          exerciseId: block.exercise.id,
+          sets: block.sets,
+          repetitions: block.repetitions,
+        }))
+      }))
+    };
+
+    this.http.put('/api/routines/current', routineUpdate).subscribe(
+      (response) => {
+        this.getStoredRoutine();
+      }
+    )
+
     this.closeModal();
   }
 
   cancelWorkoutChanges(){
+    if(this.routine == undefined) return;
+
+    this.getStoredRoutine();
+    this.closeModal();
+  }
+
+  deleteWorkout(){
+    var workoutIndex = this.routine?.workouts.findIndex(
+      (workouts) => workouts === this.selectedWorkout
+    ); 
+
+    if(workoutIndex == undefined) return;
+    this.routine?.workouts.splice(workoutIndex, 1);
+    this.closeModal();
+    this.saveRoutineChanges();
+  }
+
+  addDay(){
+    if(this.routine == undefined || this.routine.workouts.length >= 7) return;
+
+    var emptyWorkout:Workout = {
+      id: null,
+      blocks: []
+    }
+
+    this.routine?.workouts.push(emptyWorkout);
+    this.saveRoutineChanges();
+  }
+
+  getStoredRoutine(){
     this.http.get<Routine>('/api/routines/current').subscribe(
       (response) => {
         this.routine = response;
       }
     );
-    this.closeModal();
   }
 
 }

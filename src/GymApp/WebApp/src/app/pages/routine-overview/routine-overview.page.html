@@ -1,17 +1,17 @@
 <body>
   <app-user-nav-bar [profile]="true"></app-user-nav-bar>
   
-  <div id="title">
-    <h1>RUTINA</h1>
+  <div id="upperButtns">
+    <button class="utilButtn" (click)="addDay()">AÑADIR DÍA</button>
     <button class="utilButtn">EXPORTAR</button>
     <button class="utilButtn">CARGAR</button>
   </div>
 
   <div id="routine">
-    @for (workout of routine?.workouts; track workout.id) {
+    @for (workout of routine?.workouts; track $index) {
       <div class="workout">
         <h2>DIA {{ $index + 1 }}</h2>
-        @for (block of workout.blocks; track block.id) {
+        @for (block of workout.blocks; track $index) {
           <div class="exercise">
             <p>{{ block.exercise.name }}</p>
           </div>
@@ -37,18 +37,19 @@
             }
           </div>
         }
-
       </div>
-
-      @for (block of selectedWorkout.blocks; track block.id) {
+      @for (block of selectedWorkout.blocks; track $index) {
         <div class="editExercise">
           <p>{{ block.exercise.name }}</p>
+          <input class="blockInput" type="number" [min]="1"  [(ngModel)]="block.sets" value="{{block.sets}}">
+          <input class="blockInput" type="number" [min]="1"  [(ngModel)]="block.repetitions" value="{{block.repetitions}}">
           <button (click)="deleteExerciseBlock(block)">ELIMINAR</button>
         </div>
       }
       <div id="endButtns">
-        <button id="saveBttn" (click)="saveWorkoutChanges()">GUARDAR</button>
+        <button id="saveBttn" (click)="saveRoutineChanges()">GUARDAR</button>
         <button id="cancelBttn" (click)="cancelWorkoutChanges()">CANCELAR</button>
+        <button id="deleteBttn" (click)="deleteWorkout()">ELIMINAR DIA</button>
       </div>
     </div>
   </div>

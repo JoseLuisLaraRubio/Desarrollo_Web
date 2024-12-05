@@ -21,7 +21,7 @@ export class UserProfilePage implements OnInit {
 
   isPrinting: boolean = false;
 
-  constructor(private readonly personalInfoService: PersonalInfoService) {}
+  constructor(private readonly _personalInfoService: PersonalInfoService) {}
 
   public ngOnInit(): void {
     this.personalInfoService.getPersonalInfo().subscribe((info) => {
@@ -31,7 +31,6 @@ export class UserProfilePage implements OnInit {
 
   public onClickToPrint(): void {
     this.isPrinting = true;
-
     // Llama a la función de impresión del navegador
     setTimeout(() => {
       window.print();
@@ -39,13 +38,17 @@ export class UserProfilePage implements OnInit {
     }, 100); // Da tiempo a Angular para aplicar cambios en el DOM
   }
 
-  public onSubmit(personalInfo: PersonalInfo): void {
-    if (this.isPersonalInfoValid(personalInfo)) {
-      alert("Por favor, llena todos los campos antes de guardar.");
+  public onSubmit(): void {
+    if (
+      !this.isPersonalInfoValid() &&
+      this.isHeightValid() &&
+      this.isWeightValid()
+    ) {
+      this.updatePersonalInfo(this.personalInfo);
+      this.getPersonalInfo();
       return;
     }
-
-    this.personalInfoService.updatePersonalInfo(personalInfo).subscribe();
+    alert("Por favor, llena todos los campos correctamente antes de guardar.");
   }
 
   private isPersonalInfoValid(personalInfo: PersonalInfo): boolean {
@@ -57,5 +60,19 @@ export class UserProfilePage implements OnInit {
       !personalInfo.bodyType ||
       !personalInfo.dateOfBirth
     );
+  }
+
+  private isHeightValid(): boolean {
+    return this.personalInfo.height > 0;
+  }
+
+  private isWeightValid(): boolean {
+    return this.personalInfo.weight > 0;
+  }
+
+  private getPersonalInfo(): void {
+    this._personalInfoService.getPersonalInfo().subscribe((info) => {
+      this.personalInfo = { ...info };
+    });
   }
 }

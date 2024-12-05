@@ -2,23 +2,10 @@ body{
     background-color: var(--dark-gray);
 }
 
-#title{
+#upperButtns{
     display: flex;
+    align-items: left;
 
-    align-items: center;
-
-    h1{
-        margin-left: 50%;
-        transform: translateX(-50%);
-
-        color: white;
-        
-        font-size: 3.2rem;
-    }
-
-    h1 + .utilButtn{
-        margin-left: auto;
-    }
 }
 
 #routine{
@@ -141,6 +128,17 @@ button{
     }    
 }
 
+
+.blockInput{
+    width: 20%;
+    text-align: center;
+    color: white;
+    font-size: large;
+    background-color: var(--dark-gray);
+    border: none;
+
+}
+
 #endButtns{
     display: flex;
     gap: 1vw;
@@ -158,6 +156,16 @@ button{
     }
     #saveBttn{
         margin: 0;
+        border-color: var(--light-blue);
+        
+        &:hover{
+            background-color: var(--light-blue);
+        }
+    }
+    
+    #deleteBttn{
+        margin: 0;
+        margin-left: auto;
         border-color: var(--light-blue);
         
         &:hover{
@@ -228,4 +236,32 @@ button{
     gap: .5vh;
 
     padding:.5vw;
+}
+
+@media print{
+    *{
+        overflow: visible;
+        break-inside: auto;
+    }
+    body{
+        height: auto;
+    }
+    
+    button, app-user-nav-bar{
+        display: none;
+    }
+    
+    #routine{
+        break-inside: auto;
+        max-height: none;
+        height: fit-content;
+        overflow: visible;
+    }
+    
+    .workout{
+        max-width: none;
+        max-height: none;
+        overflow:visible;
+        break-before: page;
+    }
 }
